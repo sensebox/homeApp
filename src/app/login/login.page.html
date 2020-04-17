@@ -28,7 +28,7 @@
             </ion-item>
           </ion-row>
           <ion-row class="errorMessage" *ngIf="errorInput">
-             {{'LOGIN.ERRORINPUT' | translate}}
+             {{'login.errorinput' | translate}}
           </ion-row>
           <ion-row>
             <ion-col col-8>
@@ -36,9 +36,15 @@
             <ion-col col-4>
               <ion-item>
                 <button full ion-button type="submit" color="secondary">
-                  <ion-icon name="send"></ion-icon>Login
+                  <ion-icon name="send"></ion-icon>{{'login.login'|translate}}
                 </button>
               </ion-item>
+              <ion-item>
+                <button full ion-button type="submit" color="secondary">
+                  <ion-icon name="book-outline"></ion-icon>{{'login.register'|translate}}
+                </button>
+              </ion-item>
+              
             </ion-col>
           </ion-row>
         </ion-grid>
