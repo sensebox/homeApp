@@ -1,6 +1,8 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { LoginService } from '../login.service';
+import {Router, NavigationExtras} from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -13,25 +15,34 @@ export class LoginPage implements OnInit {
   private saveCredentialsCheckbox: boolean
   constructor(
     private LoginService: LoginService,
+    private router: Router,
     public loadingController: LoadingController,
-  ) { }
+    ) { }
 
   ngOnInit() {
   }
 
   submitLogin(form): void {
-
-
     if (this.validatePassword(form)) {
       try {
+
         // Try to login on success request data from all available boxes
         this.LoginService.submitLogin(form.value.email, form.value.password)
           .subscribe(loginInformation => {
             this.loginInformation = <loginResponse>loginInformation
             this.LoginService.getUserBoxes(this.loginInformation.token)
-              .subscribe(boxes => this.boxes = boxes)
+              .subscribe(boxes => {
+                this.boxes = boxes
+                let navigationExtras:NavigationExtras={
+                  state:{
+                    loginInformation:this.loginInformation,
+                    boxes : this.boxes
+                  }
+                }
+                console.log(navigationExtras)
+                this.router.navigate(['overview',navigationExtras])
+              })
           })
-
         if (this.saveCredentialsCheckbox) {
           this.saveCredentials({ username: form.value.email, password: form.value.password });
         }
