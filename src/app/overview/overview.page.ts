@@ -13,7 +13,7 @@ export class OverviewPage implements OnInit {
     this.route.queryParams.subscribe(params=>{
       if(this.router.getCurrentNavigation().extras.state){
         this.loginInformation = this.router.getCurrentNavigation().extras.state.loginInformation;
-        this.boxes = this.router.getCurrentNavigation().extras.state.loginInformation;
+        this.boxes = this.router.getCurrentNavigation().extras.state.boxes.data.boxes;
       }
     })
    }

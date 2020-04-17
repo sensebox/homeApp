@@ -1,9 +1,37 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Overview</ion-title>
+    <ion-title>My senseBox</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-
+<ion-content padding>
+  <ion-grid>
+    <ion-row *ngFor="let box of boxes">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            {{box.name}}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-row>
+            {{'MYSENSEBOX.EXPOSURE' | translate}}: {{box.exposure}}
+          </ion-row>
+          <ion-row>
+            Model: {{box.model}}
+          </ion-row>
+          <ion-row>
+           ID: <code>{{box._id}}</code>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <button class="actionButton" ion-button color="light"(click)="forwardShow(box)">{{'MYSENSEBOX.SHOW' | translate}}</button>
+            </ion-col>
+            <ion-col col-6>
+              <button class="actionButton" ion-button color="light" (click)="forwardSketch(box)">{{'MYSENSEBOX.SKETCH' | translate}}</button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
 </ion-content>

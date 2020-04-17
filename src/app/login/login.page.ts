@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
                   }
                 }
                 console.log(navigationExtras)
-                this.router.navigate(['overview',navigationExtras])
+                this.router.navigate(['overview'],navigationExtras)
               })
           })
         if (this.saveCredentialsCheckbox) {

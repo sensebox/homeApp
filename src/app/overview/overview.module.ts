@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { OverviewPageRoutingModule } from './overview-routing.module';
 
 import { OverviewPage } from './overview.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OverviewPageRoutingModule
+    OverviewPageRoutingModule,
+    TranslateModule
   ],
   declarations: [OverviewPage]
 })
