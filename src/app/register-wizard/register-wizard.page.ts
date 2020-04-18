@@ -9,36 +9,55 @@ import { LoginService } from '../login.service';
 export class RegisterWizardPage implements OnInit {
   slideOpts = {}
 
-  constructor(private loginService: LoginService, private loadingController:LoadingController) { }
+  constructor(private loginService: LoginService, private loadingController: LoadingController) { }
 
 
   ngOnInit() {
   }
 
-  async handleRegistration(form){
-    console.log("register start");
+  async handleRegistration(form) {
     const loader = await this.loadingController.create({
-      message:'Please wait ... '
+      message: 'Please wait ... '
     })
-    console.log(form);
     await loader.present();
     // call osm api to register 
-    this.loginService.registerUser(form.value.name,form.value.email,form.value.password)
-          .subscribe(response=>console.log(response))
+    if (this.validateForm(form)) {
+      this.loginService.registerUser(form.value.name, form.value.email, form.value.password)
+        .subscribe(response => {
+          console.log(response)
+          loader.dismiss()
+        })
+
+    }
+    else {
+      console.error()
+    }
+
     // after success redirect to next slide 
-  }
 
-  handleUsernameValue(event){
-    console.log(event.target.value)
-  }
-
-  handleEmailValue(event){
 
   }
-
-  handlePasswordValue(event){
+  handleNameInput(event){
+    const validName = event.target.value.length>3
 
   }
+
+  handleMailInput(event){
+    const emailValidate = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+    const validMail = emailValidate.test(event.target.value)
+
+  }
+
+  handlePasswordInput(event){
+    const validPassword = event.target.value.length>7
+
+  }
+  validateForm(form){
+    const {name,email,password} = form.value
+
+    return true
+  }
+
 }
 
 

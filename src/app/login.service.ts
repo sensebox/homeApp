@@ -33,5 +33,6 @@ export class LoginService {
 
     return this.http.post(`${URL_register}?name=`+name+`&email=`+email+`&password=`+password,{headers})
               .pipe(timeout(30000))
+              
   }
 }
