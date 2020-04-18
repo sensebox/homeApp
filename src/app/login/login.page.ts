@@ -2,7 +2,8 @@ import { Component, OnInit, NgModule } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { LoginService } from '../login.service';
 import {Router, NavigationExtras} from '@angular/router';
-
+import { ModalController } from '@ionic/angular';
+import {RegisterPage} from '../register/register.page'
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -17,6 +18,8 @@ export class LoginPage implements OnInit {
     private LoginService: LoginService,
     private router: Router,
     public loadingController: LoadingController,
+    public modalController: ModalController
+
     ) { }
 
   ngOnInit() {
@@ -65,6 +68,12 @@ export class LoginPage implements OnInit {
     else {
       return false
     }
+  }
+
+  async register(){
+    
+    this.router.navigate(['register-wizard'])
+
   }
 
 }

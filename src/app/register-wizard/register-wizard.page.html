@@ -1,0 +1,49 @@
+<ion-content padding>
+  <ion-slides pager="false" [options]="slideOpts">
+    <ion-slide>
+      <ion-grid>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>{{'register-wizard.subtitle'|translate}</ion-card-subtitle>
+            <ion-card-title>{{'register-wizard.title'|translate}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{'register-wizard.content'|translate}          
+          </ion-card-content>
+        </ion-card>
+        <form onSubmit="handleRegistration(event)">
+          <ion-list lines="full" class="ion-no-margin ion-no-padding">
+            <ion-item>
+              <ion-label position="stacked">{{'register.name'|translate}}</ion-label>
+              <ion-input required type="text" oninput="handleUsernameValue(event)"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">{{'register.email'|translate}}</ion-label>
+              <ion-input required type="text" oninput="handleEmailValue(event)"></ion-input>
+            </ion-item>
+          </ion-list>
+
+          <ion-item>
+            <ion-label position="stacked">{{'register.pw'|translate}}</ion-label>
+            <ion-input required type="password" oninput="handlePasswordValue(event)"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">{{'register.pw2nd'|translate}}</ion-label>
+            <ion-input required type="password"></ion-input>
+          </ion-item>
+        </form>
+        <div class="ion-padding">
+          <ion-button expand="block" type="submit" class="ion-no-margin">{{'register.creataccount'|translate}}</ion-button>
+        </div>
+      </ion-grid>
+    </ion-slide>
+    <ion-slide>
+      <h1>New Box</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Test</h1>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

@@ -22,7 +22,9 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  // add components/pages here that are not loaded via routing 
+  declarations: 
+  [AppComponent],
   entryComponents: [],
   imports: [
     HttpClientModule,

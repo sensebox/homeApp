@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path:'overview',
     loadChildren:()=>import('./overview/overview.module').then(m=>m.OverviewPageModule)
+  },
+  {
+    path: 'register-wizard',
+    loadChildren: () => import('./register-wizard/register-wizard.module').then( m => m.RegisterWizardPageModule)
   }
 ];
 @NgModule({
