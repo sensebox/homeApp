@@ -3,7 +3,6 @@ import { LoadingController } from '@ionic/angular';
 import { LoginService } from '../login.service';
 import {Router, NavigationExtras} from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import {RegisterPage} from '../register/register.page'
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
