@@ -6,6 +6,7 @@
 <ion-content padding>
   <ion-grid>
     <ion-row *ngFor="let box of boxes">
+      <ion-col>
       <ion-card>
         <ion-card-header>
           <ion-card-title>
@@ -23,15 +24,16 @@
            ID: <code>{{box._id}}</code>
           </ion-row>
           <ion-row>
-            <ion-col col-6>
-              <button class="actionButton" ion-button color="light"(click)="forwardShow(box)">{{'MYSENSEBOX.SHOW' | translate}}</button>
+            <ion-col>
+              <ion-button expand="block" class="actionButton" color="secondary" (click)="forwardShow(box)">{{'MYSENSEBOX.SHOW' | translate}}</ion-button>
             </ion-col>
-            <ion-col col-6>
-              <button class="actionButton" ion-button color="light" (click)="forwardSketch(box)">{{'MYSENSEBOX.SKETCH' | translate}}</button>
+            <ion-col>
+              <ion-button expand="block" class="actionButton" color="secondary" (click)="forwardSketch(box)">{{'MYSENSEBOX.SKETCH' | translate}}</ion-button>
             </ion-col>
           </ion-row>
         </ion-card-content>
       </ion-card>
+    </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

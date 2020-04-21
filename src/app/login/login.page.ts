@@ -24,7 +24,11 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  submitLogin(form): void {
+  async submitLogin(form) {
+    const loading = await this.loadingController.create({
+      message:'Please wait...'
+    })
+    loading.present();
     if (this.validatePassword(form)) {
       try {
 
@@ -56,6 +60,7 @@ export class LoginPage implements OnInit {
     else {
       console.log("input errro");
     }
+    loading.dismiss();
   }
 
   private async saveCredentials(credentials: Object) { }

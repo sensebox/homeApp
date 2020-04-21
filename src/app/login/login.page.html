@@ -17,42 +17,28 @@
   <ion-card>
     <form #form="ngForm" (ngSubmit)="submitLogin(form)">
       <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label>
-                <ion-icon name="person-outline"></ion-icon>
-              </ion-label>
-              <ion-input placeholder="email" name="email" type="email" ngModel required></ion-input>
-            </ion-item>
-        <ion-row>
           <ion-item>
             <ion-label>
-              <ion-icon name="lock-closed-outline"></ion-icon>
+              <ion-icon name="person-outline"></ion-icon>
             </ion-label>
-            <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+            <ion-input placeholder="email" name="email" type="email" ngModel required></ion-input>
           </ion-item>
-        </ion-row>
-        </ion-col>
-        <ion-col>
           <ion-row>
-            <ion-col col-8>
-            </ion-col>
-            <ion-col col-4>
-              <ion-row>
-                <ion-button type="submit" color="secondary">
-                  <ion-icon name="send"></ion-icon>{{'login.login'|translate}}
-                </ion-button>
-              </ion-row>
-              <ion-row>
-                <ion-button (click)="register()" color="secondary">
-                  <ion-icon name="book-outline"></ion-icon>{{'login.register'|translate}}
-                </ion-button>
-              </ion-row>
-            </ion-col>
+            <ion-item>
+              <ion-label>
+                <ion-icon name="lock-closed-outline"></ion-icon>
+              </ion-label>
+              <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+            </ion-item>
           </ion-row>
-        </ion-col>
-        </ion-row>
+          <ion-row class="floatright">
+            <ion-button type="submit" color="success">
+              <ion-icon name="send"></ion-icon>{{'login.login'|translate}}
+            </ion-button>
+            <ion-button (click)="register()" color="secondary">
+              <ion-icon name="book-outline"></ion-icon>{{'login.register'|translate}}
+            </ion-button>
+          </ion-row>
       </ion-grid>
     </form>
 
