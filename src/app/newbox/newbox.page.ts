@@ -14,7 +14,7 @@ export class NewboxPage implements OnInit {
     {name:"BME680",isChecked:false},
     {name:"SDS011",isChecked:false},
     {name:"Soil",isChecked:false},
-    {name:"Sound volume",isChecked:false},
+    {name:"SoundVolume",isChecked:false},
   ]
   constructor(private modalController: ModalController) { }
 
@@ -25,6 +25,10 @@ export class NewboxPage implements OnInit {
     })
     
     return await modal.present();
+  }
+
+  handleNewBox(form){
+    console.log(form);
   }
 
   ngOnInit() {
