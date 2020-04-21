@@ -8,10 +8,13 @@ import { ModalController, NavParams } from '@ionic/angular';
 })
 export class OverviewnewboxPage implements OnInit {
   @Input() form:Object;
+  @Input() sensors:Array<Object>;
   box:any
+  sensorlist:any
   constructor(public modalController: ModalController,navParams: NavParams) { 
-
-   this.box = navParams.data
+   this.box = navParams.data[0]
+   this.sensors = navParams.data[1]
+  
     }
 
   dismissModal(){

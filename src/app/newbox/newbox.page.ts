@@ -28,17 +28,20 @@ export class NewboxPage implements OnInit {
     return await modal.present();
   }
 
-  async presentModalOverview(form){
+  async presentModalOverview(form,sensors){
     const modal = await this.modalController.create({
       component:OverviewnewboxPage,
-      componentProps:form
+      componentProps:[form,sensors]
     })
     
     return await modal.present();
   }
 
   handleNewBox(form){
-    this.presentModalOverview(form.value);
+    let filtered = this.sensors.filter((sensor)=>{
+      return sensor.isChecked === true
+    })
+    this.presentModalOverview(form.value,filtered);
   }
 
   ngOnInit() {

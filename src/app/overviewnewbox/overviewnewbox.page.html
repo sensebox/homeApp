@@ -12,17 +12,21 @@
   <br>
   <ion-row>
     <ion-list>
-      <ion-label>{{'newbox.confirm.name'|translate}}:<b>{{box.name}} </b> </ion-label>
-      <ion-label>{{'newbox.confirm.exposure'|translate}}:<b>{{box.exposure}} </b> </ion-label>
+      <ion-label>{{'newbox.confirm.name'|translate}}:<b>{{box.name}} </b> </ion-label><br>
+      <ion-label>{{'newbox.confirm.exposure'|translate}}:<b>{{box.exposure}} </b> </ion-label><br>
       <ion-label>{{'newbox.confirm.selectedSensors'}}:</ion-label>
+      <ul>
+        <li *ngFor="let sensor of sensors">{{sensor.name}} </li>
+      </ul>
     </ion-list>
   </ion-row>
   <br>
   <ion-row>
     {{'newbox.confirm.disclaimer'|translate}}
   </ion-row>
-  <ion-row>
-      <ion-button expand="block" (click)="dismissModal()" class="ion-no-margin">{{'newbox.confirmbox'|translate}}</ion-button>
-  </ion-row>
+  <ion-row class="floatright">
+      <ion-button (click)="dismissModal()" color="danger" >{{'newbox.abortbox'|translate}} </ion-button>
+      <ion-button (click)="dismissModal()" color="success">{{'newbox.confirmbox'|translate}}</ion-button>
+    </ion-row>
 </ion-grid>
 </ion-content>
