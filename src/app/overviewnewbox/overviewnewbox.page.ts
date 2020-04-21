@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-overviewnewbox',
@@ -11,15 +11,27 @@ export class OverviewnewboxPage implements OnInit {
   @Input() sensors:Array<Object>;
   box:any
   sensorlist:any
-  constructor(public modalController: ModalController,navParams: NavParams) { 
+  constructor(public modalController: ModalController,navParams: NavParams, private loadingController: LoadingController) { 
    this.box = navParams.data[0]
    this.sensors = navParams.data[1]
   
     }
-
   dismissModal(){
-    // forward to api 
+    this.modalController.dismiss();
   }
+  async handleConfirmation(){
+    // forward to api 
+    this.modalController.dismiss()
+
+    const loading = await this.loadingController.create({
+      message:'Please wait...',
+      duration:2000
+    })
+    await loading.present();
+
+    loading.onDidDismiss().then(()=>console.log("finished "))
+  }
+
   ngOnInit() {
   }
 

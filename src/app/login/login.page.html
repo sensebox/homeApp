@@ -4,54 +4,57 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>Lorem Ipsum</ion-card-subtitle>
-        <ion-card-title>Ipsum Lorem</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <form #form="ngForm" (ngSubmit)="submitLogin(form)">
-        <ion-grid>
-          <ion-row>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Lorem Ipsum</ion-card-subtitle>
+      <ion-card-title>Ipsum Lorem</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+      dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <form #form="ngForm" (ngSubmit)="submitLogin(form)">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
             <ion-item>
               <ion-label>
                 <ion-icon name="person-outline"></ion-icon>
               </ion-label>
               <ion-input placeholder="email" name="email" type="email" ngModel required></ion-input>
             </ion-item>
-          </ion-row>
-          <ion-row>
-            <ion-item>
-              <ion-label>
-                <ion-icon name="lock-closed-outline"></ion-icon>
-              </ion-label>
-              <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
-            </ion-item>
-          </ion-row>
-          <ion-row class="errorMessage" *ngIf="errorInput">
-             {{'login.errorinput' | translate}}
-          </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-label>
+              <ion-icon name="lock-closed-outline"></ion-icon>
+            </ion-label>
+            <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+          </ion-item>
+        </ion-row>
+        </ion-col>
+        <ion-col>
           <ion-row>
             <ion-col col-8>
             </ion-col>
             <ion-col col-4>
-              <ion-item>
-                <button full ion-button type="submit" color="secondary">
+              <ion-row>
+                <ion-button type="submit" color="secondary">
                   <ion-icon name="send"></ion-icon>{{'login.login'|translate}}
-                </button>
-              </ion-item>
+                </ion-button>
+              </ion-row>
+              <ion-row>
+                <ion-button (click)="register()" color="secondary">
+                  <ion-icon name="book-outline"></ion-icon>{{'login.register'|translate}}
+                </ion-button>
+              </ion-row>
             </ion-col>
           </ion-row>
-        </ion-grid>
-      </form>
-      <ion-item>
-        <button full ion-button (click)="register()" color="secondary">
-          <ion-icon name="book-outline"></ion-icon>{{'login.register'|translate}}
-        </button>
-      </ion-item>
-    </ion-card>
+        </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+
+  </ion-card>
 </ion-content>
