@@ -18,6 +18,14 @@ const routes: Routes = [
   {
     path: 'register-wizard',
     loadChildren: () => import('./register-wizard/register-wizard.module').then( m => m.RegisterWizardPageModule)
+  },
+  {
+    path: 'newbox',
+    loadChildren: () => import('./newbox/newbox.module').then( m => m.NewboxPageModule)
+  },
+  {
+    path: 'privacy-disclaimer',
+    loadChildren: () => import('./privacy-disclaimer/privacy-disclaimer.module').then( m => m.PrivacyDisclaimerPageModule)
   }
 ];
 @NgModule({
