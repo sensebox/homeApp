@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'privacy-disclaimer',
     loadChildren: () => import('./privacy-disclaimer/privacy-disclaimer.module').then( m => m.PrivacyDisclaimerPageModule)
+  },
+  {
+    path: 'overviewnewbox',
+    loadChildren: () => import('./overviewnewbox/overviewnewbox.module').then( m => m.OverviewnewboxPageModule)
   }
 ];
 @NgModule({

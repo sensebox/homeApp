@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{'newbox.confirm.title'|translate}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid>
+  <ion-row>
+    {{'newbox.confirm.text'|translate}}
+  </ion-row>
+  <br>
+  <ion-row>
+    <ion-list>
+      <ion-label>{{'newbox.confirm.name'|translate}}:<b>{{box.name}} </b> </ion-label>
+      <ion-label>{{'newbox.confirm.exposure'|translate}}:<b>{{box.exposure}} </b> </ion-label>
+      <ion-label>{{'newbox.confirm.selectedSensors'}}:</ion-label>
+    </ion-list>
+  </ion-row>
+  <br>
+  <ion-row>
+    {{'newbox.confirm.disclaimer'|translate}}
+  </ion-row>
+  <ion-row>
+      <ion-button expand="block" (click)="dismissModal()" class="ion-no-margin">{{'newbox.confirmbox'|translate}}</ion-button>
+  </ion-row>
+</ion-grid>
+</ion-content>

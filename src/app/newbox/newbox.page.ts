@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import {PrivacyDisclaimerPage} from '../privacy-disclaimer/privacy-disclaimer.page'
+import {OverviewnewboxPage} from '../overviewnewbox/overviewnewbox.page'
 @Component({
   selector: 'app-newbox',
   templateUrl: './newbox.page.html',
@@ -19,7 +20,7 @@ export class NewboxPage implements OnInit {
   constructor(private modalController: ModalController) { }
 
 
-  async presentModal(){
+  async presentModalPrivacy(){
     const modal = await this.modalController.create({
       component:PrivacyDisclaimerPage
     })
@@ -27,8 +28,17 @@ export class NewboxPage implements OnInit {
     return await modal.present();
   }
 
+  async presentModalOverview(form){
+    const modal = await this.modalController.create({
+      component:OverviewnewboxPage,
+      componentProps:form
+    })
+    
+    return await modal.present();
+  }
+
   handleNewBox(form){
-    console.log(form);
+    this.presentModalOverview(form.value);
   }
 
   ngOnInit() {
