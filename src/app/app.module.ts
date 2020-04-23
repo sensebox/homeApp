@@ -16,6 +16,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {LoginService} from './login.service'
 import { PrivacyDisclaimerPage } from './privacy-disclaimer/privacy-disclaimer.page';
 import {OverviewnewboxPage} from './overviewnewbox/overviewnewbox.page'
+import { SettingsComponent } from './settings/settings.component';
 // For AoT compilation (production builds) we need to have a factory for the loader of translation files.
 // @TODO: we possibly could optimize this by using a static loader in combination with webpack:
 // https://github.com/ngx-translate/http-loader#angular-cliwebpack-translateloader-example
@@ -26,8 +27,8 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   // add components/pages here that are not loaded via routing 
   declarations: 
-  [AppComponent,PrivacyDisclaimerPage,OverviewnewboxPage],
-  entryComponents: [PrivacyDisclaimerPage,OverviewnewboxPage],
+  [AppComponent,PrivacyDisclaimerPage,OverviewnewboxPage,SettingsComponent],
+  entryComponents: [PrivacyDisclaimerPage,OverviewnewboxPage,SettingsComponent],
   imports: [
     HttpClientModule,
     BrowserModule,

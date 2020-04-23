@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SettingsComponent } from '../settings/settings.component';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-overview',
@@ -9,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class OverviewPage implements OnInit {
   loginInformation:any;
   boxes:any
-  constructor(private route:ActivatedRoute,private router:Router) {
+  constructor(private route:ActivatedRoute,private router:Router,public popoverController: PopoverController) {
     this.route.queryParams.subscribe(params=>{
       if(this.router.getCurrentNavigation().extras.state){
         this.loginInformation = this.router.getCurrentNavigation().extras.state.loginInformation;
@@ -17,6 +19,18 @@ export class OverviewPage implements OnInit {
       }
     })
    }
+
+   async presentSettings(ev:any){
+     const popover = await this.popoverController.create({
+       component: SettingsComponent,
+       event:ev,
+       translucent:true
+     })
+
+     return await popover.present();
+   }
+
+   
 
   ngOnInit() {
   }

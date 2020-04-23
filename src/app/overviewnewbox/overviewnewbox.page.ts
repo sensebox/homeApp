@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, NavParams, LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-overviewnewbox',
@@ -11,7 +12,7 @@ export class OverviewnewboxPage implements OnInit {
   @Input() sensors:Array<Object>;
   box:any
   sensorlist:any
-  constructor(public modalController: ModalController,navParams: NavParams, private loadingController: LoadingController) { 
+  constructor(public modalController: ModalController,navParams: NavParams, private loadingController: LoadingController,public router: Router) { 
    this.box = navParams.data[0]
    this.sensors = navParams.data[1]
   
@@ -29,7 +30,7 @@ export class OverviewnewboxPage implements OnInit {
     })
     await loading.present();
 
-    loading.onDidDismiss().then(()=>console.log("finished "))
+    loading.onDidDismiss().then(()=>this.router.navigate(['overview']))
   }
 
   ngOnInit() {
