@@ -22,6 +22,18 @@ const routes: Routes = [
   {
     path: 'newbox',
     loadChildren: () => import('./pages/newbox/newbox.module').then( m => m.NewboxPageModule)
+  },
+  {
+    path: 'sensor',
+    loadChildren: () => import('./pages/sensor/sensor.module').then( m => m.SensorPageModule)
+  },
+  {
+    path: 'sketch',
+    loadChildren: () => import('./pages/sketch/sketch.module').then( m => m.SketchPageModule)
+  },
+  {
+    path: 'box',
+    loadChildren: () => import('./pages/box/box.module').then( m => m.BoxPageModule)
   }
 ];
 @NgModule({

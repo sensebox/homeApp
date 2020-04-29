@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router,NavigationExtras } from '@angular/router';
 import { SettingsComponent } from '../../components/settings/settings.component';
 import { PopoverController } from '@ionic/angular';
 
@@ -30,7 +30,23 @@ export class OverviewPage implements OnInit {
      return await popover.present();
    }
 
-   
+   forwardBox(box){
+    let navigationExtras:NavigationExtras={
+      state:{
+        box
+      }
+    }
+    this.router.navigate(['box'],navigationExtras)
+   }
+
+   forwardSketch(box){
+    let navigationExtras:NavigationExtras={
+      state:{
+        box
+      }
+    }
+    this.router.navigate(['sketch'],navigationExtras)
+   }
 
   ngOnInit() {
   }
