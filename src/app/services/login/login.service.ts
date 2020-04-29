@@ -4,6 +4,7 @@ import { timeout } from 'rxjs/operators'
 const URL_login = 'https://api.opensensemap.org/users/sign-in';
 const URL_user = 'https://api.opensensemap.org/users/me/boxes';
 const URL_register = 'https://api.opensensemap.org/users/register';
+const URL_sketch = 'https://api.opensensemap.org/boxes/';
 
 
 @Injectable({
@@ -19,19 +20,22 @@ export class LoginService {
             .pipe(timeout(30000))
   }
 
-  getUserBoxes(token){
+  getUserBoxes(token:string){
     const headers = new HttpHeaders({'Authorization':"Bearer "+token})
     return this.http.get(URL_user,{headers})
               .pipe(timeout(30000))
   }
 
-  registerUser(name,email,password){
-    console.log(name,email)
-    console.log(password)
+  registerUser(name:string,email:string,password:string){
     const headers = new HttpHeaders({})
 
     return this.http.post(`${URL_register}?name=${name}&email=${email}&password=${password}`,{headers})
-              .pipe(timeout(30000))
-              
+              .pipe(timeout(30000))       
+  }
+
+  getUserSketch(token:string,id:string,ssid:string,password:string){
+    const headers = new HttpHeaders({'Authorization':"Bearer "+token})
+    return this.http.get(`${URL_sketch}${id}/script?ssid=${ssid}&password=${password}`,{headers,responseType:'text'})
+            .pipe(timeout(30000))
   }
 }

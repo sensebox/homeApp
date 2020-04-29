@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'box',
     loadChildren: () => import('./pages/box/box.module').then( m => m.BoxPageModule)
+  },
+  {
+    path: 'ota-wizard',
+    loadChildren: () => import('./pages/ota-wizard/ota-wizard.module').then( m => m.OtaWizardPageModule)
   }
 ];
 @NgModule({
