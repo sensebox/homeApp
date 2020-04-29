@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { LoginService } from '../login.service';
+import { LoginService } from '../../services/login/login.service';
 import { Router,NavigationExtras } from '@angular/router';
 @Component({
   selector: 'app-register-wizard',

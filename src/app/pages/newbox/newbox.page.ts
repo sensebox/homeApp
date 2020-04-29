@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import {PrivacyDisclaimerPage} from '../privacy-disclaimer/privacy-disclaimer.page'
-import {OverviewnewboxPage} from '../overviewnewbox/overviewnewbox.page'
+import {PrivacyDisclaimerPage} from '../../components/privacy-disclaimer/privacy-disclaimer.page'
+import {OverviewnewboxPage} from '../../components/overviewnewbox/overviewnewbox.page'
 @Component({
   selector: 'app-newbox',
   templateUrl: './newbox.page.html',

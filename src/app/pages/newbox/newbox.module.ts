@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { NewboxPageRoutingModule } from './newbox-routing.module';
 
 import { NewboxPage } from './newbox.page';
-import { PrivacyDisclaimerPage } from '../privacy-disclaimer/privacy-disclaimer.page';
+import { PrivacyDisclaimerPage } from '../../components/privacy-disclaimer/privacy-disclaimer.page';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({

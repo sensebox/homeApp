@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { timeout } from 'rxjs/operators'
-import {LoginPageModule} from './login/login.module'
 const URL_login = 'https://api.opensensemap.org/users/sign-in';
 const URL_user = 'https://api.opensensemap.org/users/me/boxes';
 const URL_register = 'https://api.opensensemap.org/users/register';
@@ -16,7 +15,7 @@ export class LoginService {
 
   submitLogin(username:string,password:string){
     const headers = new HttpHeaders({'Content-Type': 'application/json'} );
-    return this.http.post(`${URL_login}?email=`+username+`&password=`+password,{headers})
+    return this.http.post(`${URL_login}?email=${username}&password=${password}`,{headers})
             .pipe(timeout(30000))
   }
 
@@ -31,7 +30,7 @@ export class LoginService {
     console.log(password)
     const headers = new HttpHeaders({})
 
-    return this.http.post(`${URL_register}?name=`+name+`&email=`+email+`&password=`+password,{headers})
+    return this.http.post(`${URL_register}?name=${name}&email=${email}&password=${password}`,{headers})
               .pipe(timeout(30000))
               
   }

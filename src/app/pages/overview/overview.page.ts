@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SettingsComponent } from '../settings/settings.component';
+import { SettingsComponent } from '../../components/settings/settings.component';
 import { PopoverController } from '@ionic/angular';
 
 @Component({
