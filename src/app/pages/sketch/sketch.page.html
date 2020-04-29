@@ -1,12 +1,67 @@
 <ion-header>
   <ion-toolbar>
+    <ion-title>{{'sketch.title' | translate }}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{'sketch.title' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-5>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{'CONFIG.WIFI' | translate}} </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item>
+              <ion-label>SSID</ion-label>
+              <ion-input [(ngModel)]="ssid"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>{{'Password'|translate}}</ion-label>
+              <ion-input type="password" [(ngModel)]="pw"></ion-input>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col col-12 col-md-5>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ box.name}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-item>
+                  <ion-label>{{box._id}}</ion-label>
+                </ion-item>
+              </ion-row>
+              <ion-row *ngFor="let sensor of box.sensors">
+                <ion-col col-12>
+                  <ion-item (click)="viewSensor(sensor)">
+                    <ion-label>{{sensor.sensorType}} <code>{{sensor._id}}</code></ion-label>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row class="floatright">
+                <ion-button (click)="uploadStandardSketch()" color="success">
+                  <ion-icon name="send"></ion-icon>{{'sketch.upload'|translate}}
+                </ion-button>
+              </ion-row>
+            </ion-grid>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row align-items-center>
+      <ion-col>
+        <p class="hint" [innerHTML]="'ABOUT.HINT' | translate"></p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

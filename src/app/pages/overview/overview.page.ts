@@ -42,7 +42,8 @@ export class OverviewPage implements OnInit {
    forwardSketch(box){
     let navigationExtras:NavigationExtras={
       state:{
-        box
+        box,
+       loginInformation: this.loginInformation
       }
     }
     this.router.navigate(['sketch'],navigationExtras)
