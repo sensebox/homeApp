@@ -1,9 +1,74 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>ota-wizard</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-slides #slides (ionSlideDidChange)="onSlideChange()">
+    <!--Intro-->
+    <ion-slide>
+      <ion-grid>
+        <ion-row align-items-center>
+          <ion-col col-12 col-md-6>
+            <ion-icon name="wifi" style="font-size: 160px"></ion-icon>
+            <h2 translate>OTAWIZ.INTRO.TITLE</h2>
+            <p [innerHTML]="'OTAWIZ.INTRO.TEXT' | translate"></p>
+          </ion-col>
 
+          <ion-col col-12 col-md-6>
+            <p translate>OTAWIZ.INTRO.STEPS</p>
+            <ul style="text-align: left">
+              <li [innerHTML]="'OTAWIZ.INTRO.STEP1' | translate"></li>
+              <li [innerHTML]="'OTAWIZ.INTRO.STEP2' | translate"></li>
+              <li [innerHTML]="'OTAWIZ.INTRO.STEP3' | translate"></li>
+            </ul>
+            <button ion-button large clear icon-end color="primary" (click)="slides.slideNext()">
+              {{ 'OTAWIZ.BTN_NEXT' | translate }}
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+
+    <!-- OTA Mode guide-->
+    <ion-slide>
+      <ion-grid>
+        <ion-row align-items-center>
+          <ion-col col-12>
+            <h2 translate>OTAWIZ.OTAMODE.TITLE</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row align-items-center>
+          <ion-col col-12 col-md-6>
+            <ion-card (click)="showAutomatic()">
+              <ion-card-header>
+                Automatic mode
+              </ion-card-header>
+              <ion-card-content>
+                <ion-icon class="mode_selection" name="wifi"></ion-icon> <br>
+                {{ 'OTAWIZ.OTAMODESELECTION.AUTOMATIC' | translate}}
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col col-12 col-md-6>
+            <ion-card (click)="showManual()">
+              <ion-card-header>
+                Manual mode
+              </ion-card-header>
+              <ion-card-content>
+                <ion-icon class="mode_selection" name="hammer"></ion-icon> <br>
+                {{ 'OTAWIZ.OTAMODESELECTION.MANUAL' | translate}}
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

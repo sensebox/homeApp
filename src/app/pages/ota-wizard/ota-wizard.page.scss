@@ -1,0 +1,72 @@
+@import '../../../theme/variables.scss';
+
+page-ota-wizard {
+  .swiper-pagination-bullet-active {
+    background: map-get($colors, primary);
+  }
+
+  .tutorial_gif {
+    border-radius: 25px;
+   }
+  .mode_selection {
+    font-size:8rem;
+    color:lightslategray;
+    margin:10px;
+  }
+
+  ion-slide {
+    h4 {
+      margin-bottom: 40px;
+    }
+
+    img {
+      max-height: 50%;
+      max-width: 60%;
+      margin: 18px 0;
+
+      & ~ h2 {
+        margin-top: 2.8rem;
+      }
+    }
+
+    p, ul, ol {
+      padding: 0 16px;
+      font-size: 15px;
+      line-height: 1.4;
+      color: #60646B;
+
+      b {
+        color: #000000;
+        font-weight: 500;
+      }
+    }
+
+    ul, ol {
+      margin-left: 4%;
+      li {
+        padding-bottom: 6px;
+      }
+    }
+    ul {
+      list-style-type: disc;
+    }
+  }
+
+  #wifi-slide {
+    h4, button {
+      display: inline-block;
+    }
+
+    #wifi-automatic {
+      // for the ion-list height limitation to work..
+      &, div.slide-zoom, ion-grid, ion-row, ion-col:last-child {
+        height: 100%;
+      }
+
+      #wifi-list {
+        max-height: 55%;
+        overflow-y: scroll;
+      }
+    }
+  }
+}
