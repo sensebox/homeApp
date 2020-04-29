@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-sensor',
@@ -6,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sensor.page.scss'],
 })
 export class SensorPage implements OnInit {
-
-  constructor() { }
+  sensor:Sensor
+  constructor(private router:Router,private route:ActivatedRoute) {
+    this.route.queryParams.subscribe(params=>{
+      if(this.router.getCurrentNavigation().extras.state){
+        this.sensor = this.router.getCurrentNavigation().extras.state.sensor;
+      }
+    })
+   }
 
   ngOnInit() {
   }

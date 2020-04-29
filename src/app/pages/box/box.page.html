@@ -8,5 +8,21 @@
 </ion-header>
 
 <ion-content>
-
+<ion-grid>
+  <ion-card>
+    <ion-card-header>
+    <ion-card-subtitle>{{box._id}}</ion-card-subtitle>
+    <ion-card-title>{{box.name}}</ion-card-title>
+  </ion-card-header>
+    <ion-card-content>{{box.description}} </ion-card-content>
+  </ion-card>
+  <ion-row *ngFor="let sensor of box.sensors">
+    <ion-card  (click)="forwardSensor(sensor)">
+      <ion-card-header>
+        <ion-card-title>{{sensor.title}} </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>{{sensor.lastMeasurement.value}} </ion-card-content>
+    </ion-card>
+  </ion-row>
+</ion-grid>
 </ion-content>
