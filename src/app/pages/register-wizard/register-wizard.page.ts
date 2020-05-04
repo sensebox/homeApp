@@ -10,7 +10,8 @@ import { Router, NavigationExtras } from '@angular/router';
 export class RegisterWizardPage implements OnInit {
 
   constructor(private loginService: LoginService, private loadingController: LoadingController, private router: Router)
-   { }
+  
+  { }
 
 
   ngOnInit() {

@@ -10,10 +10,15 @@ $colors: (
   light:      #f4f4f4,
   dark:       #222
 );
+@font-face {
+  font-family: Brix-slab;
+  src:url("/assets/fonts/2EF157_0_0.woff") format("opentype")
+}
 
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
+  --ion-font-family:Brix-slab;
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
@@ -93,6 +98,7 @@ $colors: (
    */
 
   body {
+    --ion-default-font:Brix-slab;
     --ion-color-primary: #428cff;
     --ion-color-primary-rgb: 66,140,255;
     --ion-color-primary-contrast: #ffffff;

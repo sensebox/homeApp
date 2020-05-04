@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar class="overview_header">
     <ion-buttons slot="end">
       <ion-button (click)="presentSettings(event)">
         <ion-icon name="settings-sharp"></ion-icon>      </ion-button>    
@@ -8,36 +8,23 @@
 
   </ion-toolbar>
 </ion-header>
-<ion-content padding>
+
+<ion-content padding class="overview_background">
   <ion-grid>
-    <ion-row *ngFor="let box of boxes">
+    <ion-row class="box" *ngFor="let box of boxes">
       <ion-col>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>
-            {{box.name}}
-          </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-row>
-            {{'MYSENSEBOX.EXPOSURE' | translate}}: {{box.exposure}}
+        <ion-row class="box_title">{{box.name}} </ion-row>
+          <ion-row class="box_subtitle">
+            {{box.model}} <ion-icon name="ellipse-sharp"> </ion-icon> 52.7, 7.14 <ion-icon name="ellipse-sharp"></ion-icon> {{box.sensors.length}} Sensoren
           </ion-row>
-          <ion-row>
-            Model: {{box.model}}
-          </ion-row>
-          <ion-row>
-           ID: <code>{{box._id}}</code>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button expand="block" class="actionButton" color="secondary" (click)="forwardBox(box)">{{'MYSENSEBOX.SHOW' | translate}}</ion-button>
+          <ion-row class="button_wrapper">
+            <ion-col (click)="forwardBox(box)"class="box_button analytics">
+              Analysis
             </ion-col>
-            <ion-col>
-              <ion-button expand="block" class="actionButton" color="secondary" (click)="forwardSketch(box)">{{'MYSENSEBOX.SKETCH' | translate}}</ion-button>
+            <ion-col (click)="forwardSketch(box)" class="box_button sketch">
+                Sketch
             </ion-col>
           </ion-row>
-        </ion-card-content>
-      </ion-card>
     </ion-col>
     </ion-row>
   </ion-grid>

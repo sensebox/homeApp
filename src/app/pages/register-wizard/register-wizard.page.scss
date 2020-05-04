@@ -1,0 +1,23 @@
+.login_background {
+    --background:linear-gradient(340deg, #45beed 1%, #4eaf47 40%, #fff200 100%);
+        text-align:center;
+    display: table;
+}
+
+.login_wrapper {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  
+}
+
+
+.login_input {
+    --background:white;
+    margin:10px;
+    border-radius: 25px;
+    color:#45beed
+    
+}

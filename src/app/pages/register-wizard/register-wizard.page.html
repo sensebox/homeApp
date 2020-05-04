@@ -1,47 +1,30 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>register</ion-title>
+<ion-content class="login_background" padding>
+  <ion-grid class="login_wrapper">
+    <ion-row>
+      <h1>
 
-  </ion-toolbar>
-</ion-header>
-<ion-content padding>
-  <ion-grid>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>{{'register-wizard.subtitle'|translate}}</ion-card-subtitle>
-        <ion-card-title>{{'register-wizard.title'|translate}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        {{'register-wizard.content'|translate}}
-      </ion-card-content>
-    </ion-card>
+      Sign up for OpenSenseMap
+    </h1></ion-row>
     <form (ngSubmit)="handleRegistration(formRegist)" #formRegist="ngForm">
-      <ion-list lines="full" class="ion-no-margin ion-no-padding">
-        <ion-item>
-          <ion-label position="stacked">{{'register.name'|translate}}</ion-label>
+        <ion-item lines="none" class="login_input">
+          <ion-label position="stacked">Name</ion-label>
           <ion-input minlength="4" ngModel name="name" required type="text"></ion-input>
         </ion-item>
-
-        <ion-item>
-          <ion-label position="stacked">{{'register.email'|translate}}</ion-label>
+        <ion-item lines="none"  class="login_input">
+          <ion-label position="stacked">Email</ion-label>
           <ion-input minlength="8" ngModel name="email" required type="text"></ion-input>
         </ion-item>
-      </ion-list>
-
-      <ion-item>
-        <ion-label position="stacked">{{'register.pw'|translate}}</ion-label>
+      <ion-item lines="none"  class="login_input">
+        <ion-label position="stacked">Password</ion-label>
         <ion-input ngModel name="password" required type="password"></ion-input>
       </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">{{'register.pw2nd'|translate}}</ion-label>
+      <ion-item lines="none"  class="login_input">
+        <ion-label position="stacked">Password</ion-label>
         <ion-input ngModel name="password2" required type="password"></ion-input>
       </ion-item>
       <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin">{{'register.createaccount'|translate}}
+        <ion-button expand="block" type="submit" class="ion-no-margin">Sign up!
         </ion-button>
       </div>
     </form>
