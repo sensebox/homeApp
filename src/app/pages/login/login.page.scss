@@ -35,9 +35,15 @@ $colors: (
 
 .login_button {
     width:100%;
-    margin:10px;
+    margin:5px;
     --background:  #45beed;
-    border-radius:25px 
+    --border-radius:25px 
+}
+.register_button {
+    width:100%;
+    margin:5px;
+    --background:  #fff200;
+    --border-radius:25px 
 }
 
 .floatright{
