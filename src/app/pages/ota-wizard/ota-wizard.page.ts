@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
-import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import {OtawifiService} from '../../services/otawifi/otawifi.service'
+import {WebcompilerService} from '../../services/webcompiler/webcompiler.service'
+ 
 @Component({
   selector: 'app-ota-wizard',
   templateUrl: './ota-wizard.page.html',
@@ -21,11 +22,9 @@ export class OtaWizardPage implements OnInit {
 
   // for unified slide index access in the template
   slideCompilation = OtaSlides.Compilation
-  slideWifi = OtaSlides.WifiSelection
+  slideScan = OtaSlides.Scan
   slideUpload = OtaSlides.Upload
 
-  private onlineSub: Subscription
-  private offlineSub: Subscription
   private sketch = ''
   private compiledSketch: ArrayBuffer = undefined
   private hiddenSlides: OtaSlides[] = []
@@ -34,7 +33,7 @@ export class OtaWizardPage implements OnInit {
   private modus;
   private OTAAddress;
 
-  constructor(private route:ActivatedRoute,private router:Router,) {
+  constructor(private route:ActivatedRoute,private router:Router,private otawifi: OtawifiService,private webcompiler: WebcompilerService) {
     // build new sketch from api response 
 
     // for OTA to work, the new sketch has to include the OTA logic as well.
@@ -54,23 +53,21 @@ export class OtaWizardPage implements OnInit {
 
   }
 
-  onSlideChange() {
-    this.slideHistory.push(OtaSlides[this.currentSlide])
-    switch (this.currentSlide) {
+  async onSlideChange() {
+    let currentSlide = await Promise.resolve(this.slides.getActiveIndex());
+  //  this.slideHistory.push(OtaSlides[currentSlide])
+    console.log("currentslide",currentSlide)
+    switch (currentSlide) {
       case OtaSlides.Intro:
+        this.handleIntro();
         break
-      case OtaSlides.ModeGuide:
+      case OtaSlides.Scan:
+        this.handleScanInit()
         //if(this.modus == undefined) this.slides.lockSwipeToNext(true);
         break
       case OtaSlides.Compilation:
         this.handleCompilation()
         break
-      case OtaSlides.Mode:
-        break
-      case OtaSlides.WifiSelection:
-        this.handleWifiSelection()
-        break
-
       case OtaSlides.Upload:
         this.handleUpload()
         break
@@ -80,121 +77,55 @@ export class OtaWizardPage implements OnInit {
       //this.log.warn('unknown slide, please define its logic', { slide: this.currentSlide })
     }
   }
-
- get currentSlide(): OtaSlides {
-    let current = this.slides.getActiveIndex()
-    const hiddenOffset = this.hiddenSlides.filter(slide => slide <= current).length
-    if(current === 3 && this.slideIsHidden(this.slideWifi)){
-      // Hotfix for when automatic is selected and Wifi selection slide is hidden
-      current +=1;
-    }
-    return current + hiddenOffset
-  }
-  slideIsHidden(slide: OtaSlides): boolean {
-    return this.hiddenSlides.indexOf(slide) !== -1
+  handleScanInit(){
+    console.log("handleScanInit")
   }
 
-  private hideSlide(slide: OtaSlides) {
-    if (this.currentSlide === slide) return
-    if (this.slideIsHidden(slide)) return
-    this.hiddenSlides.push(slide)
-    this.slides.update()
+  handleUpload(){
+    console.log("handleUpload");
+  }
+  handleWifiSelection(){
+    console.log("handleWifiSelection");
   }
 
+  handleIntro(){
+    console.log(this.sketch);
+  }
+
+  private async handleCompiling(){
+    
+    const compiledSketch = await this.webcompiler.compile(this.sketch);
+    console.log(compiledSketch);
+    
+    this.slides.slideNext();
+  }
+
+  handleScan(){
+    console.log("handleScan()");
+    this.otawifi.scanNetwork()
+    this.slides.slideNext();
+  }
   private showSlide(slide:OtaSlides){
     this.hiddenSlides =  this.hiddenSlides.filter((hiddenSlide)=>hiddenSlide!=slide)
     }
-  async connectToSensebox(ssid: string) {
-    this.counts.connect++
-    this.state.wifiSelection = 'connecting'
-    try {
-      await this.otaWifi.connectToSensebox(ssid)
-      this.state.wifiSelection = 'select'
-      this.slides.lockSwipeToNext(false)
-      this.slides.slideNext()
-    } catch (err) {
-      this.state.wifiSelection = 'error'
-      this.errorMsg = err.message
-      this.log.error('could not connect to wifi:', err.message)
-    }
-  }
 
   private handleCompilation() {
     this.slides.lockSwipeToNext(!this.compiledSketch)
 
     // need to go online for compilation. compilation is retriggered via this.onlineSub
     if (!this.state.isOnline) {
-      switch (this.otaWifi.strategy) {
-        case WifiStrategy.Automatic:
-        // TODO: auto connect to previous network, if available
-        default:
           this.state.compilation = 'go-online'
-          break
       }
-    } else {
+     else {
       this.compileSketch()
     }
   }
 
-  private async handleWifiSelection(force = false) {
-    if (this.otaWifi.strategy === WifiStrategy.Automatic) {
-      this.slides.lockSwipeToNext(true)
 
-      // skip scan when boxes where already found from the scan on startup
-      if (!force && this.availableSenseboxes.length)
-        return this.state.wifiSelection = 'select'
 
-      try {
-        this.state.wifiSelection = 'scanning'
-        // force update of view, as setting subproperties of this.state is not detected automatically :/
-        this.changedetect.detectChanges()
-        this.availableSenseboxes = await this.otaWifi.findSenseboxes(true)
-        this.state.wifiSelection = 'select'
-        this.changedetect.detectChanges()
-      } catch (err) {
-        this.errorMsg = err.message
-        this.state.wifiSelection = 'error'
-        this.changedetect.detectChanges()
-        this.log.error('could not scan wifi:', err.message)
-      }
-    }
-  }
+  private compileSketch() {
 
-  private async handleUpload() {
-    this.counts.upload++
-    this.state.upload = 'uploading'
-    try {
-      
-      const res = await this.otaWifi.uploadFirmware(this.compiledSketch,this.OTAAddress)
-      this.log.debug(JSON.stringify(res, null, 2))
-
-      this.state.upload = 'done'
-      this.slides.lockSwipeToNext(false)
-    } catch (err) {
-      this.state.upload = 'error'
-      this.errorMsg = err.message
-      this.log.error('could not upload sketch:', err.message)
-    }
-  }
-
-  private async compileSketch() {
-    this.counts.compile++
-    this.state.compilation = 'compiling'
-    try {
-      this.compiledSketch = await this.webcompiler.compile(this.sketch)
-      this.state.compilation = 'done'
-      this.slides.lockSwipeToNext(false)
-    } catch (err) {
-      this.state.compilation = 'error'
-      this.errorMsg = !err.message ? err : err.message
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/\n/g, '<br/>')
-      this.log.error('could not compile sketch:', err.message)
-    }
-  }
+}
 }
 
 
@@ -213,9 +144,7 @@ type scanResult = {
 enum OtaSlides {
   Intro = 0,
   // Intro2 = 1,
-  Compilation = 1,
-  ModeGuide = 2, 
-  Mode = 3,
-  WifiSelection = 4,
-  Upload = 5,
+  Compilation = 4,
+  Scan = 1 , 
+  Upload = 2
 }
