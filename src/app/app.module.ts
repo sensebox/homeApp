@@ -17,6 +17,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { PrivacyDisclaimerPage } from './components/privacy-disclaimer/privacy-disclaimer.page';
 import {OverviewnewboxPage} from './components/overviewnewbox/overviewnewbox.page'
 import { SettingsComponent } from './components/settings/settings.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx'
+
 // For AoT compilation (production builds) we need to have a factory for the loader of translation files.
 // @TODO: we possibly could optimize this by using a static loader in combination with webpack:
 // https://github.com/ngx-translate/http-loader#angular-cliwebpack-translateloader-example
@@ -30,6 +32,7 @@ export function createTranslateLoader(http: HttpClient) {
   [AppComponent,PrivacyDisclaimerPage,OverviewnewboxPage,SettingsComponent],
   entryComponents: [PrivacyDisclaimerPage,OverviewnewboxPage,SettingsComponent],
   imports: [
+    
     HttpClientModule,
     BrowserModule,
     TranslateModule.forRoot({
@@ -42,6 +45,7 @@ export function createTranslateLoader(http: HttpClient) {
     IonicModule.forRoot(), AppRoutingModule
   ],
   providers: [
+    Geolocation,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

@@ -42,18 +42,21 @@
         </ion-row>
         <ion-row>
           <ion-col>
-              <ion-input ngModel  name="latitude" required></ion-input>
+              <ion-input [(ngModel)]="latitude"  name="latitude" required></ion-input>
               <ion-label>{{'newbox.latitude'|translate}}</ion-label>
           </ion-col>
           <ion-col>
-              <ion-input ngModel name="longitude" required></ion-input>
+              <ion-input [(ngModel)]="longitude" name="longitude" required></ion-input>
               <ion-label>{{'newbox.longitude'|translate}}</ion-label>
-
           </ion-col>
           <ion-col>
-              <ion-input ngModel name="height" required></ion-input>
-              <ion-label>{{'newbox.height'|translate}}</ion-label>                  
-            </ion-col>
+            <ion-row>
+              <ion-button  (click)="handleUserLocation()"><ion-icon name="location-outline"></ion-icon></ion-button>
+            </ion-row>
+            <!-- <ion-row>
+            <ion-button (click)="handleUserLocation()"><ion-icon name="map-outline"></ion-icon></ion-button>
+            </ion-row> -->
+          </ion-col>
         </ion-row>
         <ion-row align-items-center>
           <ion-label><b>{{'newbox.sensors'|translate}}</b></ion-label>

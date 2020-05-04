@@ -38,4 +38,8 @@ export class LoginService {
     return this.http.get(`${URL_sketch}${id}/script?ssid=${ssid}&password=${password}`,{headers,responseType:'text'})
             .pipe(timeout(30000))
   }
+
+  getUserLocation(){
+    
+  }
 }

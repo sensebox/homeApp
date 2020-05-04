@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController,ToastController } from '@ionic/angular';
 import {PrivacyDisclaimerPage} from '../../components/privacy-disclaimer/privacy-disclaimer.page'
 import {OverviewnewboxPage} from '../../components/overviewnewbox/overviewnewbox.page'
+import { Geolocation } from '@ionic-native/geolocation/ngx'
 @Component({
   selector: 'app-newbox',
   templateUrl: './newbox.page.html',
@@ -17,7 +18,9 @@ export class NewboxPage implements OnInit {
     {name:"Soil",isChecked:false},
     {name:"SoundVolume",isChecked:false},
   ]
-  constructor(private modalController: ModalController) { }
+  private latitude;
+  private longitude;
+  constructor(private modalController: ModalController,private toastController:ToastController, private geolocation: Geolocation) { }
 
 
   async presentModalPrivacy(){
@@ -35,6 +38,25 @@ export class NewboxPage implements OnInit {
     })
     
     return await modal.present();
+  }
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000
+    });
+    toast.present();
+  }
+  
+
+  async handleUserLocation(){
+    this.geolocation.getCurrentPosition().then((resp)=>{
+      this.latitude = resp.coords.latitude;
+      this.longitude = resp.coords.longitude
+    })
+    .catch((error)=>{
+      this.presentToast("Error getting location");
+      console.log("Error getting location",error);
+    })
   }
 
   handleNewBox(form){
