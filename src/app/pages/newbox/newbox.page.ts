@@ -3,6 +3,7 @@ import { ModalController,ToastController } from '@ionic/angular';
 import {PrivacyDisclaimerPage} from '../../components/privacy-disclaimer/privacy-disclaimer.page'
 import {OverviewnewboxPage} from '../../components/overviewnewbox/overviewnewbox.page'
 import { Geolocation } from '@ionic-native/geolocation/ngx'
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-newbox',
   templateUrl: './newbox.page.html',
@@ -20,7 +21,23 @@ export class NewboxPage implements OnInit {
   ]
   private latitude;
   private longitude;
-  constructor(private modalController: ModalController,private toastController:ToastController, private geolocation: Geolocation) { }
+  private token;
+  private refreshToken;
+
+  constructor(
+    private modalController: ModalController,
+    private toastController:ToastController, 
+    private geolocation: Geolocation,
+    private route:ActivatedRoute,
+    private router:Router)
+    {
+      this.route.queryParams.subscribe(params=>{
+        if(this.router.getCurrentNavigation().extras.state){
+          this.token = this.router.getCurrentNavigation().extras.state.token
+          this.refreshToken = this.router.getCurrentNavigation().extras.state.refreshToken
+        }
+      })
+    }
 
 
   async presentModalPrivacy(){
@@ -34,7 +51,7 @@ export class NewboxPage implements OnInit {
   async presentModalOverview(form,sensors){
     const modal = await this.modalController.create({
       component:OverviewnewboxPage,
-      componentProps:[form,sensors]
+      componentProps:[form,sensors,this.token,this.refreshToken]
     })
     
     return await modal.present();
@@ -50,6 +67,7 @@ export class NewboxPage implements OnInit {
 
   async handleUserLocation(){
     this.geolocation.getCurrentPosition().then((resp)=>{
+      this.presentToast("Succesfully got location")
       this.latitude = resp.coords.latitude;
       this.longitude = resp.coords.longitude
     })

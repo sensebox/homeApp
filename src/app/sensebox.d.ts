@@ -35,3 +35,19 @@ interface Measurements {
     Luftdruck : Measurement,
     Luftfeuchte: Measurement
 }
+
+interface loginResponse {
+    code: string,
+    data: Object,
+    message: string,
+    refreshToken: string,
+    token: string
+  }
+  
+interface newUserResponse {
+    code:string,
+    message:string,
+    token:string,
+    refreshToken:string,
+    data:Object
+}

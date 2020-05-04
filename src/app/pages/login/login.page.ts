@@ -82,10 +82,3 @@ export class LoginPage implements OnInit {
 
 }
 
-type loginResponse = {
-  code: string,
-  data: Object,
-  message: string,
-  refreshToken: string,
-  token: string
-}

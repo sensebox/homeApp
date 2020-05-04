@@ -5,7 +5,7 @@ const URL_login = 'https://api.opensensemap.org/users/sign-in';
 const URL_user = 'https://api.opensensemap.org/users/me/boxes';
 const URL_register = 'https://api.opensensemap.org/users/register';
 const URL_sketch = 'https://api.opensensemap.org/boxes/';
-
+const URL_newbox = 'https://api.opensensemap.org/boxes'
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +33,18 @@ export class LoginService {
               .pipe(timeout(30000))       
   }
 
+  registerBox(box,token:string){
+    /**
+     * name , exposure location { "lat": 51.972, "lng": 7.684, "height": 66.6 }
+     */
+    console.log(box);
+    console.log(token);
+
+    const headers = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+token});
+    return this.http.post(`${URL_newbox}`,box,{headers})
+                .pipe(timeout(30000))
+
+  }
   getUserSketch(token:string,id:string,ssid:string,password:string){
     const headers = new HttpHeaders({'Authorization':"Bearer "+token})
     return this.http.get(`${URL_sketch}${id}/script?ssid=${ssid}&password=${password}`,{headers,responseType:'text'})

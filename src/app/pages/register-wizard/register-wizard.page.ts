@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { LoginService } from '../../services/login/login.service';
-import { Router,NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 @Component({
   selector: 'app-register-wizard',
   templateUrl: './register-wizard.page.html',
@@ -9,59 +9,59 @@ import { Router,NavigationExtras } from '@angular/router';
 })
 export class RegisterWizardPage implements OnInit {
 
-  constructor(private loginService: LoginService, private loadingController: LoadingController,private router: Router) { }
+  constructor(private loginService: LoginService, private loadingController: LoadingController, private router: Router)
+   { }
 
 
   ngOnInit() {
   }
 
   async handleRegistration(form) {
-    // const loader = await this.loadingController.create({
-    //   message: 'Please wait ... '
-    // })
-    // await loader.present();
-    // // call osm api to register 
-    // if (this.validateForm(form)) {
-    //   this.loginService.registerUser(form.value.name, form.value.email, form.value.password)
-    //     .subscribe(response => {
-    //       console.log(response)
-    //       loader.dismiss()
+    const loader = await this.loadingController.create({
+      message: 'Please wait ... '
+    })
+    await loader.present();
+    // call osm api to register 
+    if (this.validateForm(form)) {
+      this.loginService.registerUser(form.value.name, form.value.email, form.value.password)
+        .subscribe((response: newUserResponse) => {
+          let navigationExtras: NavigationExtras = {
+            state: {
+              token:response.token,
+              refreshToken:response.refreshToken
+            }
+          }
+          loader.dismiss()
+          this.router.navigate(['newbox'], navigationExtras)
+        })
 
-    //     })
-
-    // }
-    // else {
-    //   console.error()
-    // }
-    let navigationExtras:NavigationExtras={
-      state:{
-        code:200,
-        message:"Yes"
-      }
     }
-    this.router.navigate(['newbox'],navigationExtras)
+    else {
+      console.error()
+    }
+
 
     // after success redirect to next slide 
 
 
   }
-  handleNameInput(event){
-    const validName = event.target.value.length>3
+  handleNameInput(event) {
+    const validName = event.target.value.length > 3
 
   }
 
-  handleMailInput(event){
+  handleMailInput(event) {
     console.log("sj")
 
 
   }
 
-  handlePasswordInput(event){
-    const validPassword = event.target.value.length>7
+  handlePasswordInput(event) {
+    const validPassword = event.target.value.length > 7
 
   }
-  validateForm(form){
-    const {name,email,password,password2} = form.value
+  validateForm(form) {
+    const { name, email, password, password2 } = form.value
 
     const passwordIdentical = password === password2;
 
