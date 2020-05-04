@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { PopoverController, NavParams } from '@ionic/angular';
+import { Router,NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -8,23 +8,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
+  private loginInformation;
 
-  constructor(public popoverController: PopoverController, public router:Router) { }
+  constructor(public popoverController: PopoverController, public router: Router, navParams: NavParams
+  ) {
+    this.loginInformation = navParams.data[0]
+    console.log(this.loginInformation)
 
-  signOut(){
+  }
+
+  signOut() {
     this.router.navigate(['login'])
     this.popoverController.dismiss();
   }
 
-  addNewBox(){
-    this.router.navigate(['newbox'])
+  addNewBox() {
+    let navigationExtras:NavigationExtras={
+      state:{
+        token:this.loginInformation.token,
+        refreshToken:this.loginInformation.refreshToken
+      }
+    }
+    this.router.navigate(['newbox'],navigationExtras)
     this.popoverController.dismiss();
   }
 
-  switchLanguage(lang){
+  switchLanguage(lang) {
     console.log("switching language")
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

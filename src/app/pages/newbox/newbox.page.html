@@ -64,25 +64,8 @@
         <ion-row>
           <ion-list>
             <ion-item *ngFor="let sensor of sensors">
-              <ion-label>{{sensor.name}} </ion-label>
-              <ion-checkbox  name={{sensor.name}} [(ngModel)]="sensor.isChecked" slot="start"></ion-checkbox>
-              <ion-label *ngIf="sensor.name == 'SDS011'">{{'newbox.serialport'|translate}} </ion-label>
-              <ion-select ngModel name="sdsport" *ngIf="sensor.name == 'SDS011'">
-                <ion-select-option value="Serial1">Serial1</ion-select-option>
-                <ion-select-option value="Serial1">Serial2</ion-select-option>
-              </ion-select>
-              <ion-label  *ngIf="sensor.name == 'Soil'">{{'newbox.digitalport'|translate}} </ion-label>
-              <ion-select  ngModel name="soilport" *ngIf="sensor.name == 'Soil'" >
-                <ion-select-option value="A">A</ion-select-option>
-                <ion-select-option value="B">B</ion-select-option>
-                <ion-select-option value="C">C</ion-select-option>
-              </ion-select>
-              <ion-label  *ngIf="sensor.name == 'SoundVolume'">{{'newbox.digitalport'|translate}} </ion-label>
-              <ion-select  ngModel name="soundport" *ngIf="sensor.name == 'SoundVolume'" >
-                <ion-select-option value="A">A</ion-select-option>
-                <ion-select-option value="B">B</ion-select-option>
-                <ion-select-option value="C">C</ion-select-option>
-              </ion-select>
+              <ion-label>{{sensor.title}} </ion-label>
+              <ion-checkbox  name={{sensor.title}} [(ngModel)]="sensor.isChecked" slot="start"></ion-checkbox>
             </ion-item>
           </ion-list>
         </ion-row>

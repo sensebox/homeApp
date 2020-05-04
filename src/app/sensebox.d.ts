@@ -51,3 +51,31 @@ interface newUserResponse {
     refreshToken:string,
     data:Object
 }
+
+interface OSEMLocation {
+    lat:number,
+    lng:number,
+    height?:number
+}
+
+interface newSensor{
+    title:string,
+    unit:string,
+    sensorType:string,
+    icon?:string,
+    isChecked?:boolean
+}
+
+interface newBox {
+    name:string,
+    grouptag?:string,
+    exposure:string,
+    location: OSEMLocation,
+    model?:string,
+    sensors?:Array<Sensors>,
+    sensorTemplates?:string,
+    mqtt?:Object,
+    ttn?:Object
+
+
+}

@@ -35,7 +35,7 @@ export class LoginService {
 
   registerBox(box,token:string){
     /**
-     * name , exposure location { "lat": 51.972, "lng": 7.684, "height": 66.6 }
+     * name , exposure location
      */
     console.log(box);
     console.log(token);

@@ -23,6 +23,7 @@ export class OverviewPage implements OnInit {
    async presentSettings(ev:any){
      const popover = await this.popoverController.create({
        component: SettingsComponent,
+       componentProps:[this.loginInformation],
        event:ev,
        translucent:true
      })
