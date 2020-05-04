@@ -1,21 +1,30 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="newbox_header">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-title>Adding new Box</ion-title>
+
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-grid>
+<ion-content class="newbox_background">
+  <ion-grid class="loggin_wrapper">
     <form (ngSubmit)="handleNewBox(form)" #form="ngForm">
-      <ion-list lines="full" class="ion-no-margin ion-no-padding">
-        <ion-label><b>{{'newbox.name'|translate}}</b></ion-label>
-        <ion-item>
+        <ion-item lines="none" class="newbox_input">
+          <ion-label position="stacked">Name</ion-label>
           <ion-input minlength="4" ngModel name="name" required="true" type="text"></ion-input>
         </ion-item>
         <ion-row>
           <ion-col>
-          <ion-label><b>{{'newbox.exposure.title'|translate}}</b></ion-label>
+            <ion-button  expand="full" class="exposure_button">OUTDOOR</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button  expand="full" class="exposure_button">INDOOR</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button  expand="full" class="exposure_button">MOBILE</ion-button>
+          </ion-col>
+          <!-- <ion-col>
           <ion-item>
             <ion-radio-group required ngModel name="exposure" value="exposure">
               <ion-item>
@@ -32,13 +41,21 @@
               </ion-item>
             </ion-radio-group>
           </ion-item>
-        </ion-col>
+        </ion-col> -->
         </ion-row>
         <ion-row>
-            <ion-label><b>{{'newbox.location'|translate}}</b></ion-label>
+          <ion-item lines="none" class="newbox_input">
+            <ion-label position="stacked">Longitude</ion-label>
+            <ion-input required="true" type="text"></ion-input>
+          </ion-item>
         </ion-row>
         <ion-row>
-          <ion-col>
+          <ion-item lines="none" class="newbox_input">
+            <ion-label position="stacked">Latitude</ion-label>
+            <ion-input required="true" type="text"></ion-input>
+          </ion-item>
+            <ion-button class="get_button"(click)="handleUserLocation()"><ion-icon name="location-outline"></ion-icon></ion-button>
+          <!-- <ion-col>
               <ion-input [(ngModel)]="latitude"  name="latitude" required></ion-input>
               <ion-label>{{'newbox.latitude'|translate}}</ion-label>
           </ion-col>
@@ -50,27 +67,20 @@
             <ion-row>
               <ion-button  (click)="handleUserLocation()"><ion-icon name="location-outline"></ion-icon></ion-button>
             </ion-row>
-            <!-- <ion-row>
-            <ion-button (click)="handleUserLocation()"><ion-icon name="map-outline"></ion-icon></ion-button>
-            </ion-row> -->
-          </ion-col>
+          </ion-col> -->
         </ion-row>
         <ion-row align-items-center>
-          <ion-label><b>{{'newbox.sensors'|translate}}</b></ion-label>
+          <ion-label class="label_sensoren"><b>{{'newbox.sensors'|translate}}</b></ion-label>
         </ion-row>
         <ion-row>
-          <ion-list>
-            <ion-item *ngFor="let sensor of sensors">
+            <ion-item lines="none" class="newbox_input" *ngFor="let sensor of sensors">
               <ion-label>{{sensor.title}} </ion-label>
-              <ion-checkbox  name={{sensor.title}} [(ngModel)]="sensor.isChecked" slot="start"></ion-checkbox>
+              <ion-checkbox  class="checkbox_sensor" name={{sensor.title}} [(ngModel)]="sensor.isChecked" slot="start"></ion-checkbox>
             </ion-item>
-          </ion-list>
         </ion-row>
-      </ion-list>
-      <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin">{{'newbox.createbox'|translate}}
-        </ion-button>
-      </div>    
+        <ion-row>
+          <ion-button type="submit" class="register_button" >Sign up!</ion-button>
+        </ion-row>      
     </form>
   </ion-grid>
 </ion-content>

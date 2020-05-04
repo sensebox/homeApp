@@ -1,0 +1,42 @@
+.newbox_background {
+    --background:#f6f6f6;
+}
+
+.newbox_header{
+    --background:#4ebe4b;
+    --border-color:#4ebe4b
+}
+
+.newbox_input{
+    --background:white;
+    margin:10px;
+    border-radius: 25px;
+    color:black;
+}
+.location_input{
+    --background:white;
+    border-radius:10px
+}
+.exposure_button{
+    --background-focused:#4ebe4b;
+    --background-activated:#4ebe4b
+}
+.get_button{
+    margin:10px;
+    margin-top:25px
+}
+
+.label_sensoren{
+    color:black
+}
+.checkbox_sensor{
+    --background:#f6f6f6;
+    --background-checked:#4ebe4b
+}
+
+.register_button {
+    width:100%;
+    margin:5px;
+    --background:  #45beed;
+    --border-radius:25px 
+}

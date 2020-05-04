@@ -1,11 +1,16 @@
 .login_background {
-    --background:linear-gradient(346deg, #45beed 1%, #4eaf47 40%, #fff200 100%);
+    --background:linear-gradient(346deg, #45beed 1%, #71cf6b 40%, #fff200 100%);
         text-align:center;
     display: table;
 }
 .register_header{
     --background:#efec06;
     --border-color:#efec06
+}
+.register_h1{
+    width:100%;
+    text-align: center;
+    font-size:44px;
 }
 .login_wrapper {
     position: relative;
@@ -15,7 +20,12 @@
     transform: translateY(-50%);
   
 }
-
+.login_button {
+    width:100%;
+    margin:5px;
+    --background:  #45beed;
+    --border-radius:25px 
+}
 
 .login_input {
     --background:white;
