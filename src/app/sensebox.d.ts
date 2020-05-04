@@ -72,7 +72,7 @@ interface newBox {
     exposure:string,
     location: OSEMLocation,
     model?:string,
-    sensors?:Array<Sensors>,
+    sensors?:Array<Sensor>,
     sensorTemplates?:string,
     mqtt?:Object,
     ttn?:Object
