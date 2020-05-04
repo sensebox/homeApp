@@ -1,46 +1,20 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content padding>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Lorem Ipsum</ion-card-subtitle>
-      <ion-card-title>Ipsum Lorem</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-      dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
+<ion-content padding class="login_background">
+  <ion-grid class="login_wrapper">
     <form #form="ngForm" (ngSubmit)="submitLogin(form)">
-      <ion-grid>
-          <ion-item>
-            <ion-label>
-              <ion-icon name="person-outline"></ion-icon>
-            </ion-label>
-            <ion-input placeholder="email" name="email" type="email" ngModel required></ion-input>
-          </ion-item>
-          <ion-row>
-            <ion-item>
-              <ion-label>
-                <ion-icon name="lock-closed-outline"></ion-icon>
-              </ion-label>
-              <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
-            </ion-item>
-          </ion-row>
-          <ion-row class="floatright">
-            <ion-button type="submit" color="success">
-              <ion-icon name="send"></ion-icon>{{'login.login'|translate}}
-            </ion-button>
-            <ion-button (click)="register()" color="secondary">
-              <ion-icon name="book-outline"></ion-icon>{{'login.register'|translate}}
-            </ion-button>
-          </ion-row>
-      </ion-grid>
+      <ion-row><img src="assets/imgs/sensebox_wort_logo.svg"></ion-row>
+      <ion-row>
+        <ion-input class="login_input" placeholder="email" name="email" type="email" ngModel required></ion-input>
+      </ion-row>
+      <ion-row>
+        <ion-input class="login_input" name="password" type="password" placeholder="Password" ngModel required>
+        </ion-input>
+      </ion-row>
+      <ion-row>
+        <ion-button class="login_button" type="submit">Login</ion-button>
+      </ion-row>
+      <ion-row>
+        <ion-button class="login_button" (click)="register()">Register</ion-button>
+      </ion-row>
     </form>
-
-  </ion-card>
+  </ion-grid>
 </ion-content>

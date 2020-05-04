@@ -13,6 +13,7 @@ export class LoginPage implements OnInit {
   private loginInformation;
   private boxes;
   private saveCredentialsCheckbox: boolean
+  private image="assets/sensebox_wort_logo.svg"
   constructor(
     private LoginService: LoginService,
     private router: Router,

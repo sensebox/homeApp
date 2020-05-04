@@ -19,7 +19,7 @@ interface Box {
 interface Sensor {
     _id: string,
     icon: string,
-    lastMeasurement: Measurement,
+    lastMeasurement?: Measurement,
     sensorType: string,
     title: string,
     unit: string

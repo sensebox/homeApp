@@ -37,9 +37,6 @@ export class LoginService {
     /**
      * name , exposure location
      */
-    console.log(box);
-    console.log(token);
-
     const headers = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+token});
     return this.http.post(`${URL_newbox}`,box,{headers})
                 .pipe(timeout(30000))

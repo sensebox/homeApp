@@ -1,4 +1,46 @@
+$colors: (
+  primary:    #4eaf47,
+  secondary:  #45beed,
+  yellow:     #fff200,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  darkgreen:#316d2d,
+  lightgreen: #6dd565
+);
+
+.login_background {
+    --background:linear-gradient(340deg, #45beed 1%, #4eaf47 40%, #fff200 100%);
+        text-align:center;
+    display: table;
+
+}   
+
+.login_wrapper {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  
+}
+
+.login_input {
+    --background:white;
+    margin:10px;
+    border-radius: 25px;
+    color:#45beed
+    
+}
+
+.login_button {
+    width:100%;
+    margin:10px;
+    --background:  #45beed;
+    border-radius:25px 
+}
+
 .floatright{
     float:right;
-    margin-top:50px
+    margin-top:50px;
 }

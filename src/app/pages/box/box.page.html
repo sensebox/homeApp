@@ -14,15 +14,18 @@
     <ion-card-subtitle>{{box._id}}</ion-card-subtitle>
     <ion-card-title>{{box.name}}</ion-card-title>
   </ion-card-header>
-    <ion-card-content>{{box.description}} </ion-card-content>
+    <ion-card-content *ngIf="box.description;else noDescription">{{box.description}} </ion-card-content>
   </ion-card>
   <ion-row *ngFor="let sensor of box.sensors">
     <ion-card  (click)="forwardSensor(sensor)">
       <ion-card-header>
-        <ion-card-title>{{sensor.title}} </ion-card-title>
+        <ion-card-title>{{sensor.title}}</ion-card-title>
       </ion-card-header>
-      <ion-card-content>{{sensor.lastMeasurement.value}} </ion-card-content>
+      <ion-card-content *ngIf="sensor.lastMeasurement;else noMeasurement">{{sensor.lastMeasurement.value}} </ion-card-content>
     </ion-card>
   </ion-row>
 </ion-grid>
 </ion-content>
+
+<ng-template #noDescription>{{'box.error.description'}}</ng-template>
+<ng-template #noMeasurement>{{'box.error.noMeasurement'}} </ng-template>
