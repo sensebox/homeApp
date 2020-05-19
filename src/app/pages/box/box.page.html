@@ -1,13 +1,105 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="des" [fullscreen]="true">
+  <ion-grid class="wrapper">
+    <ion-row class="titlewrapper">
+      <div class="title">{{box.name}}
+
+      </div>
+    </ion-row>
+    <ion-row class="iconwrapper">
+      <div class="iconelement">
+        <ion-icon id="sun" name="sunny-sharp"></ion-icon>
+      </div>
+    </ion-row>
+    <ion-row class="titlewrapper">
+      <div class="time">
+        {{box.lastMeasurementAt}}
+      </div>
+    </ion-row>
+    <ion-row class="titlewrapper measurements">
+      <ion-col *ngFor="let sensor of box.sensors">
+        <ion-col class="single_measurement">{{sensor.lastMeasurement.value}} {{sensor.unit}} </ion-col>
+      </ion-col>
+      <!-- <ion-col>
+        <ion-icon name="water-outline"></ion-icon> 55%
+      </ion-col>
+      <ion-col>
+        <ion-icon name="thermometer"></ion-icon> 33°C
+      </ion-col><br>
+      <ion-col>
+        <ion-icon name="arrow-down-outline"></ion-icon>  780hPa
+      </ion-col> -->
+    </ion-row>
+    <ion-row class="canvasElement">
+      <ion-slides>
+        <ion-slide *ngFor="let sensor of box.sensors">
+          <canvas height="240" [id]="sensor.title + 'Canvas'"></canvas>
+        </ion-slide>
+      </ion-slides>
+    </ion-row>
+    <!-- <ion-row class="rowelement">
+      <ion-col>
+        <ion-icon name="sunny-sharp"></ion-icon>
+      </ion-col>
+      <ion-col>
+        {{measurements.Temperatur.value}} °C
+      </ion-col>
+    </ion-row>
+    <ion-row class="rowelement">
+      <ion-col>
+        <ion-icon name="thermometer-sharp"></ion-icon>
+      </ion-col>
+      <ion-col>
+        {{measurements.Luftfeuchte.value}} %
+      </ion-col>
+    </ion-row>
+    <ion-row class="rowelement">
+      <ion-col>
+        <ion-icon name="swap-vertical-sharp"></ion-icon>
+      </ion-col>
+      <ion-col>
+        {{ measurements.Luftdruck.value }} hPa
+       </ion-col>
+    </ion-row>
+    <ion-row class="lastelement">
+      <ion-range (ionChange)="handleTime($event)" min="0" max="24" step="6" value="{{rangeValue}}"  color="danger">
+        <ion-icon slot="start" size="small" name="time-outline"></ion-icon>
+        <ion-label slot="start">{{rangeValue}}:00</ion-label>
+      </ion-range>
+    </ion-row> -->
+  </ion-grid>
+</ion-content>
+
+<!-- <ion-header>
+  <ion-toolbar>
     <ion-title>{{'box.title' | translate }}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
+<ion-content class="box_background">
+  <ion-grid>
+    <ion-row class="box_title">
+      {{box.name}}
+    </ion-row>
+    <ion-row class="box_subtitle" *ngIf="box.description;else noDescription">
+      {{box.description}}
+    </ion-row>
+    <div class="sensor_wrapper">
+      <div class="box_sensor" *ngFor="let sensor of box.sensors">
+        {{sensor.lastMeasurement.value}}
+      </div>
+    </div>
+  </ion-grid>
+</ion-content>
+<!-- <ion-content>
 <ion-grid>
   <ion-card>
     <ion-card-header>
@@ -26,6 +118,6 @@
   </ion-row>
 </ion-grid>
 </ion-content>
-
+-->
 <ng-template #noDescription>{{'box.error.description'}}</ng-template>
-<ng-template #noMeasurement>{{'box.error.noMeasurement'}} </ng-template>
+<ng-template #noMeasurement>{{'box.error.noMeasurement'}} </ng-template> -->

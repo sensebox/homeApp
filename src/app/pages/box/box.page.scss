@@ -1,0 +1,74 @@
+.box_background{
+    --background:#f4f4f4
+}
+.box_upper{
+    height:50%;
+    color:black;
+    background-color:white;
+    margin:20px;
+}
+.box_lower{
+    height: 50%;
+    color:black;
+    background-color:white;
+    margin:20px;
+
+}
+
+.box_subtitle{
+    text-align: justify;
+}
+
+.box_title{
+    font-size:50px;
+    margin-top:10px
+}
+
+
+.wrapper {
+    height:100vh;
+}
+.des{
+    --ion-background-color:#2a9d8f;
+}
+.rowelement{
+    height: 28%;
+    background-color: #f4f4f4;
+    align-items: center;
+    font-size: 2rem;
+    margin:0px 10px 10px 5px;
+}
+
+.lastelement {
+    height:1%
+}
+.title{
+    text-align:center;
+    margin:10px;
+    font-size: 2rem;
+}
+.titlewrapper {
+    display: block;
+}
+.time{
+    text-align:center;
+    margin:2px;
+    font-size: 1rem;
+}
+.iconwrapper {
+    display:block
+}
+
+.iconelement {
+    text-align: center;
+}
+
+.measurements {
+    text-align: center;
+    margin:10px 0px 0px 10px;
+    font-size: 1.5rem;
+}
+
+#sun {
+    font-size:15rem !important
+}

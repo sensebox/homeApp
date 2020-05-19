@@ -48,6 +48,12 @@ export class LoginService {
             .pipe(timeout(30000))
   }
 
+  getMeanMeasurements(boxid,phenomenon,fromDate,toDate,window){
+    const url = `https://api.opensensemap.org/statistics/descriptive?boxId=${boxid}&phenomenon=${phenomenon}&fromDate=${fromDate}&toDate=${toDate}&operation=arithmeticMean&window=${window}&format=json`
+    return this.http.get(url)
+      .pipe(timeout(30000))
+  }
+
   getUserLocation(){
     
   }
