@@ -102,17 +102,16 @@ export class NewboxPage implements OnInit {
     sensors.map((sensor)=>delete sensor.isChecked)
 
     //      location:{"lat":form.form.value.latitude,"lng":form.form.value.longitude},
-
-    const newbox:newBox= {
-      name:form.form.value.name,
-      exposure:form.form.value.exposure,
-      location:{"lat":51.9606649,"lng":7.6261347,"height":66.6},
-      sensors
-    }
+    // const newbox:newBox= {
+    //   name:form.form.value.name,
+    //   exposure:form.form.value.exposure,
+    //   location:{"lat":51.96069649,"lng":7.6261347,"height":66.6},
+    //   sensors
+    // }
     let filtered = this.sensors.filter((sensor)=>{
       return sensor.isChecked === true
     })
-    this.presentModalOverview(newbox);
+    //this.presentModalOverview(newbox);
   }
 
   ngOnInit() {

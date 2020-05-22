@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { LoginService } from 'src/app/services/login/login.service';
+import { Slides } from 'ionic-angular';
 
 @Component({
   selector: 'app-sketch',
@@ -8,10 +9,14 @@ import { LoginService } from 'src/app/services/login/login.service';
   styleUrls: ['./sketch.page.scss'],
 })
 export class SketchPage implements OnInit {
+  @ViewChild("slides",{static:false}) slides: any
   loginInformation:any;
   box:Box;
   ssid:string;
   passwordWifi:string
+  private selected:string
+  private image="assets/senseboxmcu.png"
+
   constructor(private router:Router,private route:ActivatedRoute,private LoginService:LoginService) 
   {
     this.route.queryParams.subscribe(params=>{
@@ -39,6 +44,17 @@ export class SketchPage implements OnInit {
             }
             this.router.navigate(['ota-wizard'],navigationExtras)
           })
+   }
+
+   onSlideChange(){
+   }
+
+   toggleManual(){
+    this.selected='manual'
+   }
+
+   toggleAutomatic(){
+     this.selected = 'automatic'
    }
 
   ngOnInit() {

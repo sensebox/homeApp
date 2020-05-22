@@ -1,6 +1,5 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>{{'sketch.title' | translate }}</ion-title>
+  <ion-toolbar class="sketchtoolbar">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -8,55 +7,71 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="background" padding>
   <ion-grid>
-    <ion-row>
-      <ion-col col-12 col-md-5>
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>{{'CONFIG.WIFI' | translate}} </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-item>
-              <ion-label>SSID</ion-label>
-              <ion-input [(ngModel)]="ssid"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label>{{'Password'|translate}}</ion-label>
-              <ion-input type="password" [(ngModel)]="passwordWifi"></ion-input>
-            </ion-item>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-      <ion-col col-12 col-md-5>
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>{{ box.name}}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-grid>
-              <ion-row>
-                <ion-item>
-                  <ion-label>{{box._id}}</ion-label>
-                </ion-item>
-              </ion-row>
-              <ion-row *ngFor="let sensor of box.sensors">
-                <ion-col col-12>
-                  <ion-item (click)="viewSensor(sensor)">
-                    <ion-label>{{sensor.sensorType}} <code>{{sensor._id}}</code></ion-label>
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-              <ion-row class="floatright">
-                <ion-button (click)="uploadStandardSketch()" color="success">
-                  <ion-icon name="send"></ion-icon>{{'sketch.upload'|translate}}
-                </ion-button>
-              </ion-row>
-            </ion-grid>
-
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+    <ion-slides #slides (ionSlideDidChange)="onSlideChange()" class="slides" pager="true">
+      <ion-slide #intro>
+        <ion-grid>
+          <ion-row><img src="assets/imgs/senseboxmcu.png"></ion-row>
+          <h1>Welcome to Upload</h1>
+          <h2>To upload the sketch please ensure that you have a running OTA sketch on your senseBox</h2>
+          <ion-button size="large" (click)="slides.slideNext()" class="start_button">Start</ion-button>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide #wifi>
+        <ion-grid>
+          <h1>We need your WiFi</h1>
+          <h2>Please enter the SSID an password of the network you want your senseBox connected to.</h2>
+          <ion-row>
+            <ion-input class="wifiinput ssid" placeholder="SSID" name="ssid" type="text" ngModel required></ion-input>
+          </ion-row>
+          <ion-row>
+            <ion-input class="wifiinput pw" name="password" type="password" placeholder="Password" ngModel required>
+            </ion-input>
+          </ion-row>
+          <ion-button size="large" (click)="slides.slideNext()" class="start_button">Continue</ion-button>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide #mode>
+        <ion-grid>
+          <h1>Choose connection mode</h1>
+          <ion-row>
+            <ion-col>
+              <div #automatic (click)="toggleAutomatic()" [ngClass]="selected==='automatic'? 'selected circle' : 'not_selected circle' ">
+                <div class="circle_content">
+                  <ion-icon  class="connection_icon" name="wifi-outline"></ion-icon><br>
+                  Automatic
+                </div>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div #manual (click)="toggleManual()" [ngClass]="selected==='manual'? 'selected circle' : 'not_selected circle' ">
+                <div class="circle_content">
+                  <ion-icon  class="connection_icon" name="hammer-outline">
+                  </ion-icon><br>
+                  Manual
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-button size="large" (click)="slides.slideNext()" class="start_button">Continue</ion-button>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide #automatic *ngIf="selected==='automatic'">
+        <ion-grid>
+          <h1> Automatic</h1>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide #manual *ngIf="selected==='manual'">
+        <ion-grid>
+          <h1> Manual</h1>
+        </ion-grid>
+      </ion-slide>
+      <ion-slide #placeholder *ngIf="selected!=='manual' && selected!=='automatic'">
+        <ion-grid>
+          <h1>Placeholder</h1>
+        </ion-grid>
+      </ion-slide>
+    </ion-slides>
   </ion-grid>
 </ion-content>

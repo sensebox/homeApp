@@ -25,13 +25,15 @@ export class BoxPage implements OnInit, AfterViewInit {
   private tempChart: Chart;
   private tempData: Array<Number>;
   private tempLabels: Array<string>;
-
+  private date:string
   box: Box;
   constructor(private route: ActivatedRoute, private router: Router, private LoginService: LoginService,
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.box = this.router.getCurrentNavigation().extras.state.box;
+        let date = new Date(this.box.lastMeasurementAt);
+        this.date = date.toLocaleTimeString();
 
       }
     })
@@ -136,7 +138,6 @@ export class BoxPage implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.box.sensors.map((sensor)=>{
-      console.log(document.getElementById(sensor.title+'Canvas'))
       this.elements.push(document.getElementById(sensor.title+'Canvas'))
     })
 

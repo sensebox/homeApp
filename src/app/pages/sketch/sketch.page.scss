@@ -8,3 +8,59 @@ code {
     background-color: #f9f2f4;
     border-radius: 4px;
   }
+
+img {
+    margin-bottom:20px;
+}
+.background {
+    --background:#f6f6f6;
+}
+
+.sketchtoolbar {
+    --background:#f6f6f6;
+    --border-color:#f6f6f6;
+    color:black;
+}
+
+.slides {
+    color:black;
+    --bullet-background-active:#45beed
+
+}
+
+.start_button{
+    --background:white;
+    --color:#45beed;
+    --border-radius:2px;
+    --border-width:5px;
+    --border-color:#808080;
+    margin:50px;
+}
+
+.wifiinput{
+    --background:white;
+    border-radius:25px;
+    margin:5px;
+}
+
+.circle {
+    border-radius: 50%;
+    background:white;
+    width:10rem;
+    height:10rem;
+    display:table;
+}
+.circle_content{
+    vertical-align: middle;
+    display:table-cell;
+}
+
+.connection_icon{
+    font-size:4.5rem;
+}
+.selected{
+    background-color: #45beed;
+}
+.not_selected{
+    background-color: white;
+}

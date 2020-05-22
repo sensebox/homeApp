@@ -28,8 +28,19 @@
 .wrapper {
     height:100vh;
 }
+.box_header {
+    --background:#45beed;
+    --border-color:#45beed;
+
+}
+
+.back_button{
+    --color:white;
+
+}
+
 .des{
-    --ion-background-color:#2a9d8f;
+    --ion-background-color:#45beed;
 }
 .rowelement{
     height: 28%;
