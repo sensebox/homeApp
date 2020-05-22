@@ -33,7 +33,7 @@ img {
     --color:#45beed;
     --border-radius:2px;
     --border-width:5px;
-    --border-color:#808080;
+    --box-shadow:0px 0px 10px  #888888;
     margin:50px;
 }
 
@@ -77,5 +77,10 @@ img {
 .list_automatic {
     text-align: left;
     margin-top:10rem;
-
+}
+.subtitle {
+    color:#4eaf47
+}
+.headline {
+    color:darkslategray
 }
