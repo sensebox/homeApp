@@ -33,21 +33,23 @@
         </ion-grid>
       </ion-slide>
       <ion-slide #mode>
-        <ion-grid>
+        <ion-grid class="modeGrid">
           <h1>Choose connection mode</h1>
           <ion-row>
             <ion-col>
-              <div #automatic (click)="toggleAutomatic()" [ngClass]="selected==='automatic'? 'selected circle' : 'not_selected circle' ">
+              <div #automatic (click)="toggleAutomatic()"
+                [ngClass]="selected==='automatic'? 'selected circle' : 'not_selected circle' ">
                 <div class="circle_content">
-                  <ion-icon  class="connection_icon" name="wifi-outline"></ion-icon><br>
+                  <ion-icon class="connection_icon" name="wifi-outline"></ion-icon><br>
                   Automatic
                 </div>
               </div>
             </ion-col>
             <ion-col>
-              <div #manual (click)="toggleManual()" [ngClass]="selected==='manual'? 'selected circle' : 'not_selected circle' ">
+              <div #manual (click)="toggleManual()"
+                [ngClass]="selected==='manual'? 'selected circle' : 'not_selected circle' ">
                 <div class="circle_content">
-                  <ion-icon  class="connection_icon" name="hammer-outline">
+                  <ion-icon class="connection_icon" name="hammer-outline">
                   </ion-icon><br>
                   Manual
                 </div>
@@ -59,18 +61,48 @@
       </ion-slide>
       <ion-slide #automatic *ngIf="selected==='automatic'">
         <ion-grid>
-          <h1> Automatic</h1>
+          <ion-row>
+            <ion-col>
+              <ol class="list_automatic" start="0">
+                <li>
+                  IP Address of the senseBox
+                  <input [(ngModel)]="OTAAddress" placeholder="Address"/>
+                </li>
+                <li>Upload the Over-the-Air Sketch from the OpenSenseMap to the senseBox</li>
+                <li>Connect this device to the same network the senseBox is connected with</li>
+                <li>Click Continue</li>
+              </ol>
+            </ion-col>
+          </ion-row>
+          <ion-button size="large" (click)="slides.slideNext()" class="start_button">Continue</ion-button>
         </ion-grid>
       </ion-slide>
       <ion-slide #manual *ngIf="selected==='manual'">
         <ion-grid>
-          <h1> Manual</h1>
+          <ion-row align-items-center>
+            <ion-col col-12>
+              <img class="tutorial_gif" src="assets/imgs/ota_modus.gif" />
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ol style="text-align:left;">
+                <li>Press and hold switch button </li>
+                <li>Press red button shortly</li>
+                <li>Release the switch button after one second</li>
+              </ol>
+            </ion-col>
+          </ion-row>
+          <ion-button size="large" (click)="slides.slideNext()" class="start_button">Continue</ion-button>
         </ion-grid>
       </ion-slide>
       <ion-slide #placeholder *ngIf="selected!=='manual' && selected!=='automatic'">
         <ion-grid>
           <h1>Placeholder</h1>
         </ion-grid>
+      </ion-slide>
+      <ion-slide #final>
+        <h1>Uploading....</h1>
       </ion-slide>
     </ion-slides>
   </ion-grid>
