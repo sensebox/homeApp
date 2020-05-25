@@ -12,7 +12,19 @@ export class WebcompilerService {
 
   constructor(private http: HttpClient) { }
 
+  compileId(sketch:string){
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const data = { board: 'sensebox-mcu', sketch }
+    return this.http.post(`${URL}/compile`, data, { headers })
+      .pipe(timeout(30000))
+    }
+  
+  getBinary(id:string){
+    const url = `${URL}/download?id=${id}&board=sensebox-mcu`
+    return this.http.get(url, { responseType: 'arraybuffer' })
+                .pipe(timeout(30000))
 
+  }
   
   async compile(sketch: string): Promise<ArrayBuffer> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });

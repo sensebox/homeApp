@@ -23,10 +23,10 @@
           <h1 class="headline">We need your WiFi</h1>
           <h2 class="subtitle">Please enter the SSID an password of the network you want your senseBox connected to.</h2>
           <ion-row style="margin-top:7rem">
-            <ion-input class="wifiinput ssid" placeholder="SSID" name="ssid" type="text" ngModel required></ion-input>
+            <ion-input class="wifiinput ssid" placeholder="SSID" name="ssid" type="text" [(ngModel)]="ssid" required></ion-input>
           </ion-row>
           <ion-row>
-            <ion-input class="wifiinput pw" name="password" type="password" placeholder="Password" ngModel required>
+            <ion-input class="wifiinput pw" name="password" type="password" placeholder="Password" [(ngModel)]="passwordWifi" required>
             </ion-input>
           </ion-row>
           <ion-button size="large" (click)="slides.slideNext()" class="start_button">Continue</ion-button>
