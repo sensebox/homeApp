@@ -23,7 +23,7 @@ export class OtawifiService {
 
   }
 
-  async uploadFirmware(binary: ArrayBuffer, OTAAddress: String): Promise<any> {
+   uploadFirmware(binary: ArrayBuffer, OTAAddress: String) {
     // TODO: send checksum?
     return this.http.post(`http://${OTAAddress}/sketch`, binary, {
       responseType: 'text',
@@ -31,7 +31,7 @@ export class OtawifiService {
       .pipe(timeout(5000), catchError(err => {
         throw new Error('senseBox not found. Is it running in OTA mode?')
       }))
-      .toPromise()
+
   }
 
   public scanNetwork() {

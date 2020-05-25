@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { LoginService } from 'src/app/services/login/login.service';
 import { WebcompilerService } from 'src/app/services/webcompiler/webcompiler.service';
-import { IonSlides } from '@ionic/angular'
+import {OtawifiService} from 'src/app/services/otawifi/otawifi.service'
+import { IonSlides,LoadingController } from '@ionic/angular'
+
 @Component({
   selector: 'app-sketch',
   templateUrl: './sketch.page.html',
@@ -18,9 +20,13 @@ export class SketchPage implements OnInit {
   private sketch: string
   private selected: string
   private image = "assets/senseboxmcu.png"
+  private OTAAddress = '192.168.0.46'
+
 
   constructor(private router: Router, private route: ActivatedRoute, private LoginService: LoginService,
-    private compiler: WebcompilerService) {
+    private compiler: WebcompilerService,
+    private otawifi:OtawifiService,
+    public loadingController: LoadingController ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.loginInformation = this.router.getCurrentNavigation().extras.state.loginInformation;
@@ -50,8 +56,9 @@ export class SketchPage implements OnInit {
 
   onSlideChange() {
     let current: Promise<Number> = this.slides.getActiveIndex();
+    let hiddenOffset:any = this.compiledSketch ? 1 : 0;
     current.then((number) => {
-      switch (number) {
+      switch (number+hiddenOffset) {
         case OtaSlides.Intro:
           console.log("Intro")
           break;
@@ -59,11 +66,17 @@ export class SketchPage implements OnInit {
           console.log("Wifi")
           break;
         case OtaSlides.ModeGuide:
+          console.log("ModeGuide")
           this.handleCompilation();
           break;
         case OtaSlides.Mode:
+          console.log("Mode")
           break;
+        case OtaSlides.Compiling:
+          console.log("Compiling");
         case OtaSlides.Final:
+          console.log("Final")
+          this.handleUpload();
           break;
 
         default:
@@ -89,6 +102,31 @@ export class SketchPage implements OnInit {
       })
   }
 
+ async handleFinalSlide(){
+    // Show modal / loading when sketch isnt compiled yet otherwise just go ahead
+
+    if(!this.compiledSketch){
+      // show modal
+      const loading = await this.loadingController.create({
+        message:'Please wait for the compiler to finish...',
+      })
+      await loading.present()
+
+    }
+    else {
+      this.slides.slideNext()
+    }
+
+  }
+
+  handleUpload(){
+    // this.otawifi.uploadFirmware(this.compiledSketch,this.OTAAddress)
+    //             .subscribe((response)=>{
+    //               console.log(response)
+    //             })
+  }
+
+
   toggleManual() {
     this.selected = 'manual'
   }
@@ -106,5 +144,6 @@ enum OtaSlides {
   WiFi = 1,
   ModeGuide = 2,
   Mode = 3,
-  Final = 4
+  Compiling = 4,
+  Final = 5
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { timeout } from 'rxjs/operators'
+import { timeout, catchError } from 'rxjs/operators'
 const URL = "https://compiler.sensebox.de"
 
 @Injectable({
@@ -22,7 +22,9 @@ export class WebcompilerService {
   getBinary(id:string){
     const url = `${URL}/download?id=${id}&board=sensebox-mcu`
     return this.http.get(url, { responseType: 'arraybuffer' })
-                .pipe(timeout(30000))
+                .pipe(timeout(30000), catchError(err=>{
+                  throw new Error('something went wrong in getBinary')
+                }))
 
   }
   

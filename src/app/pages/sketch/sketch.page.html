@@ -102,6 +102,11 @@
           <h1>Placeholder</h1>
         </ion-grid>
       </ion-slide>
+      <ion-slide *ngIf="!compiledSketch">
+        <ion-grid>
+          <h1>Still waiting for compiler</h1>
+        </ion-grid>
+      </ion-slide>
       <ion-slide #final>
         <h1>Uploading....</h1>
       </ion-slide>
