@@ -3,13 +3,13 @@
 }
 .box_upper{
     height:50%;
-    color:black;
-    background-color:white;
+    color:#333;
+    background-color:#fff;
     margin:20px;
 }
 .box_lower{
     height: 50%;
-    color:black;
+    color:#333;
     background-color:white;
     margin:20px;
 
@@ -29,18 +29,21 @@
     height:100vh;
 }
 .box_header {
-    --background:#45beed;
-    --border-color:#45beed;
-
+    --background:#4EAF47;
+    --border-color:#4EAF47;
+    --color:#fff
 }
 
 .back_button{
-    --color:white;
+    --color:#fff;
 
+}
+.favorit_button{
+    --color:white;
 }
 
 .des{
-    --ion-background-color:#45beed;
+    --ion-background-color:#f6f6f6;
 }
 .rowelement{
     height: 28%;
@@ -53,18 +56,23 @@
 .lastelement {
     height:1%
 }
+.pager {
+    --bullet-background-active:#4EAF47
+} 
 .title{
-    text-align:center;
-    margin:10px;
+    text-align:left;
+    margin:2px;
     font-size: 2rem;
+    color:#333
 }
 .titlewrapper {
     display: block;
 }
 .time{
     text-align:center;
-    margin:2px;
+    margin:15px 0px 10px 0px;
     font-size: 1rem;
+    color:#333
 }
 .iconwrapper {
     display:block
@@ -77,9 +85,42 @@
 .measurements {
     text-align: center;
     margin:10px 0px 0px 10px;
-    font-size: 1.5rem;
+    font-size: 1rem;
+}
+.canvas_element{
+    
+}
+.actualCanvas {
+    margin-bottom:40px;
 }
 
 #sun {
     font-size:15rem !important
 }
+
+#measurementTable  {
+
+}
+
+.measurementTable {
+    border-collapse: collapse;
+    width: 100%;
+    background-color:#fff;
+  }
+  
+  .measurementTable td, .measurementTable th {
+    text-align: left;
+    color:#333;
+    padding:0.5rem
+  }
+  
+  .measurementTable tr:nth-child(even){background-color: #9999}
+  
+  
+  .measurementTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: #333;
+  }

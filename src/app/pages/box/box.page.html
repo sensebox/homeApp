@@ -3,29 +3,37 @@
     <ion-buttons slot="start">
       <ion-back-button class="back_button"></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button class="favorit_button" (click)="addFavorit()">
+        <ion-icon name="star-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{box.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content class="des" [fullscreen]="true">
   <ion-grid class="wrapper">
-    <ion-row class="titlewrapper">
+    <!-- <ion-row class="titlewrapper">
       <div class="title">{{box.name}}
 
       </div>
-    </ion-row>
-    <ion-row class="iconwrapper">
+    </ion-row> -->
+    <!-- <ion-row class="iconwrapper">
       <div class="iconelement">
         <ion-icon id="sun" name="sunny-sharp"></ion-icon>
       </div>
-    </ion-row>
-    <ion-row class="titlewrapper">
-      <div class="time">
-        {{date}}
-      </div>
-    </ion-row>
+    </ion-row> -->
     <ion-row class="titlewrapper measurements">
-      <ion-col *ngFor="let sensor of box.sensors">
+      <table #measurementTable class="measurementTable">
+
+        <tr *ngFor="let sensor of box.sensors">
+          <td>{{sensor.title}} </td>
+          <td>{{sensor.lastMeasurement.value}} {{sensor.unit}} </td>
+        </tr>
+      </table>
+      <!-- <ion-col *ngFor="let sensor of box.sensors">
         <ion-col class="single_measurement">{{sensor.lastMeasurement.value}} {{sensor.unit}} </ion-col>
-      </ion-col>
+      </ion-col> -->
       <!-- <ion-col>
         <ion-icon name="water-outline"></ion-icon> 55%
       </ion-col>
@@ -36,10 +44,15 @@
         <ion-icon name="arrow-down-outline"></ion-icon>  780hPa
       </ion-col> -->
     </ion-row>
+    <ion-row class="titlewrapper">
+      <div class="time">
+        Letzte Messung um {{date}}
+      </div>
+    </ion-row>
     <ion-row class="canvasElement">
-      <ion-slides>
+      <ion-slides class="pager" pager="true">
         <ion-slide *ngFor="let sensor of box.sensors">
-          <canvas height="240" [id]="sensor.title + 'Canvas'"></canvas>
+          <canvas class="actualCanvas" height="240" [id]="sensor.title + 'Canvas'"></canvas>
         </ion-slide>
       </ion-slides>
     </ion-row>

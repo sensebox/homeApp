@@ -1,7 +1,7 @@
 <ion-header >
   <ion-toolbar class="overview_header">
     <ion-buttons slot="end">
-      <ion-button class="settings_button" (click)="presentSettings(event)">
+      <ion-button class="settings_button" (click)="presentSettings($event)">
         <ion-icon name="settings-sharp"></ion-icon>      </ion-button>    
     </ion-buttons>
     <ion-title>My senseBox</ion-title>  
@@ -19,10 +19,10 @@
           </ion-row>
           <ion-row class="button_wrapper">
             <ion-col (click)="forwardBox(box)"class="box_button analytics">
-              Analysis
+              Show senseBox
             </ion-col>
             <ion-col (click)="forwardSketch(box)" class="box_button sketch">
-                Sketch
+                Upload Sketch
             </ion-col>
           </ion-row>
     </ion-col>

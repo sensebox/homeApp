@@ -8,18 +8,18 @@
 }
 
 .newbox_input{
-    --background:white;
+    --background:#fff;
     margin:10px;
     border-radius: 25px;
-    color:black;
+    color:#333;
 }
 .back_button{
-    --color:white;
+    --color:#fff;
 
 }
 
 .location_input{
-    --background:white;
+    --background:#fff;
     border-radius:10px
 }
 .exposure_button{
@@ -32,16 +32,16 @@
 }
 
 .label_sensoren{
-    color:black
+    color:#333
 }
 .checkbox_sensor{
-    --background:#f6f6f6;
-    --background-checked:#4ebe4b
+    --background:#fff;
+    --background-checked:#4EAF47
 }
 
 .register_button {
     width:100%;
     margin:5px;
     --background:  #45beed;
-    --border-radius:25px 
+    --border-radius:15px 
 }

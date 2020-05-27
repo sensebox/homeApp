@@ -78,7 +78,7 @@ export class BoxPage implements OnInit, AfterViewInit {
               datasets: [{
                 data: data,
                 label: sensor.title,
-                borderColor: "#ffffff",
+                borderColor: "#4EAF47",
                 fill: false
               }
               ]
@@ -87,7 +87,7 @@ export class BoxPage implements OnInit, AfterViewInit {
               title: {
                 text: sensor.title,
                 display: true,
-                fontColor: "#ffffff"
+                fontColor: "#333"
               },
               elements: {
                 point: {
@@ -100,7 +100,7 @@ export class BoxPage implements OnInit, AfterViewInit {
                     display: false
                   },
                   ticks: {
-                    fontColor: "#ffffff",
+                    fontColor: "#333",
                     autoSkip: true,
                     maxTicksLimit: 6,
                     maxRotation: 0,
@@ -117,7 +117,8 @@ export class BoxPage implements OnInit, AfterViewInit {
                   },
                   ticks: {
                     display: true,
-                    fontColor: "#ffffff",
+                    fontColor: "#333",
+                    maxTicksLimit:9,
                     callback: function (value, index, values) {
                       return value + sensor.unit
                     }
