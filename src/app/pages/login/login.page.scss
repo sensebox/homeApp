@@ -9,13 +9,26 @@ $colors: (
   lightgreen: #6dd565
 );
 
+ion-content {
+    //--background:#f6f6f6;
+    --background:url('/./assets/imgs/umutsensebox.jpg');
+}
 .login_background {
-    --background:linear-gradient(346deg, #45beed 1%, #4eaf47 40%, #fff200 100%);
-        text-align:center;
+    text-align:center;
     display: table;
 
 }   
-
+// .black_border_font {
+//     text-shadow: 
+//         -1px -1px 0px #000,
+//          0px -1px 0px #000,
+//          1px -1px 0px #000,
+//         -1px  0px 0px #000,
+//          1px  0px 0px #000,
+//         -1px  1px 0px #000,
+//          0px  1px 0px #000,
+//          1px  1px 0px #000;
+// }
 .login_wrapper {
     position: relative;
     top: 50%;
@@ -29,21 +42,32 @@ $colors: (
     --background:white;
     margin:10px;
     border-radius: 25px;
-    color:#45beed
+    color:black
     
+}
+
+.shadow{
+    text-shadow: 0 0 2px white
+
 }
 
 .login_button {
     width:100%;
     margin:5px;
     --background:  #45beed;
-    --border-radius:25px 
+    --border-radius:25px ;
+    --color: #111111;
+    text-shadow: 0 0 2px white
 }
+
 .register_button {
     width:100%;
     margin:5px;
     --background:  #fff200;
-    --border-radius:25px 
+    --border-radius:25px ;
+    --color: #111111;
+    text-shadow: 0 0 2px white
+
 }
 
 .floatright{

@@ -1,7 +1,7 @@
 <ion-header >
   <ion-toolbar class="overview_header">
     <ion-buttons slot="end">
-      <ion-button (click)="presentSettings(event)">
+      <ion-button class="settings_button" (click)="presentSettings(event)">
         <ion-icon name="settings-sharp"></ion-icon>      </ion-button>    
     </ion-buttons>
     <ion-title>My senseBox</ion-title>  
@@ -15,7 +15,7 @@
       <ion-col>
         <ion-row class="box_title">{{box.name}} </ion-row>
           <ion-row class="box_subtitle">
-            {{box.model}} <ion-icon name="ellipse-sharp"> </ion-icon> 52.7, 7.14 <ion-icon name="ellipse-sharp"></ion-icon> {{box.sensors.length}} Sensoren
+            <ion-icon name="wifi-outline"></ion-icon> {{box.model}}<ion-icon name="location-outline"></ion-icon> 52.7, 7.14<ion-icon name="hardware-chip-outline"></ion-icon>{{box.sensors.length}} Sensoren
           </ion-row>
           <ion-row class="button_wrapper">
             <ion-col (click)="forwardBox(box)"class="box_button analytics">

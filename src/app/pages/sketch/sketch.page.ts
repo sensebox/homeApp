@@ -58,7 +58,8 @@ export class SketchPage implements OnInit {
     let current: Promise<Number> = this.slides.getActiveIndex();
     let hiddenOffset:any = this.compiledSketch ? 1 : 0;
     current.then((number) => {
-      switch (number+hiddenOffset) {
+      number > 4 ? number + hiddenOffset : number;
+      switch (number) {
         case OtaSlides.Intro:
           console.log("Intro")
           break;

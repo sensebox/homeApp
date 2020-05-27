@@ -1,11 +1,14 @@
+ion-content {
+    //--background:#f6f6f6;
+    --background:url('/./assets/imgs/osem.jpg');
+}
 .login_background {
-    --background:linear-gradient(346deg, #45beed 1%, #71cf6b 40%, #fff200 100%);
         text-align:center;
     display: table;
 }
 .register_header{
-    --background:#efec06;
-    --border-color:#efec06
+    // --background:#efec06;
+    // --border-color:#efec06
 }
 
 .back_button{
@@ -17,13 +20,14 @@
     width:100%;
     text-align: center;
     font-size:44px;
+    color:#333
 }
 .login_wrapper {
     position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+     top: 25%;
+    -webkit-transform: translateY(-25%);
+    -ms-transform: translateY(-25%);
+    transform: translateY(-25%);
   
 }
 .login_button {
@@ -36,7 +40,7 @@
 .login_input {
     --background:white;
     margin:10px;
-    border-radius: 25px;
-    color:#45beed
+    border-radius: 15px;
+    color:#333
     
 }

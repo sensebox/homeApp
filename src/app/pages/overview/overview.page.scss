@@ -2,39 +2,46 @@
     --background:#f6f6f6;
 }
 
-.actionButton{
-
+.settings_button {
+    --color:white;
 }
-
 .overview_header {
-    --background:#4EAF47
+    --background:#4EAF47;
+    --border-color:#4EAF47
 }
 
 .box {
     background-color:white;
     color:black;
     margin:15px;
+    box-shadow:0 0 5px #ccc;
 }
 .box_button {
     
 }
-
+ion-icon{
+    padding-left:0.25em;
+}
 .analytics {
     background-color:#45beed;
+    border-radius: 10px 0px 0px 10px;
 
 }
 
 .sketch {
     background-color:#fff200;
+    border-radius: 0px 10px 10px 0px;
+
 
 }
 .button_wrapper {
     text-align:center
 }
 .box_subtitle {
-    color:darkgrey;
+    color:#666;
     font-size: 10pt;
+    margin:2px 0px 5px 0px;
 }
 .box_title{
-    font-size:22pt;
+    font-size:14pt;
 }
