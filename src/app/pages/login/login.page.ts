@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
     const toast = await this.toastController.create({
       message: content,
       position: 'bottom',
-      duration:2000
+      duration:4000
     });
     toast.present();
   }
@@ -58,13 +58,11 @@ export class LoginPage implements OnInit {
                     boxes: this.boxes
                   }
                 }
-                console.log(navigationExtras)
                 this.router.navigate(['overview'], navigationExtras)
               })
           },
             (error) => {
-              console.error("wrong login");
-
+              console.error(error);
               this.presentToastWithOptions(error.error.message);
 
             })

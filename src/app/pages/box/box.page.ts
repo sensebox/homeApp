@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ViewChildren, 
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Chart } from 'chart.js'
+import { ToastController } from '@ionic/angular';
 
 
 // @Directive({selector: 'canvas'})
@@ -27,7 +28,8 @@ export class BoxPage implements OnInit, AfterViewInit {
   private tempLabels: Array<string>;
   public date: string
   box: Box;
-  constructor(private route: ActivatedRoute, private router: Router, private LoginService: LoginService,
+  private count:number;
+  constructor(private route: ActivatedRoute, private router: Router, private LoginService: LoginService, public toastController: ToastController
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -55,6 +57,14 @@ export class BoxPage implements OnInit, AfterViewInit {
 
   }
 
+  async presentToast(content) {
+    const toast = await this.toastController.create({
+      message: content,
+      duration: 2000
+    });
+    toast.present();
+  }
+
   getCharts() {
 
     const now = new Date()
@@ -67,8 +77,8 @@ export class BoxPage implements OnInit, AfterViewInit {
         .subscribe(
           results => {
             if (!results[0]) {
-              console.log("no values")
-            } else {
+              this.presentToast(`No values for some sensors`)
+              } else {
               let labels = [];
               let data = [];
 
