@@ -27,20 +27,26 @@ export class BoxPage implements OnInit, AfterViewInit {
   private tempData: Array<Number>;
   private tempLabels: Array<string>;
   public date: string
+  
   box: Box;
-  private count:number;
+  private newBox:boolean;
   constructor(private route: ActivatedRoute, private router: Router, private LoginService: LoginService, public toastController: ToastController
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.box = this.router.getCurrentNavigation().extras.state.box;
-        let date = new Date(this.box.lastMeasurementAt);
-        this.date = date.toLocaleTimeString();
+        if(this.box.createdAt === this.box.updatedAt){
+          this.newBox = true;
+        }
+        else {
+          let date = new Date(this.box.lastMeasurementAt);
+          this.date = date.toLocaleTimeString();
+        }
 
       }
     })
   }
-
+//eknxibzabxvxebasnt@awdrt.net
   forwardSensor(sensor) {
     let navigationExtras: NavigationExtras = {
       state: {
@@ -51,6 +57,9 @@ export class BoxPage implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    if(this.newBox){
+      console.log("smides")
+    }
   }
 
   addFavorit(){
@@ -158,6 +167,10 @@ export class BoxPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    if(this.newBox){
+      console.log("new box no measurements");
+      return;
+    }
     this.box.sensors.map((sensor) => {
       this.elements.push(document.getElementById(sensor.title + 'Canvas'))
     })

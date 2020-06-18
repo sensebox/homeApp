@@ -12,7 +12,7 @@ interface Box {
     model: string,
     name: string,
     sensors: Array<Sensor>,
-    updatedAt: string,
+    updatedAt?: Date,
     weblink:string
 }
 
