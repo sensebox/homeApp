@@ -23,62 +23,31 @@
         </ion-col>
         <ion-col>
           <div #automatic (click)="toggleIndoor()"
-          [ngClass]="selected==='indoor'? 'selected rectangle' : 'not_selected rectangle' ">
-          Indoor
-        </div>
-      </ion-col>
-      <ion-col>
-        <div #automatic (click)="toggleMobile()"
-        [ngClass]="selected==='mobile'? 'selected rectangle' : 'not_selected rectangle' ">
-        Mobile
-      </div>
-    </ion-col>
-        <!-- <ion-col>
-          <ion-item>
-            <ion-radio-group required ngModel name="exposure" value="exposure">
-              <ion-item>
-                <ion-label>{{'newbox.exposure.outdoor'|translate}}</ion-label>
-                <ion-radio slot="start" value="outdoor"></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label>{{'newbox.exposure.indoor'|translate}}</ion-label>
-                <ion-radio slot="start" value="indoor"></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label>{{'newbox.exposure.mobile'|translate}}</ion-label>
-                <ion-radio slot="start" value="mobile"></ion-radio>
-              </ion-item>
-            </ion-radio-group>
-          </ion-item>
-        </ion-col> -->
+            [ngClass]="selected==='indoor'? 'selected rectangle' : 'not_selected rectangle' ">
+            Indoor
+          </div>
+        </ion-col>
+        <ion-col>
+          <div #automatic (click)="toggleMobile()"
+            [ngClass]="selected==='mobile'? 'selected rectangle' : 'not_selected rectangle' ">
+            Mobile
+          </div>
+        </ion-col>
       </ion-row>
       <ion-row>
         <ion-item lines="none" class="newbox_input">
-          <ion-label position="stacked">Longitude</ion-label>
-          <ion-input required="true" type="text"></ion-input>
+          <ion-label  position="stacked">Longitude</ion-label>
+          <ion-input  ngModel name="longitude" required="true" type="text"></ion-input>
         </ion-item>
       </ion-row>
       <ion-row>
         <ion-item lines="none" class="newbox_input">
-          <ion-label position="stacked">Latitude</ion-label>
-          <ion-input required="true" type="text"></ion-input>
+          <ion-label  position="stacked">Latitude</ion-label>
+          <ion-input ngModel name="latitude" required="true" type="text"></ion-input>
         </ion-item>
         <ion-button class="get_button" (click)="handleUserLocation()">
           <ion-icon name="location-outline"></ion-icon>
         </ion-button>
-        <!-- <ion-col>
-              <ion-input [(ngModel)]="latitude"  name="latitude" required></ion-input>
-              <ion-label>{{'newbox.latitude'|translate}}</ion-label>
-          </ion-col>
-          <ion-col>
-              <ion-input [(ngModel)]="longitude" name="longitude" required></ion-input>
-              <ion-label>{{'newbox.longitude'|translate}}</ion-label>
-          </ion-col>
-          <ion-col>
-            <ion-row>
-              <ion-button  (click)="handleUserLocation()"><ion-icon name="location-outline"></ion-icon></ion-button>
-            </ion-row>
-          </ion-col> -->
       </ion-row>
       <ion-row align-items-center>
         <ion-label class="label_sensoren"><b>Sensoren</b></ion-label>

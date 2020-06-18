@@ -29,8 +29,8 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   // add components/pages here that are not loaded via routing 
   declarations: 
-  [AppComponent,SettingsComponent],
-  entryComponents: [SettingsComponent],
+  [AppComponent,SettingsComponent,OverviewnewboxPage],
+  entryComponents: [SettingsComponent,OverviewnewboxPage],
   imports: [
     
     HttpClientModule,
