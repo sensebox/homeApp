@@ -33,6 +33,7 @@ export class NewboxPage implements OnInit {
   private location:Object;
   private token;
   private refreshToken;
+  private selected:string;
 
   private box:newBox;
 
@@ -52,7 +53,19 @@ export class NewboxPage implements OnInit {
       })
     }
 
+  toggleOutdoor(){
+    this.selected = 'outdoor'
+  }
 
+  toggleIndoor(){
+    this.selected = 'indoor'
+
+  }
+
+  toggleMobile(){
+    this.selected = 'mobile'
+
+  }
   async presentModalPrivacy(){
     const modal = await this.modalController.create({
       component:PrivacyDisclaimerPage

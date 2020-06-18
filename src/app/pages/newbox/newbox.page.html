@@ -10,21 +10,30 @@
 <ion-content class="newbox_background">
   <ion-grid class="loggin_wrapper">
     <form (ngSubmit)="handleNewBox(form)" #form="ngForm">
-        <ion-item lines="none" class="newbox_input">
-          <ion-label position="stacked">Name</ion-label>
-          <ion-input minlength="4" ngModel name="name" required="true" type="text"></ion-input>
-        </ion-item>
-        <ion-row>
-          <ion-col>
-            <ion-button  expand="full" class="exposure_button">OUTDOOR</ion-button>
-          </ion-col>
-          <ion-col>
-            <ion-button  expand="full" class="exposure_button">INDOOR</ion-button>
-          </ion-col>
-          <ion-col>
-            <ion-button  expand="full" class="exposure_button">MOBILE</ion-button>
-          </ion-col>
-          <!-- <ion-col>
+      <ion-item lines="none" class="newbox_input">
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input minlength="4" ngModel name="name" required="true" type="text"></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <div #automatic (click)="toggleOutdoor()"
+            [ngClass]="selected==='outdoor'? 'selected rectangle' : 'not_selected rectangle' ">
+            Outdoor
+          </div>
+        </ion-col>
+        <ion-col>
+          <div #automatic (click)="toggleIndoor()"
+          [ngClass]="selected==='indoor'? 'selected rectangle' : 'not_selected rectangle' ">
+          Indoor
+        </div>
+      </ion-col>
+      <ion-col>
+        <div #automatic (click)="toggleMobile()"
+        [ngClass]="selected==='mobile'? 'selected rectangle' : 'not_selected rectangle' ">
+        Mobile
+      </div>
+    </ion-col>
+        <!-- <ion-col>
           <ion-item>
             <ion-radio-group required ngModel name="exposure" value="exposure">
               <ion-item>
@@ -42,20 +51,22 @@
             </ion-radio-group>
           </ion-item>
         </ion-col> -->
-        </ion-row>
-        <ion-row>
-          <ion-item lines="none" class="newbox_input">
-            <ion-label position="stacked">Longitude</ion-label>
-            <ion-input required="true" type="text"></ion-input>
-          </ion-item>
-        </ion-row>
-        <ion-row>
-          <ion-item lines="none" class="newbox_input">
-            <ion-label position="stacked">Latitude</ion-label>
-            <ion-input required="true" type="text"></ion-input>
-          </ion-item>
-            <ion-button class="get_button"(click)="handleUserLocation()"><ion-icon name="location-outline"></ion-icon></ion-button>
-          <!-- <ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-item lines="none" class="newbox_input">
+          <ion-label position="stacked">Longitude</ion-label>
+          <ion-input required="true" type="text"></ion-input>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item lines="none" class="newbox_input">
+          <ion-label position="stacked">Latitude</ion-label>
+          <ion-input required="true" type="text"></ion-input>
+        </ion-item>
+        <ion-button class="get_button" (click)="handleUserLocation()">
+          <ion-icon name="location-outline"></ion-icon>
+        </ion-button>
+        <!-- <ion-col>
               <ion-input [(ngModel)]="latitude"  name="latitude" required></ion-input>
               <ion-label>{{'newbox.latitude'|translate}}</ion-label>
           </ion-col>
@@ -68,19 +79,20 @@
               <ion-button  (click)="handleUserLocation()"><ion-icon name="location-outline"></ion-icon></ion-button>
             </ion-row>
           </ion-col> -->
-        </ion-row>
-        <ion-row align-items-center>
-          <ion-label class="label_sensoren"><b>Sensoren</b></ion-label>
-        </ion-row>
-        <ion-row>
-            <ion-item lines="none" class="newbox_input" *ngFor="let sensor of sensors">
-              <ion-label>{{sensor.title}} </ion-label>
-              <ion-checkbox  class="checkbox_sensor" name={{sensor.title}} [(ngModel)]="sensor.isChecked" slot="start"></ion-checkbox>
-            </ion-item>
-        </ion-row>
-        <ion-row>
-          <ion-button type="submit" class="register_button" >Sign up!</ion-button>
-        </ion-row>      
+      </ion-row>
+      <ion-row align-items-center>
+        <ion-label class="label_sensoren"><b>Sensoren</b></ion-label>
+      </ion-row>
+      <ion-row>
+        <ion-item lines="none" class="newbox_input" *ngFor="let sensor of sensors">
+          <ion-label>{{sensor.title}} </ion-label>
+          <ion-checkbox class="checkbox_sensor" name={{sensor.title}} [(ngModel)]="sensor.isChecked" slot="start">
+          </ion-checkbox>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-button type="submit" class="register_button">Sign up!</ion-button>
+      </ion-row>
     </form>
   </ion-grid>
 </ion-content>

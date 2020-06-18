@@ -45,3 +45,16 @@
     --background:  #45beed;
     --border-radius:15px 
 }
+
+.rectangle {
+    background-color:#45beed;
+    text-align:center;
+    padding:10px;
+}
+
+.selected{
+    background-color: #4ebe4b;
+}
+.not_selected{
+    background-color: #45beed;
+}
