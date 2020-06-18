@@ -14,6 +14,7 @@ export class OverviewnewboxPage implements OnInit {
   public newbox: newBox
   private token: string
   private refreshToken: string
+  private sensoren:Array<Sensor>
 
   constructor(public modalController: ModalController,
     navParams: NavParams,
@@ -26,6 +27,7 @@ export class OverviewnewboxPage implements OnInit {
     console.log(navParams.data)
     this.token = navParams.data[1]
     this.refreshToken = navParams.data[2]
+    this.sensoren = navParams.data[3];
 
   }
   dismissModal() {

@@ -13,20 +13,22 @@ export class NewboxPage implements OnInit {
   public sensors2 = [
     { name: "HDC1080", isChecked: false },
     { name: "BMP280", isChecked: false },
-    { name: "TSL450", isChecked: false },
+    { name: "TSL45315", isChecked: false },
+    { name: "VEML6070", isChecked: false },
     { name: "BME680", isChecked: false },
     { name: "SDS011", isChecked: false },
-    { name: "Soil", isChecked: false },
-    { name: "SoundVolume", isChecked: false },
+    { name: "SMT50", isChecked: false },
+    { name: "SoundLevelMeter", isChecked: false },
   ]
   public sensors: Array<newSensor> = [
     { title: "HDC1080", unit: "°C", sensorType: "Temperature", isChecked: false },
     { title: "BMP280", unit: "Pa", sensorType: "Air pressure", isChecked: false },
-    { title: "TSL450", unit: "Lux", sensorType: "Light", isChecked: false },
+    { title: "TSL45315", unit: "Lux", sensorType: "Light", isChecked: false },
+    { title: "VEML6070", unit: "µW/cm²", sensorType: "UV", isChecked: false },
     { title: "BME680", unit: "Q", sensorType: "Air quality", isChecked: false },
     { title: "SDS011", unit: "PM10", sensorType: "Fine dust", isChecked: false },
-    { title: "SoundVolume", unit: "°C", sensorType: "Sound", isChecked: false },
-    { title: "Soil", unit: "kA", sensorType: "kA", isChecked: false },
+    { title: "SoundLevelMeter", unit: "°C", sensorType: "Sound", isChecked: false },
+    { title: "SMT50", unit: "kA", sensorType: "kA", isChecked: false },
   ]
   private latitude;
   private longitude;
@@ -73,10 +75,10 @@ export class NewboxPage implements OnInit {
     return await modal.present();
   }
 
-  async presentModalOverview(newbox) {
+  async presentModalOverview(newbox,sensoren) {
     const modal = await this.modalController.create({
       component: OverviewnewboxPage,
-      componentProps: [newbox, this.token, this.refreshToken]
+      componentProps: [newbox, this.token, this.refreshToken,sensoren]
     })
 
     return await modal.present();
@@ -107,7 +109,7 @@ export class NewboxPage implements OnInit {
   }
 
   isSensor(key) {
-    const sensors = ["HDC1080", "BMP280", "TSL450", "BME680", "SDS011", "SoundVolume", "Soil"];
+    const sensors = ["HDC1080", "BMP280", "TSL45315", "VEML6070", "BME680", "SDS011", "SoundLevelMeter", "SMT50"];
     if (sensors.includes(key)) {
       return true;
     }
@@ -122,7 +124,7 @@ export class NewboxPage implements OnInit {
       this.presentToast('Form invalid, have you filled out every field ? ')
       return;
     }
-    let sensoren: Sensor[]=[];
+    let sensoren: Sensor[] = [];
     Object.keys(form.form.value).map((key, index) => {
       if (this.isSensor(key)) {
         if (form.form.value[key]) {
@@ -147,10 +149,17 @@ export class NewboxPage implements OnInit {
                 sensorType: key
               })
               break;
-            case "TSL450":
+            case "TSL45315":
               sensoren.push({
                 title: "Beleuchtung",
                 unit: "Lux",
+                sensorType: key
+              })
+              break;
+            case "VEML6070":
+              sensoren.push({
+                title: "UV-Intensität",
+                unit: "µW/cm²",
                 sensorType: key
               })
               break;
@@ -166,20 +175,20 @@ export class NewboxPage implements OnInit {
                 title: "PM10",
                 unit: "µg/m³",
                 sensorType: key
-              },{
-                title:"PM25",
+              }, {
+                title: "PM25",
                 unit: "µg/m³",
-                sensorType:key
+                sensorType: key
               })
               break;
-            case "SoundVolume":
+            case "SoundLevelMeter":
               sensoren.push({
                 title: "Lautsärke",
                 unit: "db",
                 sensorType: key
               })
               break;
-            case "Soil":
+            case "SMT50":
               sensoren.push({
                 title: "Bodenfeuchte",
                 unit: "%",
@@ -196,9 +205,12 @@ export class NewboxPage implements OnInit {
       name: form.form.value.name,
       exposure: this.selected,
       location: { lat: parseFloat(form.form.value.latitude), lng: parseFloat(form.form.value.longitude) },
-      sensors: sensoren
+     // sensors: sensoren,
+      model: "homeV2Wifi",
+      sensorTemplates: sensoren.map((sensor) => sensor.sensorType.toLowerCase())
     }
-    this.presentModalOverview(newbox)
+    console.log(newbox);
+    this.presentModalOverview(newbox,sensoren)
 
 
   }

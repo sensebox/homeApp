@@ -16,11 +16,11 @@
         <ion-row class="box_title">{{newbox.name}} </ion-row>
         <ion-row class="box_subtitle">
           <ion-icon name="location-outline"></ion-icon> Lng:{{newbox.location.lng}} Lat:{{newbox.location.lat}}<ion-icon
-            name="hardware-chip-outline"></ion-icon>{{newbox.sensors.length}} Sensoren <ion-icon name="cloud-outline"></ion-icon> {{newbox.exposure}}
+            name="hardware-chip-outline"></ion-icon>{{sensoren.length}} Sensoren <ion-icon name="cloud-outline"></ion-icon> {{newbox.exposure}}
         </ion-row>
         <ion-row>
           <table #sensorTable class="sensorTable">
-            <tr *ngFor="let sensor of newbox.sensors">
+            <tr *ngFor="let sensor of sensoren">
               <td>{{sensor.title}}</td>
               <td>{{sensor.unit}}</td>
               <td>{{sensor.sensorType}}</td>
