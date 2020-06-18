@@ -11,7 +11,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class OverviewnewboxPage implements OnInit {
   @Input() form: Object;
   @Input() sensors: Array<Object>;
-  private newbox:newBox
+  public newbox:newBox
   private token:string
   private refreshToken:string
   constructor(public modalController: ModalController,

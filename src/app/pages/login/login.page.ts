@@ -1,8 +1,9 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { LoginService } from '../../services/login/login.service';
-import {Router, NavigationExtras} from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular'
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -13,21 +14,32 @@ export class LoginPage implements OnInit {
   private loginInformation;
   private boxes;
   private saveCredentialsCheckbox: boolean
-  private image="assets/sensebox_wort_logo.svg"
+  private image = "assets/sensebox_wort_logo.svg"
   constructor(
     private LoginService: LoginService,
     private router: Router,
     public loadingController: LoadingController,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public toastController: ToastController
 
-    ) { }
+
+  ) { }
 
   ngOnInit() {
   }
 
+
+  async presentToastWithOptions(content) {
+    const toast = await this.toastController.create({
+      message: content,
+      position: 'bottom',
+      duration:2000
+    });
+    toast.present();
+  }
   async submitLogin(form) {
     const loading = await this.loadingController.create({
-      message:'Please wait...'
+      message: 'Please wait...'
     })
     loading.present();
     if (this.validatePassword(form)) {
@@ -35,21 +47,27 @@ export class LoginPage implements OnInit {
 
         // Try to login on success request data from all available boxes
         this.LoginService.submitLogin(form.value.email, form.value.password)
-          .subscribe(loginInformation => {
+          .subscribe((loginInformation) => {
             this.loginInformation = <loginResponse>loginInformation
             this.LoginService.getUserBoxes(this.loginInformation.token)
               .subscribe(boxes => {
                 this.boxes = boxes
-                let navigationExtras:NavigationExtras={
-                  state:{
-                    loginInformation:this.loginInformation,
-                    boxes : this.boxes
+                let navigationExtras: NavigationExtras = {
+                  state: {
+                    loginInformation: this.loginInformation,
+                    boxes: this.boxes
                   }
                 }
                 console.log(navigationExtras)
-                this.router.navigate(['overview'],navigationExtras)
+                this.router.navigate(['overview'], navigationExtras)
               })
-          })
+          },
+            (error) => {
+              console.error("wrong login");
+
+              this.presentToastWithOptions(error.error.message);
+
+            })
         if (this.saveCredentialsCheckbox) {
           this.saveCredentials({ username: form.value.email, password: form.value.password });
         }
@@ -75,8 +93,8 @@ export class LoginPage implements OnInit {
     }
   }
 
-  async register(){
-    
+  async register() {
+
     this.router.navigate(['register-wizard'])
 
   }

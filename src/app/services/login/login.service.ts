@@ -54,6 +54,12 @@ export class LoginService {
       .pipe(timeout(30000))
   }
 
+
+  getLastMeasurements(boxid,sensorid){
+    const url = `https://api.opensensemap.org/boxes/${boxid}/data/${sensorid}`
+    return this.http.get(url)
+          .pipe(timeout(30000))
+  }
   getUserLocation(){
     
   }

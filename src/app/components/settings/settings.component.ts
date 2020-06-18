@@ -33,7 +33,7 @@ export class SettingsComponent implements OnInit {
     this.popoverController.dismiss();
   }
 
-  switchLanguage(lang) {
+  switchLanguage() {
     console.log("switching language")
   }
 

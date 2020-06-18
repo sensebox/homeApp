@@ -25,7 +25,7 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this._initTranslate();
-      this.statusBar.styleDefault();
+      this.statusBar.styleLightContent();
       this.splashScreen.hide();
     });
   }

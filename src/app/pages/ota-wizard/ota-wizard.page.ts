@@ -53,6 +53,11 @@ export class OtaWizardPage implements OnInit {
 
   }
 
+  onClose(){
+
+  }
+
+
   async onSlideChange() {
     let currentSlide = await Promise.resolve(this.slides.getActiveIndex());
     //  this.slideHistory.push(OtaSlides[currentSlide])
@@ -104,7 +109,7 @@ export class OtaWizardPage implements OnInit {
     console.log(this.sketch);
   }
 
-  private async handleCompiling() {
+  async handleCompiling() {
     this.slides.slideNext();
     this.slides.lockSwipeToNext(!this.compiledSketch)
     this.compileSketch();

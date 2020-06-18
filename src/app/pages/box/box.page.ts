@@ -18,14 +18,14 @@ import { Chart } from 'chart.js'
 export class BoxPage implements OnInit, AfterViewInit {
   @ViewChild("TemperaturCanvas", { static: false }) tempCanvas2: ElementRef
   @ViewChild("tempCanvas", { static: false }) tempCanvas: ElementRef
-  @ViewChildren('canvas') canvasses!:QueryList<any>
+  @ViewChildren('canvas') canvasses!: QueryList<any>
 
-  elements:Array<any> = [];
+  elements: Array<any> = [];
 
   private tempChart: Chart;
   private tempData: Array<Number>;
   private tempLabels: Array<string>;
-  private date:string
+  public date: string
   box: Box;
   constructor(private route: ActivatedRoute, private router: Router, private LoginService: LoginService,
   ) {
@@ -51,6 +51,10 @@ export class BoxPage implements OnInit, AfterViewInit {
   ngOnInit() {
   }
 
+  addFavorit(){
+
+  }
+
   getCharts() {
 
     const now = new Date()
@@ -58,88 +62,94 @@ export class BoxPage implements OnInit, AfterViewInit {
     let pastDate = from.getDate() - 1
     from.setDate(pastDate)
 
-    this.box.sensors.map((sensor,index) => {
+    this.box.sensors.map((sensor, index) => {
       this.LoginService.getMeanMeasurements(this.box._id, sensor.title, from.toISOString(), now.toISOString(), 3600000)
-        .subscribe((results) => {
-          let labels = [];
-          let data = [];
+        .subscribe(
+          results => {
+            if (!results[0]) {
+              console.log("no values")
+            } else {
+              let labels = [];
+              let data = [];
 
-          Object.keys(results[0]).map((key, index) => {
-            if (key === 'sensorId') return;
-            let labelDate = new Date(key);
-            labels.push(labelDate.getHours())
-            data.push(results[0][key])
-          })
+              Object.keys(results[0]).map((key, index) => {
+                if (key === 'sensorId') return;
+                let labelDate = new Date(key);
+                labels.push(labelDate.getHours())
+                data.push(results[0][key])
+              })
 
-          new Chart(this.elements[index], {
-            type: "line",
-            data: {
-              labels: labels,
-              datasets: [{
-                data: data,
-                label: sensor.title,
-                borderColor: "#4EAF47",
-                fill: false
-              }
-              ]
-            },
-            options: {
-              title: {
-                text: sensor.title,
-                display: true,
-                fontColor: "#333"
-              },
-              elements: {
-                point: {
-                  radius: 0
-                }
-              },
-              scales: {
-                xAxes: [{
-                  gridLines: {
+              new Chart(this.elements[index], {
+                type: "line",
+                data: {
+                  labels: labels,
+                  datasets: [{
+                    data: data,
+                    label: sensor.title,
+                    borderColor: "#4EAF47",
+                    fill: false
+                  }
+                  ]
+                },
+                options: {
+                  title: {
+                    text: sensor.title,
+                    display: true,
+                    fontColor: "#333"
+                  },
+                  elements: {
+                    point: {
+                      radius: 0
+                    }
+                  },
+                  scales: {
+                    xAxes: [{
+                      gridLines: {
+                        display: false
+                      },
+                      ticks: {
+                        fontColor: "#333",
+                        autoSkip: true,
+                        maxTicksLimit: 6,
+                        maxRotation: 0,
+                        callback: function (value, index, values) {
+                          return value + ":00"
+                        }
+                      }
+                    }],
+                    yAxes: [{
+                      gridLines: {
+                        display: true,
+                        drawBorder: false
+
+                      },
+                      ticks: {
+                        display: true,
+                        fontColor: "#333",
+                        maxTicksLimit: 9,
+                        callback: function (value, index, values) {
+                          return value + sensor.unit
+                        }
+
+                      }
+                    }]
+                  },
+                  legend: {
                     display: false
-                  },
-                  ticks: {
-                    fontColor: "#333",
-                    autoSkip: true,
-                    maxTicksLimit: 6,
-                    maxRotation: 0,
-                    callback: function (value, index, values) {
-                      return value + ":00"
-                    }
                   }
-                }],
-                yAxes: [{
-                  gridLines: {
-                    display: true,
-                    drawBorder: false
-
-                  },
-                  ticks: {
-                    display: true,
-                    fontColor: "#333",
-                    maxTicksLimit:9,
-                    callback: function (value, index, values) {
-                      return value + sensor.unit
-                    }
-
-                  }
-                }]
-              },
-              legend: {
-                display: false
-              }
+                }
+              })
             }
           })
-        })
+
     })
 
 
   }
 
   ngAfterViewInit() {
-    this.box.sensors.map((sensor)=>{
-      this.elements.push(document.getElementById(sensor.title+'Canvas'))
+    this.box.sensors.map((sensor) => {
+      this.elements.push(document.getElementById(sensor.title + 'Canvas'))
     })
 
     this.getCharts();

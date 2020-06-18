@@ -18,9 +18,9 @@ export class SketchPage implements OnInit {
   passwordWifi: string
   compiledSketch: any
   private sketch: string
-  private selected: string
+  public selected: string
   private image = "assets/senseboxmcu.png"
-  private OTAAddress = '192.168.0.46'
+  public OTAAddress = '192.168.0.46'
 
 
   constructor(private router: Router, private route: ActivatedRoute, private LoginService: LoginService,

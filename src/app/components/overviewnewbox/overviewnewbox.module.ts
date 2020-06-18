@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { OverviewnewboxPageRoutingModule } from './overviewnewbox-routing.module';
 
 import { OverviewnewboxPage } from './overviewnewbox.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OverviewnewboxPageRoutingModule
+    OverviewnewboxPageRoutingModule,
+    TranslateModule
   ],
   declarations: [OverviewnewboxPage]
 })

@@ -40,7 +40,6 @@
         <ng-container *ngIf="state.compilation == 'compiling'">
           <h2 translate>OTAWIZ.COMPILATION.COMPILING.TITLE</h2>
           <!-- getActiveIndex() check because animated icons use loads of CPU, even when not visible! -->
-          <ion-spinner *ngIf="currentSlide == slideCompilation" item-start name="dots"></ion-spinner>
         </ng-container>
         <ng-container *ngIf="state.compilation == 'go-online'">
           <h2 translate>OTAWIZ.COMPILATION.GO_ONLINE.TITLE</h2>
@@ -88,7 +87,6 @@
     <ion-slide>
       <ng-container *ngIf="state.upload == 'uploading'">
         <h2 translate>OTAWIZ.UPLOAD.UPLOADING</h2>
-        <ion-spinner *ngIf="currentSlide == slideUpload" item-start name="dots"></ion-spinner>
       </ng-container>
 
       <ng-container *ngIf="state.upload == 'done'">
