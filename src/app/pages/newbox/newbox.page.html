@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button class="back_button"></ion-back-button>
     </ion-buttons>
-    <ion-title>Adding new Box</ion-title>
+    <ion-title>{{ 'NEWBOX.TITLE' | translate }}</ion-title>
 
   </ion-toolbar>
 </ion-header>
@@ -36,13 +36,13 @@
       </ion-row>
       <ion-row>
         <ion-item lines="none" class="newbox_input">
-          <ion-label  position="stacked">Longitude</ion-label>
+          <ion-label  position="stacked">{{ 'NEWBOX.LONGITUDE' | translate }}</ion-label>
           <ion-input  ngModel name="longitude" required="true" type="text"></ion-input>
         </ion-item>
       </ion-row>
       <ion-row>
         <ion-item lines="none" class="newbox_input">
-          <ion-label  position="stacked">Latitude</ion-label>
+          <ion-label  position="stacked">{{ 'NEWBOX.LATITUDE' | translate }}</ion-label>
           <ion-input ngModel name="latitude" required="true" type="text"></ion-input>
         </ion-item>
         <ion-button class="get_button" (click)="handleUserLocation()">
@@ -50,7 +50,7 @@
         </ion-button>
       </ion-row>
       <ion-row align-items-center>
-        <ion-label class="label_sensoren"><b>Sensoren</b></ion-label>
+        <ion-label class="label_sensoren"><b>{{ 'NEWBOX.INPT_SENSORS' | translate }}</b></ion-label>
       </ion-row>
       <ion-row>
         <ion-item lines="none" class="newbox_input" *ngFor="let sensor of sensors">
@@ -60,7 +60,7 @@
         </ion-item>
       </ion-row>
       <ion-row>
-        <ion-button type="submit" class="register_button">Sign up!</ion-button>
+        <ion-button type="submit" class="register_button">{{ 'NEWBOX.BTN_ADDBOX' | translate }}</ion-button>
       </ion-row>
     </form>
   </ion-grid>

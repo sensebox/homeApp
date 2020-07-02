@@ -13,15 +13,15 @@
       <ion-slide #intro>
         <ion-grid>
           <ion-row><img src="assets/imgs/senseboxmcu.png"></ion-row>
-          <h1 class="headline">Welcome to Upload</h1>
-          <h2 class="subtitle">To upload the sketch please ensure that you have a running OTA sketch on your senseBox</h2>
-          <ion-button size="large" (click)="slides.slideNext()" class="start_button">Start</ion-button>
+          <h1 class="headline">{{ 'SKETCH.FIRST.HEADER' | translate }}</h1>
+          <h2 class="subtitle">{{ 'SKETCH.FIRST.SUBTITLE' | translate }}</h2>
+          <ion-button size="large" (click)="slides.slideNext()" class="start_button">{{ 'SKETCH.FIRST.BTN_NEXT' | translate }}</ion-button>
         </ion-grid>
       </ion-slide>
       <ion-slide #wifi>
         <ion-grid>
-          <h1 class="headline">We need your WiFi</h1>
-          <h2 class="subtitle">Please enter the SSID an password of the network you want your senseBox connected to.</h2>
+          <h1 class="headline">{{ 'SKETCH.SECOND.HEADER' | translate }}</h1>
+          <h2 class="subtitle">{{ 'SKETCH.SECOND.SUBTITLE' | translate }}</h2>
           <ion-row style="margin-top:7rem">
             <ion-input class="wifiinput ssid" placeholder="SSID" name="ssid" type="text" [(ngModel)]="ssid" required></ion-input>
           </ion-row>
@@ -29,20 +29,20 @@
             <ion-input class="wifiinput pw" name="password" type="password" placeholder="Password" [(ngModel)]="passwordWifi" required>
             </ion-input>
           </ion-row>
-          <ion-button size="large" (click)="slides.slideNext()" class="start_button">Continue</ion-button>
+          <ion-button size="large" (click)="slides.slideNext()" class="start_button">{{ 'SKETCH.SECOND.BTN_NEXT' | translate }}</ion-button>
         </ion-grid>
       </ion-slide>
       <ion-slide #mode>
         <ion-grid class="modeGrid">
-          <h1>Choose connection mode</h1>
-          <h2 class="subtitle">Depending on the sketch you uploaded, please select a connection mode</h2>
+          <h1>{{ 'SKETCH.THIRD.HEADER' | translate }}</h1>
+          <h2 class="subtitle">{{ 'SKETCH.THIRD.SUBTITLE' | translate }}</h2>
           <ion-row>
             <ion-col>
               <div #automatic (click)="toggleAutomatic()"
                 [ngClass]="selected==='automatic'? 'selected circle' : 'not_selected circle' ">
                 <div class="circle_content">
                   <ion-icon class="connection_icon" name="wifi-outline"></ion-icon><br>
-                  Automatic
+                  {{ 'SKETCH.THIRD.BTN_AUTOMATIC' | translate }}
                 </div>
               </div>
             </ion-col>
@@ -52,12 +52,12 @@
                 <div class="circle_content">
                   <ion-icon class="connection_icon" name="hammer-outline">
                   </ion-icon><br>
-                  Manual
+                  {{ 'SKETCH.THIRD.BTN_MANUAL' | translate }}
                 </div>
               </div>
             </ion-col>
           </ion-row>
-          <ion-button size="large" (click)="slides.slideNext()" class="start_button">Continue</ion-button>
+          <ion-button size="large" (click)="slides.slideNext()" class="start_button">{{ 'SKETCH.THIRD.BTN_NEXT' | translate }}</ion-button>
         </ion-grid>
       </ion-slide>
       <ion-slide #automatic *ngIf="selected==='automatic'">

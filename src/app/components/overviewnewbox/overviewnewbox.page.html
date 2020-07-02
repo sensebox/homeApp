@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar class="newbox_header">
-    <ion-title>{{'newbox.confirm.title'|translate}} </ion-title>
+    <ion-title>{{ 'OVERVIEWNEWBOX.TITLE' | translate }} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="newbox_background">
   <ion-grid class="wrapper">
     <ion-row class="confirm_text alert">
+      {{ 'OVERVIEWNEWBOX.DISC_BLUE' | translate }}
       Um deine senseBox endgültig einzutragen, klicke auf "Abschließen" und du erhältst anschließend von uns eine Mail mit den Anweisungen zum Aufbau und Upload der Software auf deine senseBox. Falls du es dir anders überlegt hast, klicke auf abbrechen.
       <!-- {{'newbox.confirm.text'|translate}} -->
     </ion-row>
@@ -15,8 +16,8 @@
       <ion-col>
         <ion-row class="box_title">{{newbox.name}} </ion-row>
         <ion-row class="box_subtitle">
-          <ion-icon name="location-outline"></ion-icon> Lng:{{newbox.location.lng}} Lat:{{newbox.location.lat}}<ion-icon
-            name="hardware-chip-outline"></ion-icon>{{sensoren.length}} Sensoren <ion-icon name="cloud-outline"></ion-icon> {{newbox.exposure}}
+          <ion-icon name="location-outline"></ion-icon> {{ 'OVERVIEWNEWBOX.LNG' | translate }}:{{newbox.location.lng}} {{ 'OVERVIEWNEWBOX.LAT' | translate }}:{{newbox.location.lat}}<ion-icon
+            name="hardware-chip-outline"></ion-icon>{{sensoren.length}} {{ 'OVERVIEWNEWBOX.SENSOR_COUNT' | translate }} <ion-icon name="cloud-outline"></ion-icon> {{newbox.exposure}}
         </ion-row>
         <ion-row>
           <table #sensorTable class="sensorTable">
@@ -30,12 +31,12 @@
       </ion-col>
     </ion-row>
     <ion-row class="confirm_disclaimer alert">
-      Durch das Absenden der Registrierung stimmst du zu, dass deine übermittelten Sensordaten später entsprechend der Public Domain Dedication and License 1.0 von jedem genutzt werden dürfen.
+      {{ 'OVERVIEWNEWBOX.DISC_YELLOW' | translate }}
       <!-- {{'newbox.confirm.disclaimer'|translate}} -->
     </ion-row>
     <ion-row class="floatright">
-      <ion-button (click)="dismissModal()" color="danger">{{'newbox.abortbox'|translate}} </ion-button>
-      <ion-button (click)="handleConfirmation()" color="success">{{'newbox.confirmbox'|translate}}</ion-button>
+      <ion-button (click)="dismissModal()" color="danger">{{ 'OVERVIEWNEWBOX.BTN_ABORT' | translate }}</ion-button>
+      <ion-button (click)="handleConfirmation()" color="success">{{ 'OVERVIEWNEWBOX.BTN_CONFIRM' | translate }}</ion-button>
     </ion-row>
   </ion-grid>
 </ion-content>

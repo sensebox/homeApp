@@ -1,6 +1,67 @@
 {
-    "login":{
-        "user":"Username",
-        "password":"Password"
+    "LOGIN":{
+        "LOGIN":"Login",
+        "REGISTER":"Register new senseBox:home"
+    },
+    "REGISTER":{
+        "TITLE":"Register new senseBox:home",
+        "BTN_SIGNUP":"Register",
+        "INPT_REPEATPW":"Repeat password"
+    },
+    "OVERVIEW":{
+        "TITLE":"My senseBox",
+        "BTN_SHOWBOX":"Show senseBox",
+        "BTN_UPLOAD":"Upload sketch"
+    },
+    "SETTINGS":{
+        "TITLE":"Settings",
+        "BTN_SIGNOUT":"Sign out",
+        "BTN_ADDBOX":"Add senseBox",
+        "BTN_SWITCHLNG":"Change language"
+    },
+    "NEWBOX":{
+        "TITLE":"Add new senseBox",
+        "INPT_LONGITUDE":"Longitude", 
+        "INPT_LATITUDE":"Latitude",
+        "INPT_SENSORS":"Sensors",
+        "BTN_ADDBOX":"Add box"
+    },
+    "OVERVIEWNEWBOX":{
+        "TITLE":"Confirm senseBox",
+        "DISC_BLUE":"",
+        "SENSOR_COUNT":"Sensors",
+        "LNG":"LNG",
+        "LAT":"LAT",
+        "DISC_YELLOW":"",
+        "BTN_ABORT":"Abort",
+        "BTN_CONFIRM":"Confirm"
+    },
+    "BOX":{
+        "LASTMEASUREMENT":"Last measurement at ",
+        "NO_MEASUREMENT":"No measurement yet"
+    },
+    "SKETCH":{
+        "FIRST":{
+            "HEADER":"Uploading sketch",
+            "SUBTITLE":"Click 'Start' if you have fullfilled all pre-requirements for the Over-The-Air senseBox connection",
+            "BTN_NEXT":"Start"
+        },
+        "SECOND":{
+            "HEADER":"WiFi configuration",
+            "SUBTITLE":"Please provide your WiFi network name and password in the fields below",
+            "BTN_NEXT":"Next"
+        },
+        "THIRD":{
+            "HEADER":"Mode selection",
+            "SUBTITLE":"Depending on the sketch you uploaded, choose your connection mode",
+            "BTN_AUTOMATIC":"Automatic",
+            "BTN_MANUAL":"Manual",
+            "BTN_NEXT":"Continue"
+        }
+        
     }
+
+
+
+
 }

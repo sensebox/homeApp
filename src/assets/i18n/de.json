@@ -1,6 +1,68 @@
 {
-    "login":{
-        "user":"Benutzername",
-        "password":"Password"
+    "LOGIN":{
+        "LOGIN":"Login",
+        "REGISTER":"senseBox:home registrieren"
+    },
+    "REGISTER":{
+        "TITLE":"senseBox:home registrieren",
+        "BTN_SIGNUP":"Registrieren",
+        "INPT_REPEATPW":"Passwort wiederholen"
+    },
+    "OVERVIEW":{
+        "TITLE":"Deine senseBox",
+        "BTN_SHOWBOX":"Zeige senseBox",
+        "BTN_UPLOAD":"Sketch hochladen"
+    },
+    "SETTINGS":{
+        "TITLE":"Einstellungen",
+        "BTN_SIGNOUT":"Abmelden",
+        "BTN_ADDBOX":"senseBox hinzufügen",
+        "BTN_SWITCHLNG":"Sprache ändern"
+    },
+    "NEWBOX":{
+        "TITLE":"Neue senseBox hinzufügen",
+        "INPT_LONGITUDE":"Längengrad", 
+        "INPT_LATITUDE":"Breitengrad",
+        "INPT_SENSORS":"Sensoren",
+        "BTN_ADDBOX":"Box hinzufügen"
+    },
+    "OVERVIEWNEWBOX":{
+        "TITLE":"senseBox bestätigen",
+        "DISC_BLUE":" Um deine senseBox endgültig einzutragen, klicke auf 'Abschließen' und du erhältst anschließend von uns eine Mail mit den Anweisungen zum Aufbau und Upload der Software auf deine senseBox. Falls du es dir anders überlegt hast, klicke auf abbrechen.",
+        "SENSOR_COUNT":"Sensoren",
+        "LNG":"LNG",
+        "LAT":"LAT",
+        "DISC_YELLOW":" Durch das Absenden der Registrierung stimmst du zu, dass deine übermittelten Sensordaten später entsprechend der Public Domain Dedication and License 1.0 von jedem genutzt werden dürfen.",
+        "BTN_ABORT":"Abbrechen",
+        "BTN_CONFIRM":"Bestätigen"
+    },
+    "BOX":{
+        "LASTMEASUREMENT":"Letzte Messung um ",
+        "NO_MEASUREMENT":"Keine Messungen vorhanden"
+
+    },
+    "SKETCH":{
+        "FIRST":{
+            "HEADER":"Sketch hochladen",
+            "SUBTITLE":"Klicken sie auf weiter wenn sie alle Anforderungen für das Hochladen auf die senseBox erfüllt haben.",
+            "BTN_NEXT":"Start"
+        },
+        "SECOND":{
+            "HEADER":"WiFi-Daten",
+            "SUBTITLE":"Zuerst brauchen wir deine WiFi-Verbindungsdaten. Trage unten sowohl den Namen des Netzwerks und das zugehörige Passwort ein",
+            "BTN_NEXT":"Weiter"
+        },
+        "THIRD":{
+            "HEADER":"Modus Auswahl",
+            "SUBTITLE":"Abhängig vom Sketch den du hochgeladen hast, wähle hier nun deinen Verbindungsmodus aus",
+            "BTN_AUTOMATIC":"Automatisch",
+            "BTN_MANUAL":"Manuell",
+            "BTN_NEXT":"Weiter"
+        }
+        
     }
+
+
+
+
 }

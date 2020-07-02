@@ -25,7 +25,7 @@
     </ion-row>
     <ion-row class="titlewrapper">
       <div class="time">
-        Letzte Messung um {{date}}
+        {{ 'BOX.LASTMEASUREMENT' | translate }} {{date}}
       </div>
     </ion-row>
     <ion-row class="canvasElement">
@@ -52,7 +52,7 @@
   </ion-row>
   <ion-row>
     <div class="noMeasurements">
-      No measurements yet !
+      {{ 'OVERVIEWNEWBOX.NO_MEASUREMENT' | translate }}
     </div>
   </ion-row>
   </ion-grid>

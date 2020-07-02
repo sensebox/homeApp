@@ -4,7 +4,7 @@
       <ion-button class="settings_button" (click)="presentSettings($event)">
         <ion-icon name="settings-sharp"></ion-icon>      </ion-button>    
     </ion-buttons>
-    <ion-title>My senseBox</ion-title>  
+    <ion-title>{{ 'OVERVIEW.TITLE' | translate }}</ion-title>  
 
   </ion-toolbar>
 </ion-header>
@@ -19,10 +19,10 @@
           </ion-row>
           <ion-row class="button_wrapper">
             <ion-col (click)="forwardBox(box)"class="box_button analytics">
-              Show senseBox
+              {{ 'OVERVIEW.BTN_SHOWBOX' | translate }}
             </ion-col>
             <ion-col (click)="forwardSketch(box)" class="box_button sketch">
-                Upload Sketch
+              {{ 'OVERVIEW.BTN_UPLOAD' | translate }}
             </ion-col>
           </ion-row>
     </ion-col>
