@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, NavParams } from '@ionic/angular';
 import { Router,NavigationExtras } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-settings',
@@ -9,8 +10,9 @@ import { Router,NavigationExtras } from '@angular/router';
 })
 export class SettingsComponent implements OnInit {
   private loginInformation;
-
-  constructor(public popoverController: PopoverController, public router: Router, navParams: NavParams
+  private language:string = 'de'
+  constructor(public popoverController: PopoverController, public router: Router, navParams: NavParams,
+    public translate: TranslateService
   ) {
     this.loginInformation = navParams.data[0]
     console.log(this.loginInformation)
@@ -35,6 +37,9 @@ export class SettingsComponent implements OnInit {
 
   switchLanguage() {
     console.log("switching language")
+    if(this.language === 'en') this.translate.use('de');
+    if(this.language === 'de') this.translate.use('en');
+
   }
 
   ngOnInit() { }
