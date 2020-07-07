@@ -40,7 +40,7 @@ export class BoxPage implements OnInit, AfterViewInit {
         }
         else {
           let date = new Date(this.box.lastMeasurementAt);
-          this.date = date.toLocaleTimeString();
+          this.date = date.toLocaleString();
         }
 
       }
@@ -79,6 +79,8 @@ export class BoxPage implements OnInit, AfterViewInit {
     const now = new Date()
     let from = new Date()
     let pastDate = from.getDate() - 1
+
+
     from.setDate(pastDate)
 
     this.box.sensors.map((sensor, index) => {
@@ -94,8 +96,13 @@ export class BoxPage implements OnInit, AfterViewInit {
               Object.keys(results[0]).map((key, index) => {
                 if (key === 'sensorId') return;
                 let labelDate = new Date(key);
+                if(index==1){
+                  labels.push(labelDate.toLocaleDateString())
+                  data.push(results[0][key])
+                }
+                else{
                 labels.push(labelDate.getHours())
-                data.push(results[0][key])
+                data.push(results[0][key])}
               })
 
               new Chart(this.elements[index], {
@@ -129,9 +136,10 @@ export class BoxPage implements OnInit, AfterViewInit {
                       ticks: {
                         fontColor: "#333",
                         autoSkip: true,
-                        maxTicksLimit: 6,
+                        maxTicksLimit: 3,
                         maxRotation: 0,
                         callback: function (value, index, values) {
+                          if(index == 0) return value
                           return value + ":00"
                         }
                       }
