@@ -15,6 +15,13 @@
       <ion-row>
         <ion-button class="register_button" (click)="register()"><div class="shadow">{{ 'LOGIN.REGISTER' | translate }}</div></ion-button>
       </ion-row>
+        <div class="keepSignedIn">
+        <ion-item class="keepSignedInItem" lines="none">
+          <ion-label class="keepSignedInLabel">{{'LOGIN.SIGNEDIN' | translate}} </ion-label>
+          <ion-checkbox class="keepSignedInCheckbox" name="signedIn" [(ngModel)]="keepSignedIn"></ion-checkbox>
+      </ion-item>
+    </div>
+
     </form>
   </ion-grid>
 </ion-content>

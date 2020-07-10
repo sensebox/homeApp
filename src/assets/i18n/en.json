@@ -1,7 +1,8 @@
 {
     "LOGIN":{
         "LOGIN":"Login",
-        "REGISTER":"Register new senseBox:home"
+        "REGISTER":"Register new senseBox:home",
+        "SIGNEDIN":"Remember Login"
     },
     "REGISTER":{
         "TITLE":"Register new senseBox:home",

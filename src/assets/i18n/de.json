@@ -1,7 +1,8 @@
 {
     "LOGIN":{
         "LOGIN":"Login",
-        "REGISTER":"senseBox:home registrieren"
+        "REGISTER":"senseBox:home registrieren",
+        "SIGNEDIN":"Login Daten speichern"
     },
     "REGISTER":{
         "TITLE":"senseBox:home registrieren",

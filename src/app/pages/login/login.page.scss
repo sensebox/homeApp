@@ -74,3 +74,24 @@ ion-content {
     float:right;
     margin-top:50px;
 }
+
+.keepSignedIn{
+
+    display:inline-block;
+    
+}
+
+.keepSignedInItem{
+    --background:None;
+    --color:#333
+
+}
+.keepSignedInCheckbox{
+    --background:#fff;
+    --background-checked:#4EAF47;
+    margin:0.5rem;
+    --size:1.75rem
+}
+// .keepSignedInLabel {
+//     color:#333;
+// }
