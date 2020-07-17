@@ -4,6 +4,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { WebcompilerService } from 'src/app/services/webcompiler/webcompiler.service';
 import {OtawifiService} from 'src/app/services/otawifi/otawifi.service'
 import { IonSlides,LoadingController } from '@ionic/angular'
+import { OsemService } from 'src/app/services/osem.service';
 
 @Component({
   selector: 'app-sketch',
@@ -23,10 +24,14 @@ export class SketchPage implements OnInit {
   public OTAAddress = '192.168.0.46'
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private LoginService: LoginService,
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private compiler: WebcompilerService,
     private otawifi:OtawifiService,
-    public loadingController: LoadingController ) {
+    private osem: OsemService,
+    public loadingController: LoadingController
+    ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.loginInformation = this.router.getCurrentNavigation().extras.state.loginInformation;
@@ -43,7 +48,7 @@ export class SketchPage implements OnInit {
     this.router.navigate(['sensor'], navigationExtras)
   }
   uploadStandardSketch() {
-    this.LoginService.getUserSketch(this.loginInformation.token, this.box._id, this.ssid, this.passwordWifi)
+    this.osem.getUserSketch(this.loginInformation.token, this.box._id, this.ssid, this.passwordWifi)
       .subscribe(sketch => {
         let navigationExtras: NavigationExtras = {
           state: {
@@ -88,7 +93,7 @@ export class SketchPage implements OnInit {
 
   handleCompilation() {
     // get user sketch
-    this.LoginService.getUserSketch(this.loginInformation.token, this.box._id, this.ssid, this.passwordWifi)
+    this.osem.getUserSketch(this.loginInformation.token, this.box._id, this.ssid, this.passwordWifi)
       .subscribe((sketch) => {
         // get id for compiler
         this.compiler.compileId(sketch)

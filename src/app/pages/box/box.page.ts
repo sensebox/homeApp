@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Chart } from 'chart.js'
 import { ToastController } from '@ionic/angular';
+import { OsemService } from 'src/app/services/osem.service';
 
 
 // @Directive({selector: 'canvas'})
@@ -30,7 +31,12 @@ export class BoxPage implements OnInit, AfterViewInit {
   
   box: Box;
   private newBox:boolean;
-  constructor(private route: ActivatedRoute, private router: Router, private LoginService: LoginService, public toastController: ToastController
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private LoginService: LoginService,
+    private osem: OsemService,
+    public toastController: ToastController
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -84,7 +90,7 @@ export class BoxPage implements OnInit, AfterViewInit {
     from.setDate(pastDate)
 
     this.box.sensors.map((sensor, index) => {
-      this.LoginService.getMeanMeasurements(this.box._id, sensor.title, from.toISOString(), now.toISOString(), 3600000)
+      this.osem.getMeanMeasurements(this.box._id, sensor.title, from.toISOString(), now.toISOString(), 3600000)
         .subscribe(
           results => {
             if (!results[0]) {

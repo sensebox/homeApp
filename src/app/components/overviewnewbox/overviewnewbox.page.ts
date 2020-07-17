@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, NavParams, LoadingController, ToastController } from '@ionic/angular';
 import { Router, NavigationExtras } from '@angular/router';
-import { LoginService } from 'src/app/services/login/login.service';
-
+import { OsemService } from 'src/app/services/osem.service';
+import {AuthenticationService} from 'src/app/services/authentication.service'
 @Component({
   selector: 'app-overviewnewbox',
   templateUrl: './overviewnewbox.page.html',
@@ -16,12 +16,14 @@ export class OverviewnewboxPage implements OnInit {
   private refreshToken: string
   private sensoren:Array<Sensor>
 
-  constructor(public modalController: ModalController,
+  constructor(
+    public modalController: ModalController,
     navParams: NavParams,
     private loadingController: LoadingController,
     public router: Router,
-    private LoginService: LoginService,
-    private toastController: ToastController
+    private authentication: AuthenticationService,
+    private toastController: ToastController,
+    private osem: OsemService
   ) {
     this.newbox = navParams.data[0]
     console.log(navParams.data)
@@ -53,9 +55,9 @@ export class OverviewnewboxPage implements OnInit {
     await loading.present();
 
 
-    this.LoginService.registerBox(this.newbox, this.token)
+    this.authentication.addBox(this.newbox, this.token)
       .subscribe((response) => {
-        this.LoginService.getUserBoxes(this.token)
+        this.osem.getUserBoxes(this.token)
           .subscribe((boxes) => {
             let navigationExtras: NavigationExtras = {
               state: {

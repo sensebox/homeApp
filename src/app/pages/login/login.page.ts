@@ -1,9 +1,10 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { LoginService } from '../../services/login/login.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular'
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { OsemService } from 'src/app/services/osem.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -17,8 +18,9 @@ export class LoginPage implements OnInit {
   private keepSignedIn:boolean
 
   constructor(
-    private LoginService: LoginService,
     private router: Router,
+    private authentication: AuthenticationService,
+    private osem: OsemService,
     public loadingController: LoadingController,
     public modalController: ModalController,
     public toastController: ToastController
@@ -47,10 +49,10 @@ export class LoginPage implements OnInit {
       try {
 
         // Try to login on success request data from all available boxes
-        this.LoginService.submitLogin(form.value.email, form.value.password)
+        this.authentication.submitLogin(form.value.email, form.value.password)
           .subscribe((loginInformation) => {
             this.loginInformation = <loginResponse>loginInformation
-            this.LoginService.getUserBoxes(this.loginInformation.token)
+            this.osem.getUserBoxes(this.loginInformation.token)
               .subscribe(boxes => {
                 this.boxes = boxes
                 let navigationExtras: NavigationExtras = {

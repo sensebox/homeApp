@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { LoginService } from '../../services/login/login.service';
 import { Router, NavigationExtras } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 @Component({
   selector: 'app-register-wizard',
   templateUrl: './register-wizard.page.html',
@@ -9,7 +9,11 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class RegisterWizardPage implements OnInit {
 
-  constructor(private loginService: LoginService, private loadingController: LoadingController, private router: Router)
+  constructor(
+    private loadingController: LoadingController,
+    private router: Router,
+    private authentication: AuthenticationService
+    )
   
   { }
 
@@ -24,7 +28,7 @@ export class RegisterWizardPage implements OnInit {
     await loader.present();
     // call osm api to register 
     if (this.validateForm(form)) {
-      this.loginService.registerUser(form.value.name, form.value.email, form.value.password)
+      this.authentication.registerUser(form.value.name, form.value.email, form.value.password)
         .subscribe((response: newUserResponse) => {
           let navigationExtras: NavigationExtras = {
             state: {
