@@ -1,0 +1,48 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { timeout } from 'rxjs/operators'
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class OsemService {
+
+  private URL_user =  'https://api.opensensemap.org/users/me/boxes';
+  private URL_sketch = 'https://api.opensensemap.org/boxes/';
+
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  getUserBoxes(token:string){
+    const headers = new HttpHeaders({'Authorization':"Bearer "+token})
+    return this.http.get(this.URL_user,{headers})
+              .pipe(timeout(30000))
+  }
+
+
+  getUserSketch(token:string,id:string,ssid:string,password:string){
+    const headers = new HttpHeaders({'Authorization':"Bearer "+token})
+    return this.http.get(`${this.URL_sketch}${id}/script?ssid=${ssid}&password=${password}`,{headers,responseType:'text'})
+            .pipe(timeout(30000))
+  }
+
+  getMeanMeasurements(boxid,phenomenon,fromDate,toDate,window){
+    const url = `https://api.opensensemap.org/statistics/descriptive?boxId=${boxid}&phenomenon=${phenomenon}&fromDate=${fromDate}&toDate=${toDate}&operation=arithmeticMean&window=${window}&format=json`
+    return this.http.get(url)
+      .pipe(timeout(30000))
+  }
+
+
+  getLastMeasurements(boxid,sensorid){
+    const url = `https://api.opensensemap.org/boxes/${boxid}/data/${sensorid}`
+    return this.http.get(url)
+          .pipe(timeout(30000))
+  }
+  getUserLocation(){
+    
+  }
+
+  }
+
