@@ -16,9 +16,9 @@
     },
     "SETTINGS":{
         "TITLE":"Einstellungen",
-        "BTN_SIGNOUT":"Abmelden",
-        "BTN_ADDBOX":"senseBox hinzufügen",
-        "BTN_SWITCHLNG":"Sprache ändern"
+        "SIGNOUT":"Abmelden",
+        "ADDBOX":"senseBox hinzufügen",
+        "SWITCHLNG":"Sprache ändern"
     },
     "NEWBOX":{
         "TITLE":"Neue senseBox hinzufügen",

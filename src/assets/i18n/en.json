@@ -16,9 +16,9 @@
     },
     "SETTINGS":{
         "TITLE":"Settings",
-        "BTN_SIGNOUT":"Sign out",
-        "BTN_ADDBOX":"Add senseBox",
-        "BTN_SWITCHLNG":"Change language"
+        "SIGNOUT":"Sign out",
+        "ADDBOX":"Add senseBox",
+        "SWITCHLNG":"Change language"
     },
     "NEWBOX":{
         "TITLE":"Add new senseBox",
