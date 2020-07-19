@@ -13,8 +13,6 @@ export class OverviewnewboxPage implements OnInit {
   @Input() form: Object;
   @Input() sensors: Array<Object>;
   public newbox: newBox
-  private token
-  private refreshToken
   private sensoren: Array<Sensor>
 
   constructor(
@@ -29,9 +27,6 @@ export class OverviewnewboxPage implements OnInit {
   ) {
     this.newbox = navParams.data[0]
     this.sensoren = navParams.data[1];
-    this.token = this.storage.get('token').then((token) => token)
-    console.log(this.token)
-    this.refreshToken = this.storage.get('refreshToken').then((refreshToken) => refreshToken)
 
   }
   dismissModal() {

@@ -35,8 +35,6 @@ export class NewboxPage implements OnInit {
   private latitude;
   private longitude;
   private location: Object;
-  private token;
-  private refreshToken;
   private selected: string;
 
   private box: newBox;
@@ -48,8 +46,6 @@ export class NewboxPage implements OnInit {
     private storage: Storage,
     private route: ActivatedRoute,
     private router: Router) {
-      this.token = this.storage.get('token').then((token)=>token)
-      this.token.then((token)=>console.log(token))
   }
 
   toggleOutdoor() {

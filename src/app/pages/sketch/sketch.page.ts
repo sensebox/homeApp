@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { WebcompilerService } from 'src/app/services/webcompiler/webcompiler.service';
-import {OtawifiService} from 'src/app/services/otawifi/otawifi.service'
-import { IonSlides,LoadingController } from '@ionic/angular'
+import { OtawifiService } from 'src/app/services/otawifi/otawifi.service'
+import { IonSlides, LoadingController } from '@ionic/angular'
 import { OsemService } from 'src/app/services/osem.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-sketch',
@@ -12,7 +13,6 @@ import { OsemService } from 'src/app/services/osem.service';
 })
 export class SketchPage implements OnInit {
   @ViewChild("slides", { static: false }) slides: IonSlides;
-  loginInformation: any;
   box: Box;
   ssid: string;
   passwordWifi: string
@@ -27,13 +27,13 @@ export class SketchPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private compiler: WebcompilerService,
-    private otawifi:OtawifiService,
+    private otawifi: OtawifiService,
     private osem: OsemService,
-    public loadingController: LoadingController
-    ) {
+    public loadingController: LoadingController,
+    private storage: Storage,
+  ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
-        this.loginInformation = this.router.getCurrentNavigation().extras.state.loginInformation;
         this.box = this.router.getCurrentNavigation().extras.state.box;
       }
     })
@@ -47,20 +47,23 @@ export class SketchPage implements OnInit {
     this.router.navigate(['sensor'], navigationExtras)
   }
   uploadStandardSketch() {
-    this.osem.getUserSketch(this.loginInformation.token, this.box._id, this.ssid, this.passwordWifi)
-      .subscribe(sketch => {
-        let navigationExtras: NavigationExtras = {
-          state: {
-            sketch
+    this.storage.get('token').then((token) => {
+      this.osem.getUserSketch(token, this.box._id, this.ssid, this.passwordWifi)
+        .subscribe(sketch => {
+          let navigationExtras: NavigationExtras = {
+            state: {
+              sketch
+            }
           }
-        }
-        this.router.navigate(['ota-wizard'], navigationExtras)
-      })
+          this.router.navigate(['ota-wizard'])
+        })
+    })
+
   }
 
   onSlideChange() {
     let current: Promise<Number> = this.slides.getActiveIndex();
-    let hiddenOffset:any = this.compiledSketch ? 1 : 0;
+    let hiddenOffset: any = this.compiledSketch ? 1 : 0;
     current.then((number) => {
       number > 4 ? number + hiddenOffset : number;
       switch (number) {
@@ -92,28 +95,30 @@ export class SketchPage implements OnInit {
 
   handleCompilation() {
     // get user sketch
-    this.osem.getUserSketch(this.loginInformation.token, this.box._id, this.ssid, this.passwordWifi)
-      .subscribe((sketch) => {
-        // get id for compiler
-        this.compiler.compileId(sketch)
-          .subscribe((response: any) => {
-            // use id to download compiled sketch
-            this.compiler.getBinary(response.data.id)
-              .subscribe((binary) => {
-                // save compiled sketch 
-                this.compiledSketch = binary
-              })
-          })
-      })
+    this.storage.get('token').then((token) => {
+      this.osem.getUserSketch(token, this.box._id, this.ssid, this.passwordWifi)
+        .subscribe((sketch) => {
+          // get id for compiler
+          this.compiler.compileId(sketch)
+            .subscribe((response: any) => {
+              // use id to download compiled sketch
+              this.compiler.getBinary(response.data.id)
+                .subscribe((binary) => {
+                  // save compiled sketch 
+                  this.compiledSketch = binary
+                })
+            })
+        })
+    })
   }
 
- async handleFinalSlide(){
+  async handleFinalSlide() {
     // Show modal / loading when sketch isnt compiled yet otherwise just go ahead
 
-    if(!this.compiledSketch){
+    if (!this.compiledSketch) {
       // show modal
       const loading = await this.loadingController.create({
-        message:'Please wait for the compiler to finish...',
+        message: 'Please wait for the compiler to finish...',
       })
       await loading.present()
 
@@ -124,7 +129,7 @@ export class SketchPage implements OnInit {
 
   }
 
-  handleUpload(){
+  handleUpload() {
     // this.otawifi.uploadFirmware(this.compiledSketch,this.OTAAddress)
     //             .subscribe((response)=>{
     //               console.log(response)

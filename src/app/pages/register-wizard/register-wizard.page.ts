@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { Router, NavigationExtras } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-register-wizard',
   templateUrl: './register-wizard.page.html',
