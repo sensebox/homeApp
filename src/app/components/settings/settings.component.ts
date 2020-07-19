@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, NavParams } from '@ionic/angular';
-import { Router,NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class SettingsComponent implements OnInit {
   private loginInformation;
-  private language:string = 'de'
+  private language: string = 'en'
   constructor(public popoverController: PopoverController, public router: Router, navParams: NavParams,
     public translate: TranslateService
   ) {
@@ -25,20 +25,29 @@ export class SettingsComponent implements OnInit {
   }
 
   addNewBox() {
-    let navigationExtras:NavigationExtras={
-      state:{
-        token:this.loginInformation.token,
-        refreshToken:this.loginInformation.refreshToken
+    let navigationExtras: NavigationExtras = {
+      state: {
+        token: this.loginInformation.token,
+        refreshToken: this.loginInformation.refreshToken
       }
     }
-    this.router.navigate(['newbox'],navigationExtras)
+    this.router.navigate(['newbox'], navigationExtras)
     this.popoverController.dismiss();
   }
 
   switchLanguage() {
-    console.log("switching language")
-    if(this.language === 'en') this.translate.use('de');
-    if(this.language === 'de') this.translate.use('en');
+    switch (this.language) {
+      case 'de':
+        this.translate.use('en')
+        this.language = 'en'
+        break;
+      case 'en':
+        this.translate.use('de')
+        this.language = 'de'
+  
+      default:
+        break;
+    }
 
   }
 
