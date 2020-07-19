@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, NavParams, LoadingController, ToastController } from '@ionic/angular';
 import { Router, NavigationExtras } from '@angular/router';
 import { OsemService } from 'src/app/services/osem.service';
-import {AuthenticationService} from 'src/app/services/authentication.service'
+import { AuthenticationService } from 'src/app/services/authentication.service'
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-overviewnewbox',
   templateUrl: './overviewnewbox.page.html',
@@ -12,9 +13,9 @@ export class OverviewnewboxPage implements OnInit {
   @Input() form: Object;
   @Input() sensors: Array<Object>;
   public newbox: newBox
-  private token: string
-  private refreshToken: string
-  private sensoren:Array<Sensor>
+  private token
+  private refreshToken
+  private sensoren: Array<Sensor>
 
   constructor(
     public modalController: ModalController,
@@ -23,13 +24,14 @@ export class OverviewnewboxPage implements OnInit {
     public router: Router,
     private authentication: AuthenticationService,
     private toastController: ToastController,
-    private osem: OsemService
+    private osem: OsemService,
+    private storage: Storage
   ) {
     this.newbox = navParams.data[0]
-    console.log(navParams.data)
-    this.token = navParams.data[1]
-    this.refreshToken = navParams.data[2]
-    this.sensoren = navParams.data[3];
+    this.sensoren = navParams.data[1];
+    this.token = this.storage.get('token').then((token) => token)
+    console.log(this.token)
+    this.refreshToken = this.storage.get('refreshToken').then((refreshToken) => refreshToken)
 
   }
   dismissModal() {
@@ -54,27 +56,30 @@ export class OverviewnewboxPage implements OnInit {
     })
     await loading.present();
 
-
-    this.authentication.addBox(this.newbox, this.token)
-      .subscribe((response) => {
-        this.osem.getUserBoxes(this.token)
-          .subscribe((boxes) => {
-            let navigationExtras: NavigationExtras = {
-              state: {
-                token: this.token,
-                boxes: boxes
+    this.storage.get('token').then((token) => {
+      this.authentication.addBox(this.newbox, token)
+        .subscribe((response) => {
+          this.osem.getUserBoxes(token)
+            .subscribe((boxes) => {
+              let navigationExtras: NavigationExtras = {
+                state:
+                {
+                  boxes: boxes
+                }
               }
+              loading.dismiss();
+              this.router.navigate(['overview'], navigationExtras)
+            }),
+            (error) => {
+              loading.dismiss();
+              console.error(error);
+              this.presentToast(error.message);
             }
-            loading.dismiss();
-            this.router.navigate(['overview'], navigationExtras)
-          })
-      },
-        (error) => {
-          loading.dismiss();
-          console.error(error);
-          this.presentToast(error.message);
         })
+    })
   }
+
+
 
   ngOnInit() {
   }

@@ -4,6 +4,8 @@ import { PrivacyDisclaimerPage } from '../../components/privacy-disclaimer/priva
 import { OverviewnewboxPage } from '../../components/overviewnewbox/overviewnewbox.page'
 import { Geolocation } from '@ionic-native/geolocation/ngx'
 import { ActivatedRoute, Router } from '@angular/router';
+import { Storage } from '@ionic/storage'
+
 @Component({
   selector: 'app-newbox',
   templateUrl: './newbox.page.html',
@@ -43,15 +45,11 @@ export class NewboxPage implements OnInit {
     private modalController: ModalController,
     private toastController: ToastController,
     private geolocation: Geolocation,
+    private storage: Storage,
     private route: ActivatedRoute,
     private router: Router) {
-    this.route.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.token = this.router.getCurrentNavigation().extras.state.token
-        console.log(this.token)
-        this.refreshToken = this.router.getCurrentNavigation().extras.state.refreshToken
-      }
-    })
+      this.token = this.storage.get('token').then((token)=>token)
+      this.token.then((token)=>console.log(token))
   }
 
   toggleOutdoor() {
@@ -75,10 +73,10 @@ export class NewboxPage implements OnInit {
     return await modal.present();
   }
 
-  async presentModalOverview(newbox,sensoren) {
+  async presentModalOverview(newbox, sensoren) {
     const modal = await this.modalController.create({
       component: OverviewnewboxPage,
-      componentProps: [newbox, this.token, this.refreshToken,sensoren]
+      componentProps: [newbox, sensoren]
     })
 
     return await modal.present();
@@ -205,12 +203,12 @@ export class NewboxPage implements OnInit {
       name: form.form.value.name,
       exposure: this.selected,
       location: { lat: parseFloat(form.form.value.latitude), lng: parseFloat(form.form.value.longitude) },
-     // sensors: sensoren,
+      // sensors: sensoren,
       model: "homeV2Wifi",
       sensorTemplates: sensoren.map((sensor) => sensor.sensorType.toLowerCase())
     }
     console.log(newbox);
-    this.presentModalOverview(newbox,sensoren)
+    this.presentModalOverview(newbox, sensoren)
 
 
   }

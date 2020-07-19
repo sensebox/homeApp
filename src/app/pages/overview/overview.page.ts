@@ -9,12 +9,10 @@ import { PopoverController } from '@ionic/angular';
   styleUrls: ['./overview.page.scss'],
 })
 export class OverviewPage implements OnInit {
-  loginInformation:any;
   boxes:any
   constructor(private route:ActivatedRoute,private router:Router,public popoverController: PopoverController) {
     this.route.queryParams.subscribe(params=>{
       if(this.router.getCurrentNavigation().extras.state){
-        this.loginInformation = this.router.getCurrentNavigation().extras.state.loginInformation;
         this.boxes = this.router.getCurrentNavigation().extras.state.boxes.data.boxes;
       }
     })
@@ -23,7 +21,6 @@ export class OverviewPage implements OnInit {
    async presentSettings(ev:any){
      const popover = await this.popoverController.create({
        component: SettingsComponent,
-       componentProps:[this.loginInformation],
        event:ev,
        translucent:true
      })
@@ -44,7 +41,6 @@ export class OverviewPage implements OnInit {
     let navigationExtras:NavigationExtras={
       state:{
         box,
-       loginInformation: this.loginInformation
       }
     }
     this.router.navigate(['sketch'],navigationExtras)

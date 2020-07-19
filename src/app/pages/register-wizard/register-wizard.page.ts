@@ -12,7 +12,8 @@ export class RegisterWizardPage implements OnInit {
   constructor(
     private loadingController: LoadingController,
     private router: Router,
-    private authentication: AuthenticationService
+    private authentication: AuthenticationService,
+    private storage: Storage
     )
   
   { }
@@ -30,14 +31,10 @@ export class RegisterWizardPage implements OnInit {
     if (this.validateForm(form)) {
       this.authentication.registerUser(form.value.name, form.value.email, form.value.password)
         .subscribe((response: newUserResponse) => {
-          let navigationExtras: NavigationExtras = {
-            state: {
-              token:response.token,
-              refreshToken:response.refreshToken
-            }
-          }
+          this.storage.set('token',response.token)
+          this.storage.set('refreshToken',response.refreshToken)
           loader.dismiss()
-          this.router.navigate(['newbox'], navigationExtras)
+          this.router.navigate(['newbox'])
         })
 
     }

@@ -83,12 +83,16 @@ export class LoginPage {
     this.authentication.submitLogin(email, password)
       .subscribe((loginInformation) => {
         this.loginInformation = <loginResponse>loginInformation
+        this.storage.set('token',this.loginInformation.token)
+        this.storage.set('refreshToken',this.loginInformation.refreshToken)
+        
         this.osem.getUserBoxes(this.loginInformation.token)
           .subscribe(boxes => {
             this.boxes = boxes
+            // this.storage.set('login')
+
             let navigationExtras: NavigationExtras = {
               state: {
-                loginInformation: this.loginInformation,
                 boxes: this.boxes
               }
             }
