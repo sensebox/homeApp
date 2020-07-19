@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ViewChildren, QueryList, Directive, Input } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
-import { LoginService } from 'src/app/services/login/login.service';
 import { Chart } from 'chart.js'
 import { ToastController } from '@ionic/angular';
 import { OsemService } from 'src/app/services/osem.service';
@@ -34,7 +33,6 @@ export class BoxPage implements OnInit, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private LoginService: LoginService,
     private osem: OsemService,
     public toastController: ToastController
   ) {

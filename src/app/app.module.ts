@@ -19,6 +19,7 @@ import {OverviewnewboxPage} from './components/overviewnewbox/overviewnewbox.pag
 import { SettingsComponent } from './components/settings/settings.component';
 import { Geolocation } from '@ionic-native/geolocation/ngx'
 import {HttpErrorInterceptor} from './services/HttpIntercep/HttpIntercep'
+import { IonicStorageModule } from '@ionic/storage';
 // For AoT compilation (production builds) we need to have a factory for the loader of translation files.
 // @TODO: we possibly could optimize this by using a static loader in combination with webpack:
 // https://github.com/ngx-translate/http-loader#angular-cliwebpack-translateloader-example
@@ -32,7 +33,7 @@ export function createTranslateLoader(http: HttpClient) {
   [AppComponent,SettingsComponent,OverviewnewboxPage],
   entryComponents: [SettingsComponent,OverviewnewboxPage],
   imports: [
-    
+    IonicStorageModule.forRoot(),
     HttpClientModule,
     BrowserModule,
     TranslateModule.forRoot({

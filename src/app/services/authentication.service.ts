@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { timeout } from 'rxjs/operators'
-
+import { Platform } from '@ionic/angular';
+import { Storage } from '@ionic/storage'
 @Injectable({
   providedIn: 'root'
 })
@@ -11,9 +12,26 @@ export class AuthenticationService {
   private URL_register = 'https://api.opensensemap.org/users/register'
   private URL_newbox = 'https://api.opensensemap.org/boxes'
   
+
+
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    private platform: Platform,
+    private storage: Storage  
+  ) 
+  { 
+    this.platform.ready().then(()=>{
+      console.log("ready");
+      // check to see if there are values stored in the internal storage 
+      storage.get('useremail').then((email)=>{
+        if(email){
+          storage.get('userpw').then((pw)=>{
+            this.submitLogin(email,pw);
+          })
+        }
+      })
+    })
+  }
 
   submitLogin(username:string,password:string){
     const headers = new HttpHeaders({'Content-Type': 'application/json'} );
@@ -39,5 +57,6 @@ export class AuthenticationService {
               .pipe(timeout(30000))       
   }
 
+  
 
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
-import { LoginService } from 'src/app/services/login/login.service';
 import { WebcompilerService } from 'src/app/services/webcompiler/webcompiler.service';
 import {OtawifiService} from 'src/app/services/otawifi/otawifi.service'
 import { IonSlides,LoadingController } from '@ionic/angular'
