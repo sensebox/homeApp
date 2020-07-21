@@ -1,6 +1,6 @@
 <ion-list>
-  <ion-list-header>{{ 'SETTINGS.TITLE' | translate }}</ion-list-header>
-  <ion-item button (click)="signOut()">{{ 'SETTINGS.SIGNOUT' | translate }}</ion-item>
-  <ion-item button (click)="addNewBox()">{{ 'SETTINGS.ADDBOX' | translate }}</ion-item>
-  <ion-item button (click)="switchLanguage()">{{ 'SETTINGS.SWITCHLNG' | translate }}</ion-item>
+  <!-- <ion-list-header>{{ 'SETTINGS.TITLE' | translate }}</ion-list-header> -->
+  <ion-item button (click)="signOut()"><ion-icon name="log-out"></ion-icon>{{ 'SETTINGS.SIGNOUT' | translate }}</ion-item>
+  <ion-item button (click)="addNewBox()"><ion-icon name="add"></ion-icon>{{ 'SETTINGS.ADDBOX' | translate }}</ion-item>
+  <ion-item button (click)="switchLanguage()"><ion-icon name="language"></ion-icon>{{ 'SETTINGS.SWITCHLNG' | translate }}</ion-item>
 </ion-list>

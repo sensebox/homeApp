@@ -4,8 +4,11 @@
       <ion-back-button class="back_button"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button class="favorit_button" (click)="addFavorit()">
+      <ion-button *ngIf="!favorit" class="favorit_button" (click)="addFavorit()">
         <ion-icon name="star-outline"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="favorit" class="favorit_button" (click)="removeFavorit()">
+        <ion-icon  name="star"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>{{box.name}}</ion-title>

@@ -11,6 +11,7 @@ export class AuthenticationService {
   private URL_login = 'https://api.opensensemap.org/users/sign-in'
   private URL_register = 'https://api.opensensemap.org/users/register'
   private URL_newbox = 'https://api.opensensemap.org/boxes'
+  private URL_logout = 'https://api.opensensemap.org/users/sign-out '
   
 
 
@@ -37,6 +38,15 @@ export class AuthenticationService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'} );
     return this.http.post(`${this.URL_login}?email=${username}&password=${password}`,{headers})
             .pipe(timeout(30000))
+  }
+
+  logout(token:string){
+
+    const headers = new HttpHeaders({'Content-Type':'application/json','Authorization':'Bearer '+token})
+
+    
+    return this.http.post(this.URL_logout,{headers})
+      .pipe(timeout(30000))
   }
 
 

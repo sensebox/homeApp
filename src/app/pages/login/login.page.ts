@@ -85,7 +85,6 @@ export class LoginPage {
         this.loginInformation = <loginResponse>loginInformation
         this.storage.set('token',this.loginInformation.token)
         this.storage.set('refreshToken',this.loginInformation.refreshToken)
-        
         this.osem.getUserBoxes(this.loginInformation.token)
           .subscribe(boxes => {
             this.boxes = boxes

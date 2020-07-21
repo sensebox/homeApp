@@ -26,7 +26,9 @@ export class BoxPage implements OnInit, AfterViewInit {
   private tempChart: Chart;
   private tempData: Array<Number>;
   private tempLabels: Array<string>;
+  private favorit: Boolean;
   public date: string
+
   
   box: Box;
   private newBox:boolean;
@@ -67,7 +69,12 @@ export class BoxPage implements OnInit, AfterViewInit {
   }
 
   addFavorit(){
+    this.favorit = !this.favorit
 
+  }
+
+  removeFavorit(){
+    this.favorit = !this.favorit
   }
 
   async presentToast(content) {
