@@ -28,6 +28,8 @@ export class SettingsComponent implements OnInit {
     this.storage.get('token').then((token)=>{
       this.authentication.logout(token)
     })
+    this.storage.remove('useremail')
+    this.storage.remove('userpw')
     this.router.navigate(['login'])
     this.popoverController.dismiss();
   }
