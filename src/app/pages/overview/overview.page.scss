@@ -1,35 +1,28 @@
 .overview_background {
-    --background:#f6f6f6;
+    --background:var(--white);
 }
-
 .settings_button {
     --color:white;
 }
-.overview_header {
-    --background:#4EAF47;
-    --border-color:#4EAF47
-}
 
 .box {
-    background-color:white;
-    color:#333;
+    background-color:var(--white);
+    color:var(--black);
     margin:15px;
-    box-shadow:0 0 5px #ccc;
+    box-shadow:0 0 7px var(--grayfont);
 }
-.box_button {
-    
-}
+
 ion-icon{
     padding-left:0.25em;
 }
 .analytics {
-    background-color:#45beed;
+    background-color:var(--secondary);
     border-radius: 10px 0px 0px 10px;
 
 }
 
 .sketch {
-    background-color:#fff200;
+    background-color:var(--yellow);
     border-radius: 0px 10px 10px 0px;
 
 

@@ -4,31 +4,31 @@
 }
 
 .newbox_background {
-    --background:#f6f6f6;
+    --background:var(--white);
 }
 
 .wrapper {
-    color:#333
+    color:var(--black)
 
 }
 .newbox_header {
-    --background:#4ebe4b;
-    --border-color:#4ebe4b;
+    --background:var(--primary);
+    --border-color:var(--primary);
 }
 
 .list {
-    background-color: #f6f6f6;
+    background-color: var(--white);
 }
 
 
 .box {
-    background-color:white;
-    color:#333;
+    background-color:var(--white);
+    color:var(--black);
     margin:15px;
-    box-shadow:0 0 5px #ccc;
+    box-shadow:0 0 5px var(--grayfont);
 }
 .box_subtitle {
-    color:#666;
+    color:var(--darkgray);
     font-size: 10pt;
     margin:2px 0px 5px 0px;
 }
@@ -41,12 +41,12 @@ ion-icon{
 .sensorTable {
     border-collapse: collapse;
     width: 100%;
-    background-color:#fff;
+    background-color:var(--white);
   }
   
   .measurementTable td, .measurementTable th {
     text-align: left;
-    color:#333;
+    color:var(--black);
     padding:0.5rem
   }
   
@@ -57,8 +57,8 @@ ion-icon{
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #4CAF50;
-    color: #333;
+    background-color: var(--primary);
+    color: var(--black);
   }
 
 .confirm_text{

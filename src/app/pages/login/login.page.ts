@@ -55,8 +55,6 @@ export class LoginPage {
   }
 
   private async submitLogin(form) {
-
-
     try {
       // Try to login on success request data from all available boxes
       this.loginAndForward(form.value.email, form.value.password)
@@ -64,7 +62,6 @@ export class LoginPage {
       this.keepSignedIn ?
         this.saveCredentials(form.value.email, form.value.password) :
         this.removeCredentials()
-
     }
     catch (err) {
       console.log(err);
@@ -78,13 +75,11 @@ export class LoginPage {
     })
 
     loading.present();
-
-
     this.authentication.submitLogin(email, password)
       .subscribe((loginInformation) => {
         this.loginInformation = <loginResponse>loginInformation
-        this.storage.set('token',this.loginInformation.token)
-        this.storage.set('refreshToken',this.loginInformation.refreshToken)
+        this.storage.set('token', this.loginInformation.token)
+        this.storage.set('refreshToken', this.loginInformation.refreshToken)
         this.osem.getUserBoxes(this.loginInformation.token)
           .subscribe(boxes => {
             this.boxes = boxes
@@ -123,7 +118,7 @@ export class LoginPage {
     this.storage.remove('userpw');
   }
 
-  private forwardRegister(){
+  private forwardRegister() {
     this.router.navigate(['register-wizard']);
   }
 

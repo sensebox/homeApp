@@ -25,8 +25,8 @@ export class OtawifiService {
 
    uploadFirmware(binary: ArrayBuffer, OTAAddress: String) {
     // TODO: send checksum?
-    return this.http.post(`http://${OTAAddress}/sketch`, binary, {
-      responseType: 'text',
+    return this.http.post(`http://${SENSEBOX_API}/sketch`, binary, {
+      responseType: 'text'
     })
       .pipe(timeout(5000), catchError(err => {
         throw new Error('senseBox not found. Is it running in OTA mode?')

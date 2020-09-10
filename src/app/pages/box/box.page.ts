@@ -77,6 +77,15 @@ export class BoxPage implements OnInit, AfterViewInit {
     this.favorit = !this.favorit
   }
 
+  forwardSketch(box){
+    let navigationExtras:NavigationExtras={
+      state:{
+        box,
+      }
+    }
+    this.router.navigate(['sketch'],navigationExtras)
+   }
+
   async presentToast(content) {
     const toast = await this.toastController.create({
       message: content,

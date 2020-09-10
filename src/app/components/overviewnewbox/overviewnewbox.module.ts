@@ -17,6 +17,6 @@ import { TranslateModule } from '@ngx-translate/core';
     OverviewnewboxPageRoutingModule,
     TranslateModule
   ],
-  declarations: [OverviewnewboxPage]
+  declarations: []
 })
 export class OverviewnewboxPageModule {}

@@ -29,6 +29,8 @@ export class OverviewPage implements OnInit {
    }
 
    forwardBox(box){
+    console.log(box);
+
     let navigationExtras:NavigationExtras={
       state:{
         box

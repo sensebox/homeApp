@@ -3,16 +3,12 @@ ion-content {
     --background:url('/./assets/imgs/osem.jpg');
 }
 .login_background {
-        text-align:center;
+    text-align:center;
     display: table;
-}
-.register_header{
-    --background:#4EAF47;
-    --border-color:#4EAF47
 }
 
 .back_button{
-    --color:#fff;
+    --color:var(--white);
 
 }
 
@@ -20,7 +16,7 @@ ion-content {
     width:100%;
     text-align: center;
     font-size:44px;
-    color:#333
+    color:var(--black)
 }
 .login_wrapper {
     position: relative;
@@ -33,14 +29,14 @@ ion-content {
 .login_button {
     width:100%;
     margin:5px;
-    --background:  #45beed;
+    --background:  var(--secondary);
     --border-radius:25px 
 }
 
 .login_input {
-    --background:#fff;
+    --background:#var(--white);
     margin:10px;
     border-radius: 15px;
-    color:#333
-    
+    color:var(--black);
+    box-shadow:0 0 5px var(--grayfont);
 }

@@ -2,14 +2,6 @@
 // http://ionicframework.com/docs/theming/
 
 
-$colors: (
-  primary:    #4EAF47,
-  secondary:  #45beed,
-  yellow:     #fff200,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
-);
 @font-face {
   font-family: Brix-slab;
   src:url("/assets/fonts/2EF157_0_0.woff") format("opentype")
@@ -17,6 +9,14 @@ $colors: (
 
 /** Ionic CSS Variables **/
 :root {
+  --primary:#4EAF47;
+  --secondary:#45BEED;
+  --yellow:#FFF200;
+  --grayfont:#CCC;
+  --black:#333;
+  --white:#FFF;
+  --darkgray:#60646B;
+
   /** primary **/
   --ion-font-family:Brix-slab;
   --ion-color-primary: #3880ff;

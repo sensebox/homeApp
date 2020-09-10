@@ -12,7 +12,8 @@
     "OVERVIEW":{
         "TITLE":"Deine senseBox",
         "BTN_SHOWBOX":"Zeige senseBox",
-        "BTN_UPLOAD":"Sketch hochladen"
+        "BTN_UPLOAD":"Sketch hochladen",
+        "SENSORS":"Sensoren"
     },
     "SETTINGS":{
         "TITLE":"Einstellungen",
@@ -43,17 +44,18 @@
 
     },
     "SKETCH":{
-        "FIRST":{
+        "FORM":{},
+        "WIFI":{
             "HEADER":"Sketch hochladen",
             "SUBTITLE":"Klicken sie auf weiter wenn sie alle Anforderungen für das Hochladen auf die senseBox erfüllt haben.",
             "BTN_NEXT":"Start"
         },
-        "SECOND":{
+        "CONFIG":{
             "HEADER":"WiFi-Daten",
             "SUBTITLE":"Zuerst brauchen wir deine WiFi-Verbindungsdaten. Trage unten sowohl den Namen des Netzwerks und das zugehörige Passwort ein",
             "BTN_NEXT":"Weiter"
         },
-        "THIRD":{
+        "RESULT":{
             "HEADER":"Modus Auswahl",
             "SUBTITLE":"Abhängig vom Sketch den du hochgeladen hast, wähle hier nun deinen Verbindungsmodus aus",
             "BTN_AUTOMATIC":"Automatisch",

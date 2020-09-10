@@ -12,7 +12,8 @@
     "OVERVIEW":{
         "TITLE":"My senseBox",
         "BTN_SHOWBOX":"Show senseBox",
-        "BTN_UPLOAD":"Upload sketch"
+        "BTN_UPLOAD":"Upload sketch",
+        "SENSORS":"Sensors"
     },
     "SETTINGS":{
         "TITLE":"Settings",
@@ -39,7 +40,7 @@
     },
     "BOX":{
         "LASTMEASUREMENT":"Last measurement at ",
-        "NO_MEASUREMENT":"No measurement yet"
+        "NO_MEASUREMENT":"No measurements yet. Click below to upload the openSenseMap Sketch to your senseBox !"
     },
     "SKETCH":{
         "FIRST":{

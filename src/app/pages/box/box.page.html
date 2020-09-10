@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar class="box_header">
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button class="back_button"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button *ngIf="!favorit" class="favorit_button" (click)="addFavorit()">
@@ -16,7 +16,7 @@
 </ion-header>
 
 
-<ion-content class="des" [fullscreen]="true">
+<ion-content [fullscreen]="true">
   <ion-grid *ngIf="!newBox;else noMeasurement" class="wrapper">
     <ion-row class="titlewrapper measurements">
       <table #measurementTable class="measurementTable">
@@ -32,9 +32,11 @@
       </div>
     </ion-row>
     <ion-row class="canvasElement">
-      <ion-slides class="pager" pager="true">
-        <ion-slide *ngFor="let sensor of box.sensors">
+      <ion-slides pager="true">
+        <ion-slide class="canvasSlide" *ngFor="let sensor of box.sensors">
+          <div style="width:95%">
           <canvas class="actualCanvas" height="240" [id]="sensor.title + 'Canvas'"></canvas>
+        </div>
         </ion-slide>
       </ion-slides>
     </ion-row>
@@ -44,7 +46,7 @@
 <ng-template #noDescription>{{'box.error.description'}}</ng-template>
 <ng-template #noMeasurement>
   <ion-grid class="wrapper">
-    <ion-row>
+    <ion-row class="titlewrapper measurements">
     <table #measurementTable class="measurementTable">
       <tr *ngFor="let sensor of box.sensors">
         <td>{{sensor.title}} </td>
@@ -53,9 +55,14 @@
       </tr>
     </table>
   </ion-row>
-  <ion-row>
-    <div class="noMeasurements">
-      {{ 'OVERVIEWNEWBOX.NO_MEASUREMENT' | translate }}
+  <ion-row class="titlewrapper ion-align-items-center">
+    <div class="center-div">
+      {{ 'BOX.NO_MEASUREMENT' | translate }}
+
+      <ion-button class="continue_btn" size="large" fill="clear" (click)="forwardSketch(box)">
+        Upload Sketch to senseBox
+        <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+      </ion-button>
     </div>
   </ion-row>
   </ion-grid>

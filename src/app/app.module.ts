@@ -20,6 +20,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { Geolocation } from '@ionic-native/geolocation/ngx'
 import {HttpErrorInterceptor} from './services/HttpIntercep/HttpIntercep'
 import { IonicStorageModule } from '@ionic/storage';
+import { WifiWizard2 } from '@ionic-native/wifi-wizard-2/ngx';
+import { Network } from '@ionic-native/network/ngx';
 // For AoT compilation (production builds) we need to have a factory for the loader of translation files.
 // @TODO: we possibly could optimize this by using a static loader in combination with webpack:
 // https://github.com/ngx-translate/http-loader#angular-cliwebpack-translateloader-example
@@ -50,6 +52,8 @@ export function createTranslateLoader(http: HttpClient) {
     StatusBar,
     SplashScreen,
     HttpErrorInterceptor,
+    WifiWizard2,
+    Network,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 
   ],
