@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar class="newbox_header">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button class="back_button"></ion-back-button>
     </ion-buttons>
@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="newbox_background">
-  <ion-grid class="loggin_wrapper">
+  <ion-grid>
     <form (ngSubmit)="handleNewBox(form)" #form="ngForm">
       <ion-item lines="none" class="newbox_input">
         <ion-label position="stacked">Name</ion-label>
@@ -60,7 +60,7 @@
         </ion-item>
       </ion-row>
       <ion-row>
-        <ion-button type="submit" class="register_button">{{ 'NEWBOX.BTN_ADDBOX' | translate }}</ion-button>
+        <ion-button type="submit" class="addbox_button">{{ 'NEWBOX.BTN_ADDBOX' | translate }}</ion-button>
       </ion-row>
     </form>
   </ion-grid>

@@ -1,41 +1,15 @@
-$colors: (
-  primary:    #4eaf47,
-  secondary:  #45beed,
-  yellow:     #fff200,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222,
-  darkgreen:#316d2d,
-  lightgreen: #6dd565
-);
-
 ion-content {
-    //--background:#f6f6f6;
     --background:url('/./assets/imgs/umutsensebox.jpg');
-}
-.login_background {
     text-align:center;
-    display: table;
-
-}   
-// .black_border_font {
-//     text-shadow: 
-//         -1px -1px 0px #000,
-//          0px -1px 0px #000,
-//          1px -1px 0px #000,
-//         -1px  0px 0px #000,
-//          1px  0px 0px #000,
-//         -1px  1px 0px #000,
-//          0px  1px 0px #000,
-//          1px  1px 0px #000;
-// }
+    display:table;
+}
 .login_wrapper {
     position: relative;
     top: 50%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-  
+ 
 }
 
 .login_input {
@@ -46,33 +20,24 @@ ion-content {
     
 }
 
-.shadow{
-    text-shadow: 0 0 2px white
-
-}
 
 .login_button {
     width:100%;
     margin:5px;
-    --background:  #45beed;
+    --background: var(--secondary);
     --border-radius:25px ;
-    --color: #111111;
+    --color:var(--black);
     text-shadow: 0 0 2px white
 }
 
 .register_button {
     width:100%;
     margin:5px;
-    --background:  #fff200;
+    --background:  var(--yellow);
     --border-radius:25px ;
-    --color: #111111;
+    --color: var(--black);
     text-shadow: 0 0 2px white
 
-}
-
-.floatright{
-    float:right;
-    margin-top:50px;
 }
 
 .keepSignedIn{
@@ -83,15 +48,12 @@ ion-content {
 
 .keepSignedInItem{
     --background:None;
-    --color:#333
+    --color:--var(--black)
 
 }
 .keepSignedInCheckbox{
-    --background:#fff;
-    --background-checked:#4EAF47;
+    --background:var(--white);
+    --background-checked:var(--primary);
     margin:0.5rem;
     --size:1.75rem
 }
-// .keepSignedInLabel {
-//     color:#333;
-// }

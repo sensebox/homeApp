@@ -1,0 +1,13 @@
+ion-toolbar{
+    --background:var(--primary);
+    --border-color:var(--primary);
+    color:var(--white)
+}
+
+ion-back-button{
+    --color:var(--white);
+}
+
+ion-slides{
+    --bullet-background-active:var(--primary)
+}

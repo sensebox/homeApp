@@ -1,114 +1,127 @@
 <ion-header>
-  <ion-toolbar class="sketchtoolbar">
-    <ion-buttons  slot="start">
+  <ion-toolbar>
+    <ion-buttons slot="start">
       <ion-back-button class="back_button"></ion-back-button>
     </ion-buttons>
+    <ion-title>Upload Sketch</ion-title>
   </ion-toolbar>
 </ion-header>
-
-
 <ion-content class="background" padding>
   <ion-grid>
-    <ion-slides #slides (ionSlideDidChange)="onSlideChange()" class="slides" pager="true">
-      <ion-slide #intro>
+    <ion-slides #slides pager="true" (ionSlideDidChange)="onSlideChange()">
+      <!-- intro -->
+      <ion-slide>
         <ion-grid>
-          <ion-row><img src="assets/imgs/senseboxmcu.png"></ion-row>
-          <h1 class="headline">{{ 'SKETCH.FIRST.HEADER' | translate }}</h1>
-          <h2 class="subtitle">{{ 'SKETCH.FIRST.SUBTITLE' | translate }}</h2>
-          <ion-button size="large" (click)="slides.slideNext()" class="start_button">{{ 'SKETCH.FIRST.BTN_NEXT' | translate }}</ion-button>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="12">
+              <ion-icon name="wifi" style="font-size: 160px"></ion-icon>
+              <h2>Welcome</h2>
+              <p>To transfer your code to your senseBox over the air (OTA), please follow these steps.</p>
+            </ion-col>
+
+            <ion-col size="12">
+              <p>First please make sure that your senseBox ... </p>
+              <ul style="text-align: left">
+                <li>has the <b>WiFi Bee</b> plugged in XBEE Slot 1</li>
+                <li>has the initial <b>Webserver Sketch</b> installed</li>
+                <li>is powered</li>
+              </ul>
+              <ion-button class="continue_btn" size="large" fill="clear" (click)="slides.slideNext()">
+                CONTINUE
+                <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
         </ion-grid>
       </ion-slide>
-      <ion-slide #wifi>
+      <!-- intro -->
+      <ion-slide>
         <ion-grid>
-          <h1 class="headline">{{ 'SKETCH.SECOND.HEADER' | translate }}</h1>
-          <h2 class="subtitle">{{ 'SKETCH.SECOND.SUBTITLE' | translate }}</h2>
-          <ion-row style="margin-top:7rem">
-            <ion-input class="wifiinput ssid" placeholder="SSID" name="ssid" type="text" [(ngModel)]="ssid" required></ion-input>
-          </ion-row>
-          <ion-row>
-            <ion-input class="wifiinput pw" name="password" type="password" placeholder="Password" [(ngModel)]="passwordWifi" required>
-            </ion-input>
-          </ion-row>
-          <ion-button size="large" (click)="slides.slideNext()" class="start_button">{{ 'SKETCH.SECOND.BTN_NEXT' | translate }}</ion-button>
+          <div id="wifi-manual" class="center-div">
+            <h2>Connect to your senseBox</h2>
+            <p>Your senseBox should have created a WiFi network. Because we can not do this automatically on your
+              platform, please connect to it manually.</p>
+            <ion-button class="continue_btn" size="large" fill="clear" (click)="slides.slideNext()">
+              CONTINUE
+              <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+            </ion-button>
+          </div>
         </ion-grid>
       </ion-slide>
-      <ion-slide #mode>
-        <ion-grid class="modeGrid">
-          <h1>{{ 'SKETCH.THIRD.HEADER' | translate }}</h1>
-          <h2 class="subtitle">{{ 'SKETCH.THIRD.SUBTITLE' | translate }}</h2>
-          <ion-row>
+      <!-- wifi selection -->
+      <ion-slide id="wifi" #wifi>
+        <ion-grid>
+          <ion-row class="box">
             <ion-col>
-              <div #automatic (click)="toggleAutomatic()"
-                [ngClass]="selected==='automatic'? 'selected circle' : 'not_selected circle' ">
-                <div class="circle_content">
-                  <ion-icon class="connection_icon" name="wifi-outline"></ion-icon><br>
-                  {{ 'SKETCH.THIRD.BTN_AUTOMATIC' | translate }}
-                </div>
-              </div>
-            </ion-col>
-            <ion-col>
-              <div #manual (click)="toggleManual()"
-                [ngClass]="selected==='manual'? 'selected circle' : 'not_selected circle' ">
-                <div class="circle_content">
-                  <ion-icon class="connection_icon" name="hammer-outline">
-                  </ion-icon><br>
-                  {{ 'SKETCH.THIRD.BTN_MANUAL' | translate }}
-                </div>
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-button size="large" (click)="slides.slideNext()" class="start_button">{{ 'SKETCH.THIRD.BTN_NEXT' | translate }}</ion-button>
-        </ion-grid>
-      </ion-slide>
-      <ion-slide #automatic *ngIf="selected==='automatic'">
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ol class="list_automatic" start="0">
-                <li>
-                  IP Address of the senseBox
-                  <input [(ngModel)]="OTAAddress" placeholder="Address"/>
-                </li>
-                <li>Upload the Over-the-Air Sketch from the OpenSenseMap to the senseBox</li>
-                <li>Connect this device to the same network the senseBox is connected with</li>
-                <li>Click Continue</li>
-              </ol>
-            </ion-col>
-          </ion-row>
-          <ion-button size="large" (click)="slides.slideNext()" class="start_button">Continue</ion-button>
-        </ion-grid>
-      </ion-slide>
-      <ion-slide #manual *ngIf="selected==='manual'">
-        <ion-grid>
-          <ion-row align-items-center>
-            <ion-col col-12>
-              <img class="tutorial_gif" src="assets/imgs/ota_modus.gif" />
+              <ion-row class="box_title">{{box.name}} </ion-row>
+              <ion-row class="box_subtitle">
+                <ion-icon name="location-outline"></ion-icon>
+                {{ 'OVERVIEWNEWBOX.LNG' | translate }}:{{box.currentLocation.coordinates[0]}}
+                {{ 'OVERVIEWNEWBOX.LAT' | translate }}:{{box.currentLocation.coordinates[1]}}<ion-icon
+                  name="hardware-chip-outline"></ion-icon>{{box.sensors.length}}
+                {{ 'OVERVIEWNEWBOX.SENSOR_COUNT' | translate }} <ion-icon name="cloud-outline"></ion-icon>
+                {{box.exposure}}
+              </ion-row>
+              <ion-row>
+                <table #sensorTable class="sensorTable">
+                  <tr *ngFor="let sensor of box.sensors">
+                    <td>{{sensor.title}}</td>
+                    <td>{{sensor.unit}}</td>
+                    <td>{{sensor.sensorType}}</td>
+                  </tr>
+                </table>
+              </ion-row>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col col-12>
-              <ol style="text-align:left;">
-                <li>Press and hold switch button </li>
-                <li>Press red button shortly</li>
-                <li>Release the switch button after one second</li>
-              </ol>
+            <ion-item lines="none" class="upload_input">
+              <ion-label position="stacked">SSID</ion-label>
+              <ion-input minlength="4" [(ngModel)]="ssid" type="text"></ion-input>
+            </ion-item>
+            <ion-item lines="none" class="upload_input">
+              <ion-label position="stacked">Password</ion-label>
+              <ion-input minlength="4" [(ngModel)]="passwordWifi" type="password"></ion-input>
+            </ion-item>
+            <ion-col size="6">
+              <ion-item lines="none" class="upload_input">
+                <ion-label position="stacked">Security Mode</ion-label>
+                <ion-select [(ngModel)]="wifiSecurity" value="WPA">
+                  <ion-select-option value="WPA">WPA</ion-select-option>
+                  <ion-select-option value="WPA2">WPA2</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item lines="none" class="upload_input">
+                <ion-label position="stacked">Mode(Optional)</ion-label>
+                <ion-select [(ngModel)]="ipSettings" value="DHCP">
+                  <ion-select-option value="DHCP">DHCP(default)</ion-select-option>
+                  <ion-select-option value="notDHCP">not DHCP(not default)</ion-select-option>
+                </ion-select>
+              </ion-item>
             </ion-col>
           </ion-row>
-          <ion-button size="large" (click)="slides.slideNext()" class="start_button">Continue</ion-button>
+          <ion-row>
+            <ion-button type="submit" (click)="uploadToSenseBox()" class="upload_button">{{ 'NEWBOX.BTN_ADDBOX' | translate }}</ion-button>
+          </ion-row>        
         </ion-grid>
+
       </ion-slide>
-      <ion-slide #placeholder *ngIf="selected!=='manual' && selected!=='automatic'">
+      <ion-slide #result>
         <ion-grid>
-          <h1>Placeholder</h1>
+          <ion-row class="align-items-center center-div">
+            <ion-col size="12">
+                <ion-icon name="checkmark-circle-outline" style="font-size: 160px"></ion-icon>
+                <h2>Successful!</h2>
+                <p>Sketch has succesfully been uploaded! </p>
+
+                <ion-button class="continue_btn" size="large" fill="clear" (click)="forwardBox(box)">
+                  Go back to Box
+                  <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+                </ion-button>
+            </ion-col>
+          </ion-row>
         </ion-grid>
-      </ion-slide>
-      <ion-slide *ngIf="!compiledSketch">
-        <ion-grid>
-          <h1>Still waiting for compiler</h1>
-        </ion-grid>
-      </ion-slide>
-      <ion-slide #final>
-        <h1>Uploading....</h1>
       </ion-slide>
     </ion-slides>
   </ion-grid>

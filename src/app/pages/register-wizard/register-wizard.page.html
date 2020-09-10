@@ -1,35 +1,35 @@
 <ion-header>
-  <ion-toolbar class="register_header">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button class="back_button"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="login_background" padding>
-  <ion-grid class="login_wrapper">
+<ion-content class="register_background" padding>
+  <ion-grid class="register_wrapper">
     <ion-row>
       <h1 class="register_h1">
         {{ 'REGISTER.TITLE' | translate }}
     </h1></ion-row>
     <form (ngSubmit)="handleRegistration(formRegist)" #formRegist="ngForm">
-        <ion-item lines="none" class="login_input">
+        <ion-item lines="none" class="register_input">
           <ion-label position="stacked">Name</ion-label>
           <ion-input minlength="4" ngModel name="name" required type="text"></ion-input>
         </ion-item>
-        <ion-item lines="none"  class="login_input">
+        <ion-item lines="none"  class="register_input">
           <ion-label position="stacked">Email</ion-label>
           <ion-input minlength="8" ngModel name="email" required type="text"></ion-input>
         </ion-item>
-      <ion-item lines="none"  class="login_input">
+      <ion-item lines="none"  class="register_input">
         <ion-label position="stacked">Password</ion-label>
         <ion-input ngModel name="password" required type="password"></ion-input>
       </ion-item>
 
-      <ion-item lines="none"  class="login_input">
+      <ion-item lines="none"  class="register_input">
         <ion-label position="stacked">{{ 'REGISTER.INPT_REPEATPW' | translate }}</ion-label>
         <ion-input ngModel name="password2" required type="password"></ion-input>
       </ion-item>
-      <ion-button class="login_button" type="submit">{{ 'REGISTER.BTN_SIGNUP' | translate }}</ion-button>
+      <ion-button class="register_submit" type="submit">{{ 'REGISTER.BTN_SIGNUP' | translate }}</ion-button>
 
     </form>
   </ion-grid>

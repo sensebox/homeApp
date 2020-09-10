@@ -1,60 +1,51 @@
-.newbox_background {
-    --background:#f6f6f6;
+.back_button{
+    --color:var(--white);
 }
 
-.newbox_header{
-    --background:#4ebe4b;
-    --border-color:#4ebe4b
+.newbox_background {
+    --background:var(--white);
 }
 
 .newbox_input{
-    --background:#fff;
+    --background:var(--white);
     margin:10px;
     border-radius: 25px;
-    color:#333;
-}
-.back_button{
-    --color:#fff;
-
+    color:var(--black);;
+    box-shadow:0 0 5px var(--grayfont);
 }
 
-.location_input{
-    --background:#fff;
-    border-radius:10px
-}
-.exposure_button{
-    --background-focused:#4ebe4b;
-    --background-activated:#4ebe4b
-}
 .get_button{
     margin:10px;
     margin-top:25px
 }
 
 .label_sensoren{
-    color:#333
+    color:var(--black)
 }
 .checkbox_sensor{
-    --background:#fff;
-    --background-checked:#4EAF47
+    --background:var(--white);
+    --background-checked:var(--primary);
 }
 
-.register_button {
+.addbox_button {
     width:100%;
     margin:5px;
-    --background:  #45beed;
+    --background:  var(--primary);
     --border-radius:15px 
 }
 
 .rectangle {
-    background-color:#45beed;
+    background-color:var(--secondary);
     text-align:center;
     padding:10px;
+    border-radius:15px;
+    color:var(--white)
 }
 
 .selected{
-    background-color: #4ebe4b;
+    background-color: var(--primary);
 }
 .not_selected{
-    background-color: #45beed;
+    background-color:var(--secondary);
 }
+

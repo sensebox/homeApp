@@ -1,92 +1,79 @@
-.floatright{
-    float:right;
-    margin-top:50px
+ion-slides {
+  --bullet-background-active: var(--primary);
+  --bullet-background: var(--darkgray);
 }
 
-code {
-    color:#c7254e;
-    background-color: #f9f2f4;
-    border-radius: 4px;
+.background {
+  --background: var(--white);
+}
+
+.continue_btn {
+  --color: var(--primary);
+}
+
+.box {
+  background-color: white;
+  color: var(--black);
+  margin: 15px;
+  box-shadow: 0 0 5px #2223;
+}
+.box_subtitle {
+  color: #666;
+  font-size: 10pt;
+  margin: 2px 0px 5px 0px;
+}
+.box_title {
+  font-size: 14pt;
+}
+
+.center-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 90vh;
+}
+
+.sensorTable {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: var(--white);
+}
+.upload_button {
+  width: 100%;
+  margin: 5px;
+  --background: var(--primary);
+  --border-radius: 15px;
+}
+.upload_input {
+  --background: var(--white);
+  margin: 10px;
+  border-radius: 25px;
+  color: var(--black);
+  box-shadow: 0 0 5px #ccc;
+}
+.back_button {
+  --color: var(--white);
+}
+
+ion-slide {
+  p,
+  ul,
+  ol {
+    padding: 0 16px;
+    font-size: 18px;
+    line-height: 1.4;
+    color: var(--darkgray);
+
+    b {
+      color: #000000;
+      font-weight: 500;
+    }
   }
 
-img {
-    margin-bottom:20px;
-    width:15rem;
-    height:10rem;
-    margin-left:3.5rem;
-    margin-top:2rem;
-}
-.background {
-    --background:#f6f6f6;
-}
-
-.sketchtoolbar {
-    --background:#4EAF47;
-    --border-color:#4EAF47
-}
-.back_button{
-    --color:#fff;
-}
-
-.slides {
-    color:black;
-    --bullet-background-active:#4eaf47
-
-}
-
-.start_button{
-    --background:white;
-    --color:#333;
-    --border-radius:2px;
-    --border-width:5px;
-    --box-shadow:0px 0px 10px  #888888;
-    margin:50px;
-}
-
-.wifiinput{
-    --background:white;
-    border-radius:25px;
-    margin:5px;
-}
-
-.circle {
-    border-radius: 50%;
-    background:white;
-    width:10rem;
-    height:10rem;
-    display:table;
-}
-.circle_content{
-    vertical-align: middle;
-    display:table-cell;
-}
-
-.connection_icon{
-    font-size:4.5rem;
-}
-.selected{
-    background-color: #4eaf47;
-}
-.not_selected{
-    background-color: white;
-}
-
-.modeGrid{
-    margin-top:8rem;
-}
-
-.tutorial_gif {
-    margin-top:5rem;
-    border-radius: 25px;
-   }
-
-.list_automatic {
-    text-align: left;
-    margin-top:10rem;
-}
-.subtitle {
-    color:#4eaf47
-}
-.headline {
-    color:darkslategray
+  ul,
+  ul {
+    list-style-type: disc;
+  }
 }

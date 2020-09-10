@@ -2,7 +2,7 @@
 
 page-ota-wizard {
   .swiper-pagination-bullet-active {
-    background: map-get($colors, primary);
+    background: var(--primary);
   }
 
   .tutorial_gif {

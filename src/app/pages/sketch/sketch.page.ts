@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { WebcompilerService } from 'src/app/services/webcompiler/webcompiler.service';
 import { OtawifiService } from 'src/app/services/otawifi/otawifi.service'
-import { IonSlides, LoadingController } from '@ionic/angular'
+import { IonSlides, LoadingController, ToastController } from '@ionic/angular'
+import { NetworkscannerService, WifiStrategy } from 'src/app/services/networkscanner.service';
 import { OsemService } from 'src/app/services/osem.service';
-import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-sketch',
@@ -13,147 +13,196 @@ import { Storage } from '@ionic/storage';
 })
 export class SketchPage implements OnInit {
   @ViewChild("slides", { static: false }) slides: IonSlides;
-  box: Box;
   ssid: string;
-  passwordWifi: string
-  compiledSketch: any
-  private sketch: string
+  passwordWifi: string;
+  wifiSecurity: string;
+  ipSettings: string;
+  box: Box
+  networks: string[] = [] // ssid's in the area
   public selected: string
-  private image = "assets/senseboxmcu.png"
-  public OTAAddress = '192.168.0.46'
+  errorMsg = ''
+  state: OtaState = {
+    isOnline: false,
+    wifiSelection: 'scanning',
+    upload: 'uploading',
+  }
 
 
   constructor(
+    private networkScanner: NetworkscannerService,
+    public loadingController: LoadingController,
+    private toastController: ToastController,
+    private changedetect: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
-    private compiler: WebcompilerService,
-    private otawifi: OtawifiService,
-    private osem: OsemService,
-    public loadingController: LoadingController,
-    private storage: Storage,
+    private osem: OsemService
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.box = this.router.getCurrentNavigation().extras.state.box;
+        console.log(this.box);
       }
     })
   }
-  viewSensor(sensor) {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        sensor
-      }
-    }
-    this.router.navigate(['sensor'], navigationExtras)
-  }
-  uploadStandardSketch() {
-    this.storage.get('token').then((token) => {
-      this.osem.getUserSketch(token, this.box._id, this.ssid, this.passwordWifi)
-        .subscribe(sketch => {
-          let navigationExtras: NavigationExtras = {
-            state: {
-              sketch
-            }
-          }
-          this.router.navigate(['ota-wizard'])
-        })
-    })
 
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
   onSlideChange() {
     let current: Promise<Number> = this.slides.getActiveIndex();
-    let hiddenOffset: any = this.compiledSketch ? 1 : 0;
     current.then((number) => {
-      number > 4 ? number + hiddenOffset : number;
       switch (number) {
-        case OtaSlides.Intro:
-          console.log("Intro")
-          break;
-        case OtaSlides.WiFi:
+        case OtaSlides.wifi:
+          // scan for networks here
+          //this.networkScanner.scanNetwork();
           console.log("Wifi")
           break;
-        case OtaSlides.ModeGuide:
-          console.log("ModeGuide")
-          this.handleCompilation();
+        case OtaSlides.config:
+          // show config form
+          console.log("config")
           break;
-        case OtaSlides.Mode:
-          console.log("Mode")
+        case OtaSlides.result:
+          // display success/error message
+          console.log("result")
           break;
-        case OtaSlides.Compiling:
-          console.log("Compiling");
-        case OtaSlides.Final:
-          console.log("Final")
-          this.handleUpload();
-          break;
-
         default:
           console.warn("Unknown slide");
       }
     })
   }
 
-  handleCompilation() {
-    // get user sketch
-    this.storage.get('token').then((token) => {
-      this.osem.getUserSketch(token, this.box._id, this.ssid, this.passwordWifi)
-        .subscribe((sketch) => {
-          // get id for compiler
-          this.compiler.compileId(sketch)
-            .subscribe((response: any) => {
-              // use id to download compiled sketch
-              this.compiler.getBinary(response.data.id)
-                .subscribe((binary) => {
-                  // save compiled sketch 
-                  this.compiledSketch = binary
-                })
-            })
-        })
-    })
-  }
 
-  async handleFinalSlide() {
-    // Show modal / loading when sketch isnt compiled yet otherwise just go ahead
-
-    if (!this.compiledSketch) {
-      // show modal
-      const loading = await this.loadingController.create({
-        message: 'Please wait for the compiler to finish...',
-      })
-      await loading.present()
-
-    }
-    else {
-      this.slides.slideNext()
-    }
-
-  }
-
-  handleUpload() {
-    // this.otawifi.uploadFirmware(this.compiledSketch,this.OTAAddress)
-    //             .subscribe((response)=>{
-    //               console.log(response)
-    //             })
-  }
-
-
-  toggleManual() {
-    this.selected = 'manual'
-  }
-
-  toggleAutomatic() {
-    this.selected = 'automatic'
+  onWifiRefresh() {
+    this.handleWifiSelection(true)
   }
 
   ngOnInit() {
+
+    // this.networkScanner.scanNetwork()
+    //   .then(ssids => {
+    //     console.log(ssids);
+    //     this.networks = ssids
+    //   });
+
+
+
+    // this.state.wifiSelection = 'manual';
+
   }
+
+  private saveNetwork(ssid: string) {
+    this.ssid = ssid;
+  }
+
+  private async handleWifiSelection(force = false) {
+    if (this.networkScanner.strategy === WifiStrategy.Automatic) {
+      this.slides.lockSwipeToNext(true)
+
+      // skip scan when boxes where already found from the scan on startup
+      if (!force && this.networks.length)
+        return this.state.wifiSelection = 'select'
+
+      try {
+        this.state.wifiSelection = 'scanning'
+        // force update of view, as setting subproperties of this.state is not detected automatically :/
+        this.changedetect.detectChanges()
+        this.networks = await this.networkScanner.scanNetwork()
+        this.state.wifiSelection = 'select'
+        this.changedetect.detectChanges()
+      } catch (err) {
+        this.errorMsg = err.message
+        this.state.wifiSelection = 'error'
+        this.changedetect.detectChanges()
+      }
+    }
+  }
+
+  private uploadToSenseBox() {
+    console.log("uploading to 192.168.2.1")
+    let sensors = {
+      temperature: 'None',
+      humidty: 'None',
+      light: 'None',
+      uv: 'None',
+      pressure: 'None',
+      rain: 'None',
+      pm10: 'None',
+      pm25: 'None',
+    }
+    this.box.sensors.map((sensor) => {
+      switch (sensor.title) {
+        case 'Temperatur':
+          sensors['temperature'] = sensor._id
+          break;
+        case 'rel. Luftfeuchte':
+          sensors['humidity'] = sensor._id
+          break;
+        case 'Beleuchtungsstärke':
+          sensors['light'] = sensor._id
+          break;
+        case 'UV-Intensität':
+          sensors['uv'] = sensor._id
+          break;
+        case 'Luftdruck':
+          sensors['pressure'] = sensor._id
+          break;
+        case 'Regenmesser':
+          sensors['rain'] = sensor._id
+          break;
+        case 'PM10':
+          sensors['pm10'] = sensor._id
+          break;
+        case 'PM2.5':
+          sensors['pm25'] = sensor._id
+          break;
+        default:
+          break;
+      }
+    })
+
+    this.osem.uploadToSenseBox(this.wifiSecurity,this.ssid,this.passwordWifi,this.box._id,sensors,this.ipSettings)
+      .subscribe((response)=>{
+        console.log(response)
+      },
+      (error)=>{
+        console.error(error);
+      })
+
+
+      this.slides.slideNext();
+    // const url = ''
+    // this.osem.uploadToSenseBox(url)
+    //     .subscribe((response)=>{
+    //       console.log(response)
+    //     },
+    //     (error)=>{
+    //       console.error(error);
+    //     })
+  }
+
+  forwardBox(box){
+    let navigationExtras:NavigationExtras={
+      state:{
+        box
+      }
+    }
+    this.router.navigate(['box'],navigationExtras)
+   }
 
 }
 enum OtaSlides {
-  Intro = 0,
-  WiFi = 1,
-  ModeGuide = 2,
-  Mode = 3,
-  Compiling = 4,
-  Final = 5
+  wifi = 0,
+  config = 1,
+  result = 2
+}
+
+type OtaState = {
+  isOnline: boolean,
+  wifiSelection: 'scanning' | 'connecting' | 'select' | 'manual' | 'error',
+  upload: 'uploading' | 'done' | 'error',
 }

@@ -1,23 +1,22 @@
 <ion-header >
-  <ion-toolbar class="overview_header">
+  <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button class="settings_button" (click)="presentSettings($event)">
+      <ion-button style="--color:white" (click)="presentSettings($event)">
         <ion-icon name="settings-sharp"></ion-icon>      </ion-button>    
     </ion-buttons>
     <ion-title>{{ 'OVERVIEW.TITLE' | translate }}</ion-title>  
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="overview_background">
   <ion-grid >
-    <ion-row class="box" *ngFor="let box of boxes">
+    <ion-row class="preview_box" *ngFor="let box of boxes">
       <ion-col>
-        <ion-row class="box_title">{{box.name}} </ion-row>
-          <ion-row class="box_subtitle">
-            <ion-icon name="wifi-outline"></ion-icon> {{box.model}}<ion-icon name="location-outline"></ion-icon> 52.7, 7.14<ion-icon name="hardware-chip-outline"></ion-icon>{{box.sensors.length}} Sensoren
+        <ion-row class="preview_box_title">{{box.name}} </ion-row>
+          <ion-row class="preview_box_subtitle">
+            <ion-icon name="wifi-outline"></ion-icon> {{box.model}}<ion-icon name="location-outline"></ion-icon> {{box.loc[0].geometry.coordinates[0]}}, {{box.loc[0].geometry.coordinates[1]}}<ion-icon name="hardware-chip-outline"></ion-icon>{{box.sensors.length}} {{'OVERVIEW.SENSORS' | translate}}
           </ion-row>
-          <ion-row class="button_wrapper">
+          <ion-row style="text-align: center;">
             <ion-col (click)="forwardBox(box)"class="box_button analytics">
               {{ 'OVERVIEW.BTN_SHOWBOX' | translate }}
             </ion-col>

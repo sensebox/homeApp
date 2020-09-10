@@ -2,27 +2,22 @@ ion-content {
     //--background:#f6f6f6;
     --background:url('/./assets/imgs/osem.jpg');
 }
-.login_background {
-        text-align:center;
+.register_background {
+    text-align:center;
     display: table;
-}
-.register_header{
-    --background:#4EAF47;
-    --border-color:#4EAF47
 }
 
 .back_button{
-    --color:#fff;
-
+    --color:var(--white);
 }
 
 .register_h1{
     width:100%;
     text-align: center;
     font-size:44px;
-    color:#333
+    color:var(--black)
 }
-.login_wrapper {
+.register_wrapper {
     position: relative;
      top: 25%;
     -webkit-transform: translateY(-25%);
@@ -30,17 +25,17 @@ ion-content {
     transform: translateY(-25%);
   
 }
-.login_button {
+.register_submit {
     width:100%;
     margin:5px;
-    --background:  #45beed;
+    --background:  var(--secondary);
     --border-radius:25px 
 }
 
-.login_input {
-    --background:#fff;
+.register_input {
+    --background:#var(--white);
     margin:10px;
     border-radius: 15px;
-    color:#333
-    
+    color:var(--black);
+    box-shadow:0 0 5px var(--grayfont);
 }
