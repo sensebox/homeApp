@@ -1,21 +1,15 @@
-
 ion-content {
-    //--background:#f6f6f6;
     --background:url('/./assets/imgs/umutsensebox.jpg');
-}
-.login_background {
     text-align:center;
-    display: table;
-
-}   
-
+    display:table;
+}
 .login_wrapper {
     position: relative;
     top: 50%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-  
+ 
 }
 
 .login_input {
@@ -26,10 +20,6 @@ ion-content {
     
 }
 
-.shadow{
-    text-shadow: 0 0 2px white
-
-}
 
 .login_button {
     width:100%;
@@ -50,11 +40,6 @@ ion-content {
 
 }
 
-.floatright{
-    float:right;
-    margin-top:50px;
-}
-
 .keepSignedIn{
 
     display:inline-block;
@@ -63,11 +48,11 @@ ion-content {
 
 .keepSignedInItem{
     --background:None;
-    --color:#333
+    --color:--var(--black)
 
 }
 .keepSignedInCheckbox{
-    --background:#fff;
+    --background:var(--white);
     --background-checked:var(--primary);
     margin:0.5rem;
     --size:1.75rem
