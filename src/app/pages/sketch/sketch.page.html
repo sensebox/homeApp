@@ -1,16 +1,14 @@
 <ion-header>
-  <ion-toolbar class="sketchtoolbar">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button class="back_button"></ion-back-button>
     </ion-buttons>
     <ion-title>Upload Sketch</ion-title>
   </ion-toolbar>
 </ion-header>
-
-
 <ion-content class="background" padding>
   <ion-grid>
-    <ion-slides #slides pager="true" (ionSlideDidChange)="onSlideChange()" class="slides">
+    <ion-slides #slides pager="true" (ionSlideDidChange)="onSlideChange()">
       <!-- intro -->
       <ion-slide>
         <ion-grid>
@@ -76,16 +74,16 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-item lines="none" class="newbox_input">
+            <ion-item lines="none" class="upload_input">
               <ion-label position="stacked">SSID</ion-label>
               <ion-input minlength="4" [(ngModel)]="ssid" type="text"></ion-input>
             </ion-item>
-            <ion-item lines="none" class="newbox_input">
+            <ion-item lines="none" class="upload_input">
               <ion-label position="stacked">Password</ion-label>
               <ion-input minlength="4" [(ngModel)]="passwordWifi" type="password"></ion-input>
             </ion-item>
             <ion-col size="6">
-              <ion-item lines="none" class="newbox_input">
+              <ion-item lines="none" class="upload_input">
                 <ion-label position="stacked">Security Mode</ion-label>
                 <ion-select [(ngModel)]="wifiSecurity" value="WPA">
                   <ion-select-option value="WPA">WPA</ion-select-option>
@@ -94,7 +92,7 @@
               </ion-item>
             </ion-col>
             <ion-col size="6">
-              <ion-item lines="none" class="newbox_input">
+              <ion-item lines="none" class="upload_input">
                 <ion-label position="stacked">Mode(Optional)</ion-label>
                 <ion-select [(ngModel)]="ipSettings" value="DHCP">
                   <ion-select-option value="DHCP">DHCP(default)</ion-select-option>
@@ -104,7 +102,7 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-button type="submit" (click)="uploadToSenseBox()" class="register_button">{{ 'NEWBOX.BTN_ADDBOX' | translate }}</ion-button>
+            <ion-button type="submit" (click)="uploadToSenseBox()" class="upload_button">{{ 'NEWBOX.BTN_ADDBOX' | translate }}</ion-button>
           </ion-row>        
         </ion-grid>
 

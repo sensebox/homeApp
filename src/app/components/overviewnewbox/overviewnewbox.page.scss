@@ -1,3 +1,6 @@
+ion-icon{
+    padding-left:0.25em;
+}
 .floatright{
     float:right;
     padding:20px
@@ -11,15 +14,6 @@
     color:var(--black)
 
 }
-.newbox_header {
-    --background:var(--primary);
-    --border-color:var(--primary);
-}
-
-.list {
-    background-color: var(--white);
-}
-
 
 .box {
     background-color:var(--white);
@@ -35,31 +29,13 @@
 .box_title{
     font-size:14pt;
 }
-ion-icon{
-    padding-left:0.25em;
-}
+
 .sensorTable {
     border-collapse: collapse;
     width: 100%;
     background-color:var(--white);
   }
   
-  .measurementTable td, .measurementTable th {
-    text-align: left;
-    color:var(--black);
-    padding:0.5rem
-  }
-  
-  .measurementTable tr:nth-child(even){background-color: #9999}
-  
-  
-  .measurementTable th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: var(--primary);
-    color: var(--black);
-  }
 
 .confirm_text{
     color:#31708f;
