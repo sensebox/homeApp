@@ -153,7 +153,7 @@ export class BoxPage implements OnInit, AfterViewInit {
                       ticks: {
                         fontColor: "#333",
                         autoSkip: true,
-                        maxTicksLimit: 3,
+                        maxTicksLimit: 2,
                         maxRotation: 0,
                         callback: function (value, index, values) {
                           if (index == 0) return value
