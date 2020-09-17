@@ -43,22 +43,33 @@
         "NO_MEASUREMENT":"No measurements yet. Click below to upload the openSenseMap Sketch to your senseBox !"
     },
     "SKETCH":{
-        "FIRST":{
-            "HEADER":"Uploading sketch",
-            "SUBTITLE":"Click 'Start' if you have fullfilled all pre-requirements for the Over-The-Air senseBox connection",
-            "BTN_NEXT":"Start"
+        "TITLE":"Upload Sketch",
+        "INTRO":{
+            "WELCOME":"Welcome",
+            "INSTRUCTIONS":"To transfer your code to your senseBox over the air (OTA), please follow these steps.",
+            "INTROSTEPS":" First please make sure that your senseBox ...",
+            "STEP1":"has the <b>WiFi Bee</b> plugged in XBEE Slot 1",
+            "STEP2":"has the initial <b>Webserver Sketch</b> installed",
+            "STEP3":"is powered",
+            "CONTINUE":"CONTINUE"
         },
-        "SECOND":{
-            "HEADER":"WiFi configuration",
-            "SUBTITLE":"Please provide your WiFi network name and password in the fields below",
-            "BTN_NEXT":"Next"
+        "DISCLAIMER":{
+            "INTRO":"Connect to your senseBox",
+            "TEXT":"Your senseBox should have created a WiFi network. Because we can not do this automatically on your platform, please connect to it manually.",
+            "CONTINUE":"WEITER"
         },
-        "THIRD":{
-            "HEADER":"Mode selection",
-            "SUBTITLE":"Depending on the sketch you uploaded, choose your connection mode",
-            "BTN_AUTOMATIC":"Automatic",
-            "BTN_MANUAL":"Manual",
-            "BTN_NEXT":"Continue"
+        "WIFI":{
+            "SSID":"SSID",
+            "PASSWORD":"Password",
+            "SECURITYMODE":"Security mode",
+            "MODE":"Mode",
+            "DHCP":"DHCP(default)",
+            "NOTDHCP":"Not DHCP(not default)"
+        },
+        "RESULT":{
+            "SUCCESS":"Success!",
+            "SUCCESSTEXT":"The upload has been successful!",
+            "BACKTOBOX":"Go back to Box"
         }
         
     }

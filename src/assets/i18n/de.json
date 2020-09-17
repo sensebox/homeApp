@@ -44,23 +44,33 @@
 
     },
     "SKETCH":{
-        "FORM":{},
-        "WIFI":{
-            "HEADER":"Sketch hochladen",
-            "SUBTITLE":"Klicken sie auf weiter wenn sie alle Anforderungen für das Hochladen auf die senseBox erfüllt haben.",
-            "BTN_NEXT":"Start"
+        "TITLE":"Sketch hochladen",
+        "INTRO":{
+            "WELCOME":"Willkommen",
+            "INSTRUCTIONS":"Folge dieser Anleitung, um deinen Code drahtlos auf die senseBox zu übertragen (OTA)",
+            "INTROSTEPS":"Stelle sicher, dass deine senseBox...",
+            "STEP1":"die <b>WiFi Bee</b> in XBee Slot 1 gesteckt hat,",
+            "STEP2":"den initialen <b>OTA Sketch</b> installiert hat,",
+            "STEP3":"mit Strom versorgt ist.",
+            "CONTINUE":"WEITER"
         },
-        "CONFIG":{
-            "HEADER":"WiFi-Daten",
-            "SUBTITLE":"Zuerst brauchen wir deine WiFi-Verbindungsdaten. Trage unten sowohl den Namen des Netzwerks und das zugehörige Passwort ein",
-            "BTN_NEXT":"Weiter"
+        "DISCLAIMER":{
+            "INTRO":"Verbindung zur senseBox herstellen",
+            "TEXT":"Deine senseBox sollte nun ein WiFi Netzwerk erstellt haben. Bitte verbinde dich mit diesem Netzwerk im WiFi Menü deines Geräts.",
+            "CONTINUE":"WEITER"
+        },
+        "WIFI":{
+            "SSID":" Netzwerkname",
+            "PASSWORD":"Passwort",
+            "SECURITYMODE":"Sicherheitsmodus",
+            "MODE":"Modus",
+            "DHCP":"DHCP(Standard)",
+            "NOTDHCP":"kein DHCP(nicht Standard"
         },
         "RESULT":{
-            "HEADER":"Modus Auswahl",
-            "SUBTITLE":"Abhängig vom Sketch den du hochgeladen hast, wähle hier nun deinen Verbindungsmodus aus",
-            "BTN_AUTOMATIC":"Automatisch",
-            "BTN_MANUAL":"Manuell",
-            "BTN_NEXT":"Weiter"
+            "SUCCESS":"Erfolgreich",
+            "SUCCESSTEXT":"Das hochladen hat funktioniert. Klicke unten um zur Box zurück zu gelangen!",
+            "BACKTOBOX":"Zurück zur Box"
         }
         
     }

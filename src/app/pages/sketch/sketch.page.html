@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button class="back_button"></ion-back-button>
     </ion-buttons>
-    <ion-title>Upload Sketch</ion-title>
+    <ion-title>{{ 'SKETCH.TITLE' | translate }} </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content class="background" padding>
@@ -15,34 +15,33 @@
           <ion-row class="ion-align-items-center">
             <ion-col size="12">
               <ion-icon name="wifi" style="font-size: 160px"></ion-icon>
-              <h2>Welcome</h2>
-              <p>To transfer your code to your senseBox over the air (OTA), please follow these steps.</p>
+              <h2>{{'SKETCH.INTRO.WELCOME' | translate}}</h2>
+              <p>{{'SKETCH.INTRO.INSTRUCTIONS' | translate}} </p>
             </ion-col>
 
             <ion-col size="12">
-              <p>First please make sure that your senseBox ... </p>
+              <p>{{'SKETCH.INTRO.INTROSTEPS' | translate}} </p>
               <ul style="text-align: left">
-                <li>has the <b>WiFi Bee</b> plugged in XBEE Slot 1</li>
-                <li>has the initial <b>Webserver Sketch</b> installed</li>
-                <li>is powered</li>
+                <li [innerHTML]="'SKETCH.INTRO.STEP1'| translate"></li>
+                <li [innerHTML]="'SKETCH.INTRO.STEP2'| translate"></li>
+                <li [innerHTML]="'SKETCH.INTRO.STEP3'| translate"></li>
               </ul>
               <ion-button class="continue_btn" size="large" fill="clear" (click)="slides.slideNext()">
-                CONTINUE
+                {{'SKETCH.INTRO.CONTINUE' | translate}}
                 <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
               </ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-slide>
-      <!-- intro -->
+      <!-- DISCLAIMER -->
       <ion-slide>
         <ion-grid>
           <div id="wifi-manual" class="center-div">
-            <h2>Connect to your senseBox</h2>
-            <p>Your senseBox should have created a WiFi network. Because we can not do this automatically on your
-              platform, please connect to it manually.</p>
+            <h2>{{'SKETCH.DISCLAIMER.INTRO' | translate}}</h2>
+            <p>{{'SKETCH.DISCLAIMER.TEXT' | translate}} </p>
             <ion-button class="continue_btn" size="large" fill="clear" (click)="slides.slideNext()">
-              CONTINUE
+              {{'SKETCH.DISCLAIMER.CONTINUE' | translate}}
               <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
             </ion-button>
           </div>
@@ -75,16 +74,16 @@
           </ion-row>
           <ion-row>
             <ion-item lines="none" class="upload_input">
-              <ion-label position="stacked">SSID</ion-label>
+              <ion-label position="stacked">{{'SKETCH.WIFI.SSID' | translate}}</ion-label>
               <ion-input minlength="4" [(ngModel)]="ssid" type="text"></ion-input>
             </ion-item>
             <ion-item lines="none" class="upload_input">
-              <ion-label position="stacked">Password</ion-label>
+              <ion-label position="stacked">{{'SKETCH.WIFI.PASSWORD' | translate}}</ion-label>
               <ion-input minlength="4" [(ngModel)]="passwordWifi" type="password"></ion-input>
             </ion-item>
             <ion-col size="6">
               <ion-item lines="none" class="upload_input">
-                <ion-label position="stacked">Security Mode</ion-label>
+                <ion-label position="stacked">{{'SKETCH.WIFI.SECURITYMODE' | translate}}</ion-label>
                 <ion-select [(ngModel)]="wifiSecurity" value="WPA">
                   <ion-select-option value="WPA">WPA</ion-select-option>
                   <ion-select-option value="WPA2">WPA2</ion-select-option>
@@ -93,10 +92,10 @@
             </ion-col>
             <ion-col size="6">
               <ion-item lines="none" class="upload_input">
-                <ion-label position="stacked">Mode(Optional)</ion-label>
+                <ion-label position="stacked">{{'SKETCH.WIFI.MODE' | translate}}</ion-label>
                 <ion-select [(ngModel)]="ipSettings" value="DHCP">
-                  <ion-select-option value="DHCP">DHCP(default)</ion-select-option>
-                  <ion-select-option value="notDHCP">not DHCP(not default)</ion-select-option>
+                  <ion-select-option value="DHCP">{{'SKETCH.WIFI.DHCP' | translate}}</ion-select-option>
+                  <ion-select-option value="notDHCP">{{'SKETCH.WIFI.NOTDHCP' | translate}}</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-col>
@@ -112,11 +111,11 @@
           <ion-row class="align-items-center center-div">
             <ion-col size="12">
                 <ion-icon name="checkmark-circle-outline" style="font-size: 160px"></ion-icon>
-                <h2>Successful!</h2>
-                <p>Sketch has succesfully been uploaded! </p>
+                <h2>{{'SKETCH.RESULT.SUCCESS' | translate}}!</h2>
+                <p>{{'SKETCH.RESULT.SUCCESSTEXT' | translate}} </p>
 
                 <ion-button class="continue_btn" size="large" fill="clear" (click)="forwardBox(box)">
-                  Go back to Box
+                  {{'SKETCH.RESULT.BACKTOBOX' | translate}}
                   <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
                 </ion-button>
             </ion-col>
