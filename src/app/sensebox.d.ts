@@ -27,7 +27,7 @@ interface Sensor {
 
 interface Measurement {
     value: number,
-    time: string
+    createdAt: Date
 }
 
 interface Measurements {

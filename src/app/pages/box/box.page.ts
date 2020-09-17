@@ -29,9 +29,9 @@ export class BoxPage implements OnInit, AfterViewInit {
   private favorit: Boolean;
   public date: string
 
-  
+
   box: Box;
-  private newBox:boolean;
+  private newBox: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -41,7 +41,7 @@ export class BoxPage implements OnInit, AfterViewInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.box = this.router.getCurrentNavigation().extras.state.box;
-        if(this.box.createdAt === this.box.updatedAt){
+        if (this.box.createdAt === this.box.updatedAt) {
           this.newBox = true;
         }
         else {
@@ -62,28 +62,28 @@ export class BoxPage implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    if(this.newBox){
+    if (this.newBox) {
       console.log("smides")
     }
   }
 
-  addFavorit(){
+  addFavorit() {
     this.favorit = !this.favorit
 
   }
 
-  removeFavorit(){
+  removeFavorit() {
     this.favorit = !this.favorit
   }
 
-  forwardSketch(box){
-    let navigationExtras:NavigationExtras={
-      state:{
+  forwardSketch(box) {
+    let navigationExtras: NavigationExtras = {
+      state: {
         box,
       }
     }
-    this.router.navigate(['sketch'],navigationExtras)
-   }
+    this.router.navigate(['sketch'], navigationExtras)
+  }
 
   async presentToast(content) {
     const toast = await this.toastController.create({
@@ -94,33 +94,32 @@ export class BoxPage implements OnInit, AfterViewInit {
   }
 
   getCharts() {
-
-    const now = new Date()
-    let from = new Date()
-    let fromLastMeasurement = new Date(this.box.lastMeasurementAt);
-    let pastDate = fromLastMeasurement.getDate() - 1
-    fromLastMeasurement.setDate(pastDate)
-
     this.box.sensors.map((sensor, index) => {
-      this.osem.getMeanMeasurements(this.box._id, sensor.title, fromLastMeasurement.toISOString(), this.box.lastMeasurementAt, 3600000)
+
+      let fromLastMeasurement = new Date(sensor.lastMeasurement.createdAt);
+      let pastDate = fromLastMeasurement.getDate() - 1
+      fromLastMeasurement.setDate(pastDate)
+
+      this.osem.getMeanMeasurements(this.box._id, sensor.title, fromLastMeasurement.toISOString(), sensor.lastMeasurement.createdAt, 3600000)
         .subscribe(
           results => {
             if (!results[0]) {
               this.presentToast(`No values for some sensors`)
-              } else {
+            } else {
               let labels = [];
               let data = [];
 
               Object.keys(results[0]).map((key, index) => {
                 if (key === 'sensorId') return;
                 let labelDate = new Date(key);
-                if(index==1){
+                if (index == 1) {
                   labels.push(labelDate.toLocaleDateString())
                   data.push(results[0][key])
                 }
-                else{
-                labels.push(labelDate.getHours())
-                data.push(results[0][key])}
+                else {
+                  labels.push(labelDate.getHours())
+                  data.push(results[0][key])
+                }
               })
 
               new Chart(this.elements[index], {
@@ -157,7 +156,7 @@ export class BoxPage implements OnInit, AfterViewInit {
                         maxTicksLimit: 3,
                         maxRotation: 0,
                         callback: function (value, index, values) {
-                          if(index == 0) return value
+                          if (index == 0) return value
                           return value + ":00"
                         }
                       }
@@ -193,7 +192,7 @@ export class BoxPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if(this.newBox){
+    if (this.newBox) {
       console.log("new box no measurements");
       return;
     }
