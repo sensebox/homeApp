@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { Chart } from 'chart.js'
 import { ToastController } from '@ionic/angular';
 import { OsemService } from 'src/app/services/osem.service';
+import { Storage } from '@ionic/storage';
 
 
 // @Directive({selector: 'canvas'})
@@ -36,6 +37,7 @@ export class BoxPage implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private router: Router,
     private osem: OsemService,
+    private storage: Storage,
     public toastController: ToastController
   ) {
     this.route.queryParams.subscribe(params => {
@@ -68,12 +70,27 @@ export class BoxPage implements OnInit, AfterViewInit {
   }
 
   addFavorit() {
-    this.favorit = !this.favorit
+    this.favorit = true;
+    this.storage.get('favs').then((favs) => {
+      if (favs) {
+        favs.push(this.box.name);
+        this.storage.set('favs', favs);
+      }
+      else {
+        const arr = [this.box.name]
+        this.storage.set('favs', arr);
+      }
+    })
 
+    
   }
 
   removeFavorit() {
-    this.favorit = !this.favorit
+    this.storage.get('favs').then((favs) => {
+      const index = favs.indexOf(this.box.name);
+      favs.splice(index, 1);
+      this.favorit = false;
+    })
   }
 
   forwardSketch(box) {
@@ -198,6 +215,21 @@ export class BoxPage implements OnInit, AfterViewInit {
     }
     this.box.sensors.map((sensor) => {
       this.elements.push(document.getElementById(sensor.title + 'Canvas'))
+    })
+
+    this.storage.get('favs').then((favs) => {
+      if (favs) {
+        const index = favs.indexOf(this.box.name)
+        if (index == -1) {
+          this.favorit = false;
+        }
+        else {
+          this.favorit = true;
+        }
+      }
+      else {
+        this.favorit = false;
+      }
     })
 
     this.getCharts();
