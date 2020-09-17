@@ -52,7 +52,6 @@ export class BoxPage implements OnInit, AfterViewInit {
       }
     })
   }
-//eknxibzabxvxebasnt@awdrt.net
   forwardSensor(sensor) {
     let navigationExtras: NavigationExtras = {
       state: {
@@ -98,13 +97,12 @@ export class BoxPage implements OnInit, AfterViewInit {
 
     const now = new Date()
     let from = new Date()
-    let pastDate = from.getDate() - 1
-
-
-    from.setDate(pastDate)
+    let fromLastMeasurement = new Date(this.box.lastMeasurementAt);
+    let pastDate = fromLastMeasurement.getDate() - 1
+    fromLastMeasurement.setDate(pastDate)
 
     this.box.sensors.map((sensor, index) => {
-      this.osem.getMeanMeasurements(this.box._id, sensor.title, from.toISOString(), now.toISOString(), 3600000)
+      this.osem.getMeanMeasurements(this.box._id, sensor.title, fromLastMeasurement.toISOString(), this.box.lastMeasurementAt, 3600000)
         .subscribe(
           results => {
             if (!results[0]) {
