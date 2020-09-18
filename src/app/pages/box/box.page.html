@@ -17,6 +17,9 @@
 
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-grid *ngIf="!newBox;else noMeasurement" class="wrapper">
     <ion-row class="titlewrapper measurements">
       <table #measurementTable class="measurementTable">

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { SettingsComponent } from '../../components/settings/settings.component';
 import { PopoverController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { OsemService } from 'src/app/services/osem.service';
 
 @Component({
   selector: 'app-overview',
@@ -11,12 +12,13 @@ import { Storage } from '@ionic/storage';
 })
 export class OverviewPage implements OnInit {
   boxes: any
-  favs:Array<String>=[];
+  favs: Array<String> = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private storage: Storage,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    private osem: OsemService
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -33,6 +35,21 @@ export class OverviewPage implements OnInit {
     })
 
     return await popover.present();
+  }
+
+  doRefresh(event) {
+    this.storage.get('token').then((token) => {
+      this.osem.getUserBoxes(token)
+        .subscribe((boxes: any) => {
+          this.boxes = boxes.data.boxes;
+        })
+    })
+      .then(() => {
+        event.target.complete();
+      })
+    this.storage.get('favs').then((favs) => {
+      if (favs) this.favs = favs;
+    })
   }
 
   forwardBox(box: Box) {
@@ -54,8 +71,8 @@ export class OverviewPage implements OnInit {
   }
 
   ngOnInit() {
-    this.storage.get('favs').then((favs)=>{
-      if(favs) this.favs = favs;
+    this.storage.get('favs').then((favs) => {
+      if (favs) this.favs = favs;
     })
   }
 

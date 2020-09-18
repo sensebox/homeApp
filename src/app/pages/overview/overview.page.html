@@ -9,6 +9,9 @@
 </ion-header>
 
 <ion-content padding class="overview_background">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-grid >
     <ng-container *ngFor="let box of boxes">
     <ion-row class="preview_box" *ngIf="favs.indexOf(box.name) != -1">

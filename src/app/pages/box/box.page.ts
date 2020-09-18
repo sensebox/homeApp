@@ -206,6 +206,11 @@ export class BoxPage implements OnInit, AfterViewInit {
 
   }
 
+  doRefresh(event) {
+    this.getCharts();
+    event.target.complete();
+  }
+
   ngAfterViewInit() {
     if (this.newBox) {
       console.log("new box no measurements");
