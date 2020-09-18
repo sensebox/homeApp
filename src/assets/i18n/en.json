@@ -69,7 +69,10 @@
         "RESULT":{
             "SUCCESS":"Success!",
             "SUCCESSTEXT":"The upload has been successful!",
-            "BACKTOBOX":"Go back to Box"
+            "BACKTOBOX":"Go back to Box",
+            "FAILURE":"Failure!",
+            "FAILURETEXT":"Something went wrong, please try again!",
+            "BACKTOUPLOAD":"Go back!"
         }
         
     }

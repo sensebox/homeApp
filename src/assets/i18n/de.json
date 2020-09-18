@@ -70,7 +70,10 @@
         "RESULT":{
             "SUCCESS":"Erfolgreich",
             "SUCCESSTEXT":"Das hochladen hat funktioniert. Klicke unten um zur Box zurück zu gelangen!",
-            "BACKTOBOX":"Zurück zur Box"
+            "BACKTOBOX":"Zurück zur Box",
+            "FAILURE":"Fehler!",
+            "FAILURETEXT":"Ein Fehler ist aufgetreten.Bitte versuchen sie es erneut!",
+            "BACKTOUPLOAD":"Zurück!"
         }
         
     }

@@ -54,7 +54,7 @@ export class OsemService {
     const headers = new HttpHeaders({ 'Content-Type': 'text' })
 
     return this.http.post(url,{},{headers})
-      .pipe(timeout(30000))
+      .pipe(timeout(3000))
   }
 
 }

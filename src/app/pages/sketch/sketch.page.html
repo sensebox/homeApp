@@ -10,7 +10,7 @@
   <ion-grid>
     <ion-slides #slides pager="true" (ionSlideDidChange)="onSlideChange()">
       <!-- intro -->
-      <ion-slide>
+      <ion-slide #intro>
         <ion-grid>
           <ion-row class="ion-align-items-center">
             <ion-col size="12">
@@ -35,7 +35,7 @@
         </ion-grid>
       </ion-slide>
       <!-- DISCLAIMER -->
-      <ion-slide>
+      <ion-slide #disclaimer>
         <ion-grid>
           <div id="wifi-manual" class="center-div">
             <h2>{{'SKETCH.DISCLAIMER.INTRO' | translate}}</h2>
@@ -101,23 +101,38 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-button type="submit" (click)="uploadToSenseBox()" class="upload_button">{{ 'NEWBOX.BTN_ADDBOX' | translate }}</ion-button>
-          </ion-row>        
+            <ion-button type="submit" (click)="uploadToSenseBox()" class="upload_button">
+              {{ 'NEWBOX.BTN_ADDBOX' | translate }}</ion-button>
+          </ion-row>
         </ion-grid>
 
       </ion-slide>
       <ion-slide #result>
-        <ion-grid>
+        <ion-grid *ngIf="success">
           <ion-row class="align-items-center center-div">
             <ion-col size="12">
-                <ion-icon name="checkmark-circle-outline" style="font-size: 160px"></ion-icon>
-                <h2>{{'SKETCH.RESULT.SUCCESS' | translate}}!</h2>
-                <p>{{'SKETCH.RESULT.SUCCESSTEXT' | translate}} </p>
+              <ion-icon name="checkmark-circle-outline" style="font-size: 160px"></ion-icon>
+              <h2>{{'SKETCH.RESULT.SUCCESS' | translate}}!</h2>
+              <p>{{'SKETCH.RESULT.SUCCESSTEXT' | translate}} </p>
 
-                <ion-button class="continue_btn" size="large" fill="clear" (click)="forwardBox(box)">
-                  {{'SKETCH.RESULT.BACKTOBOX' | translate}}
-                  <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-                </ion-button>
+              <ion-button class="continue_btn" size="large" fill="clear" (click)="forwardBox(box)">
+                {{'SKETCH.RESULT.BACKTOBOX' | translate}}
+                <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid *ngIf="!success">
+          <ion-row class="align-items-center center-div">
+            <ion-col size="12">
+              <ion-icon name="close-circle-outline" style="font-size: 160px;"></ion-icon>
+              <h2>{{'SKETCH.RESULT.FAILURE' | translate}}</h2>
+              <p>{{'SKETCH.RESULT.FAILURETEXT' | translate}} </p>
+
+              <ion-button class="continue_btn" size="large" fill="clear" (click)="slides.slidePrev()">
+                {{'SKETCH.RESULT.BACKTOUPLOAD' | translate}}
+                <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+              </ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>

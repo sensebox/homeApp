@@ -20,6 +20,7 @@ export class SketchPage implements OnInit {
   box: Box
   networks: string[] = [] // ssid's in the area
   public selected: string
+  private success: Boolean = false;
   errorMsg = ''
   state: OtaState = {
     isOnline: false,
@@ -57,14 +58,21 @@ export class SketchPage implements OnInit {
     let current: Promise<Number> = this.slides.getActiveIndex();
     current.then((number) => {
       switch (number) {
-        case OtaSlides.wifi:
+        case OtaSlides.intro:
           // scan for networks here
           //this.networkScanner.scanNetwork();
           console.log("Wifi")
+          this.slides.lockSwipeToNext(false);
           break;
-        case OtaSlides.config:
+        case OtaSlides.disclaimer:
           // show config form
           console.log("config")
+          this.slides.lockSwipeToNext(false);
+          break;
+        case OtaSlides.wifi:
+          // display success/error message
+          console.log("result")
+          this.slides.lockSwipeToNext(true);
           break;
         case OtaSlides.result:
           // display success/error message
@@ -165,16 +173,22 @@ export class SketchPage implements OnInit {
       }
     })
 
-    this.osem.uploadToSenseBox(this.wifiSecurity,this.ssid,this.passwordWifi,this.box._id,sensors,this.ipSettings)
-      .subscribe((response)=>{
+    this.osem.uploadToSenseBox(this.wifiSecurity, this.ssid, this.passwordWifi, this.box._id, sensors, this.ipSettings)
+      .subscribe((response) => {
         console.log(response)
+        this.success = true;
+        this.slides.lockSwipeToNext(false);
+        this.slides.slideNext();
+
       },
-      (error)=>{
-        console.error(error);
-      })
+        (error) => {
+          this.success = false;
+          console.error(error);
+          this.slides.lockSwipeToNext(false);
+          this.slides.slideNext();
+        })
 
 
-      this.slides.slideNext();
     // const url = ''
     // this.osem.uploadToSenseBox(url)
     //     .subscribe((response)=>{
@@ -185,20 +199,21 @@ export class SketchPage implements OnInit {
     //     })
   }
 
-  forwardBox(box){
-    let navigationExtras:NavigationExtras={
-      state:{
+  forwardBox(box) {
+    let navigationExtras: NavigationExtras = {
+      state: {
         box
       }
     }
-    this.router.navigate(['box'],navigationExtras)
-   }
+    this.router.navigate(['box'], navigationExtras)
+  }
 
 }
 enum OtaSlides {
-  wifi = 0,
-  config = 1,
-  result = 2
+  intro = 0,
+  disclaimer = 1,
+  wifi = 2,
+  result = 3
 }
 
 type OtaState = {

@@ -17,10 +17,9 @@ import { Storage } from '@ionic/storage';
   templateUrl: './box.page.html',
   styleUrls: ['./box.page.scss'],
 })
-export class BoxPage implements OnInit, AfterViewInit {
+export class BoxPage implements  AfterViewInit {
 
   @ViewChildren('canvas') canvasses!: QueryList<any>
-
   elements: Array<any> = [];
 
   private favorit: Boolean;
@@ -59,11 +58,6 @@ export class BoxPage implements OnInit, AfterViewInit {
     this.router.navigate(['sensor'], navigationExtras)
   }
 
-  ngOnInit() {
-    if (this.newBox) {
-      console.log("smides")
-    }
-  }
 
   addFavorit() {
     this.favorit = true;
