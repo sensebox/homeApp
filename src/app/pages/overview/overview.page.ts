@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { SettingsComponent } from '../../components/settings/settings.component';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { OsemService } from 'src/app/services/osem.service';
 
@@ -18,6 +18,7 @@ export class OverviewPage implements OnInit {
     private router: Router,
     private storage: Storage,
     public popoverController: PopoverController,
+    private toastController: ToastController,
     private osem: OsemService
   ) {
     this.route.queryParams.subscribe(params => {
@@ -43,13 +44,22 @@ export class OverviewPage implements OnInit {
         .subscribe((boxes: any) => {
           this.boxes = boxes.data.boxes;
         })
+      this.storage.get('favs').then((favs) => {
+        if (favs) this.favs = favs;
+      })
     })
       .then(() => {
+        this.presentToast("Refresh done!")
         event.target.complete();
       })
-    this.storage.get('favs').then((favs) => {
-      if (favs) this.favs = favs;
-    })
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 1000
+    });
+    toast.present();
   }
 
   forwardBox(box: Box) {

@@ -110,7 +110,6 @@ export class BoxPage implements OnInit, AfterViewInit {
 
   getCharts() {
     this.box.sensors.map((sensor, index) => {
-
       let fromLastMeasurement = new Date(sensor.lastMeasurement.createdAt);
       let pastDate = fromLastMeasurement.getDate() - 1
       fromLastMeasurement.setDate(pastDate)
@@ -209,6 +208,7 @@ export class BoxPage implements OnInit, AfterViewInit {
   doRefresh(event) {
     this.getCharts();
     event.target.complete();
+    this.presentToast("Refresh done!")
   }
 
   ngAfterViewInit() {
