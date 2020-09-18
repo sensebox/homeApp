@@ -18,15 +18,11 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./box.page.scss'],
 })
 export class BoxPage implements OnInit, AfterViewInit {
-  @ViewChild("TemperaturCanvas", { static: false }) tempCanvas2: ElementRef
-  @ViewChild("tempCanvas", { static: false }) tempCanvas: ElementRef
+
   @ViewChildren('canvas') canvasses!: QueryList<any>
 
   elements: Array<any> = [];
 
-  private tempChart: Chart;
-  private tempData: Array<Number>;
-  private tempLabels: Array<string>;
   private favorit: Boolean;
   public date: string
 
@@ -82,14 +78,16 @@ export class BoxPage implements OnInit, AfterViewInit {
       }
     })
 
-    
+
   }
 
   removeFavorit() {
     this.storage.get('favs').then((favs) => {
       const index = favs.indexOf(this.box.name);
       favs.splice(index, 1);
+      this.storage.set('favs', favs);
       this.favorit = false;
+
     })
   }
 

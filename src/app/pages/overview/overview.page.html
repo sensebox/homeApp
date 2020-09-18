@@ -10,9 +10,10 @@
 
 <ion-content padding class="overview_background">
   <ion-grid >
-    <ion-row class="preview_box" *ngFor="let box of boxes">
+    <ng-container *ngFor="let box of boxes">
+    <ion-row class="preview_box" *ngIf="favs.indexOf(box.name) != -1">
       <ion-col>
-        <ion-row class="preview_box_title">{{box.name}} </ion-row>
+        <ion-row class="preview_box_title">{{box.name}} <ion-icon name="star"></ion-icon>  </ion-row>
           <ion-row class="preview_box_subtitle">
             <ion-icon name="wifi-outline"></ion-icon> {{box.model}}<ion-icon name="location-outline"></ion-icon> {{box.loc[0].geometry.coordinates[0]}}, {{box.loc[0].geometry.coordinates[1]}}<ion-icon name="hardware-chip-outline"></ion-icon>{{box.sensors.length}} {{'OVERVIEW.SENSORS' | translate}}
           </ion-row>
@@ -26,6 +27,25 @@
           </ion-row>
     </ion-col>
     </ion-row>
+  </ng-container>
+  <ng-container *ngFor="let box of boxes">
+    <ion-row class="preview_box" *ngIf="favs.indexOf(box.name) == -1">
+      <ion-col>
+        <ion-row class="preview_box_title">{{box.name}} <ion-icon *ngIf="favs.indexOf(box.name) != -1" name="star"></ion-icon>  </ion-row>
+          <ion-row class="preview_box_subtitle">
+            <ion-icon name="wifi-outline"></ion-icon> {{box.model}}<ion-icon name="location-outline"></ion-icon> {{box.loc[0].geometry.coordinates[0]}}, {{box.loc[0].geometry.coordinates[1]}}<ion-icon name="hardware-chip-outline"></ion-icon>{{box.sensors.length}} {{'OVERVIEW.SENSORS' | translate}}
+          </ion-row>
+          <ion-row style="text-align: center;">
+            <ion-col (click)="forwardBox(box)"class="box_button analytics">
+              {{ 'OVERVIEW.BTN_SHOWBOX' | translate }}
+            </ion-col>
+            <ion-col (click)="forwardSketch(box)" class="box_button sketch">
+              {{ 'OVERVIEW.BTN_UPLOAD' | translate }}
+            </ion-col>
+          </ion-row>
+    </ion-col>
+    </ion-row>
+  </ng-container>
   </ion-grid>
 
 </ion-content>
